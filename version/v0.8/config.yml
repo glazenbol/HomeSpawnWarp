@@ -1,6 +1,0 @@
-# Configuration file for HomeSpawnWarp.
-# More information at http://dev.bukkit.org/bukkit-mods/homespawnwarp
-
-leightWeightMode: false
-useExactSpawn: true
-useGeneralSpawn: true
