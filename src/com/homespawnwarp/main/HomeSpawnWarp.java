@@ -74,7 +74,6 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 	@Override
 	public void onDisable() {
 		HandlerList.unregisterAll(this);
-		ConfigIO.save("messages");
 		ConfigIO.save("locations");
 	}
 
@@ -125,20 +124,18 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 	public void onLoad() {
 		ConfigIO.init(this);
 		hsw = this;
-
-		Tools.getConfig();
-		Tools.getLocations();
-		Tools.getMessages();
-		
-
-		ConfigIO.save("messages");
-		ConfigIO.save("locations");
-		ConfigIO.save("config");
 		
 		ConfigIO.saveDefault("messages");
 		ConfigIO.saveDefault("locations");
 		ConfigIO.saveDefault("config");
-
+		
+		Tools.getConfig().options().copyDefaults(true);
+		Tools.getLocations().options().copyDefaults(true);
+		Tools.getMessages().options().copyDefaults(true);
+		
+		ConfigIO.save("messages");
+		ConfigIO.save("config");
+		
 		leightWeightMode = Tools.getConfig().getBoolean("leightweigtmode");
 		useExactSpawn = Tools.getConfig().getBoolean("useexactspawn");
 		useGeneralSpawn = Tools.getConfig().getBoolean("usegeneralspawn");

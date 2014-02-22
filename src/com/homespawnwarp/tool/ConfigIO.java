@@ -56,7 +56,8 @@ public final class ConfigIO {
 			YamlConfiguration defConfig = YamlConfiguration
 					.loadConfiguration(defConfigStream);
 			configs.get(configName).setDefaults(defConfig);
-			configs.get(configName).options().copyDefaults(true);
+			/* configs.get(configName).options().copyDefaults(true);
+			save(configName);*/
 
 		}
 	}
