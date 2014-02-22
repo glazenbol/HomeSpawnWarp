@@ -20,6 +20,10 @@ public final class ConfigIO {
 
 	// TODO Make add default messages when missing
 
+	private ConfigIO() {
+		//Initial constructor
+	}
+	
 	// GETTING
 
 	public static void init(JavaPlugin main) {
