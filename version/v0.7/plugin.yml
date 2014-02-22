@@ -1,0 +1,26 @@
+name: HomeSpawnWarp
+main: com.Pieter3457.HomeSpawnWarp.HomeSpawnWarp
+version: 0.7.1
+description: >
+  HomeSpawnWarp Beta
+author: pieter3457
+website: http://dev.bukkit.org/bukkit-plugins/homespawnwarp/
+commands:
+  sethome:
+    description: Set your home to your current position.
+  home:
+    description: Go to your with /sethome set home.
+  setspawn:
+    description: Set the worldspawn.
+  spawn:
+    description: Go to the worldspawn.
+  warp:
+    description: Warp to a warplocation.
+  setwarp:
+    description: Set a public warp.
+  delwarp:
+    description: Remove a public warp.
+  setprivatewarp:
+    description: Set a private warp.
+  warplist:
+    description: View a list of available warps.

@@ -1,0 +1,40 @@
+# Configuration file for HomeSpawnWarp.
+# Nodes are numeral
+#
+# 1
+# Set this function to true if you have an extremely old harddrive.
+# Make sure you stop the server with the stop command otherwise it won't save!
+#
+# 2
+# Set this to false if you want to use the bukkit spawning system.
+#
+# 3
+# Set this to true if you want to have one general spawn.
+
+leightWeightMode: false
+useExactSpawn: true
+useGeneralSpawn: true
+
+messages:
+  cannot-perform: "§4You cannot perform this command from command line!"
+  no-permission: "§4You don't have the permission to do that!"
+  no-spawn-set: "§4There is no spawn set for your current world!"
+  not-enough-items: "§4You do not have enough items to perform this command!"
+  wrong-arguments: "§4You've entered wrong argument(s)!"
+  no-home-set: "§4You need to set a home first!"
+  too-few-arguments: "§4You have entered too few arguments!"
+  wrong-warpname: "§4You have entered a unknown warp!"
+  warp-is-already: "§4This warp already exist as a public one!"
+  warp-deleted-private: "§3You have succesfully deleted this private warp!"
+  warp-deleted-public: "§3You have succesfully deleted this public warp!"
+  warpsprivate: "§3Your private warps:"
+  warpspublic: "§3Public warps:"
+  teleport-to-home: "§3Teleporting to home..."
+  set-home: "§3Your home has been set succesfully!"
+  teleport-to-spawn: "§3Teleporting to spawn..."
+  set-spawn: "§3Spawn has been set succesfully!"
+  teleport-to-warp: "§3Teleporting to warplocation..."
+  teleport-to-private-warp: "§3Teleporting to private warplocation..."
+  set-warp: "§3Public warp set!"
+  set-warp-private: "§3Private warp set!"
+  none: "§3 - None - "

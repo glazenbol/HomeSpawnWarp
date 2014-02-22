@@ -1,0 +1,43 @@
+# Configuration file for HomeSpawnWarp.
+
+# leightWeightMode is an option that makes you able to
+# choose if you want to save directly after the home,
+# spawn or warp is set or if you want to save when the server shuts down.
+# The last option is less heavy for your server,
+# but if you don't stop the server with /stop, it won't save.
+
+# The option useExactSpawn lets you choose if you want to use
+# Craftbukkit's playerspawning system or my custom made one. If you set
+# useExactSpawn it will use my one and you will exactly spawn at the spawnpoint.
+# I highly recommend you to set this option to true.
+
+# The option useGeneralSpawn lets you choose between one spawn per world or one general spawn.
+
+# More information at http://dev.bukkit.org/bukkit-mods/homespawnwarp
+
+leightweightmode: false
+useexactspawn: true
+usegeneralspawn: true
+cancelwarmupsonmove: false
+
+# Warmup time in seconds per command. Specify a negative or zero number
+# to disable warmup for this command. You can bypass players from having
+# to warmup by giving them the HomeSpawnWarp.nowarmup permission.
+warmups:
+  home: 0
+  spawn: 0
+  warp: 0
+  request: 0
+# Prices for commands. You can add any command to this and put its price behind
+# to make it cost money. You can bypass players from paying money by giving them the
+# HomeSpawnWarp.nofee permission.
+prices:
+  home: 0
+  spawn: 0
+  warp: 0
+
+group1: 1
+group2: 2
+group3: 3
+group4: 5
+group5: 10
