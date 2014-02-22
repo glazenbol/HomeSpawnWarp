@@ -55,9 +55,11 @@ public abstract class AbstractCommand implements CommandExecutor {
 				player = (Player) sender;
 
 				if (hasPerm(sender, commandPermission, isDefaultPermitted, true)) {
-
-					doCommand(player, sender, cmd, commandLabel, args);
-
+					if (costsMoney && hasMoney(player)) {
+						if (doCommand(player, sender, cmd, commandLabel, args)) {
+							takeMoney(player);
+						}
+					}
 				}
 			} else {
 				sender.sendMessage(Tools.getMessage("cannot-perform"));
@@ -97,36 +99,50 @@ public abstract class AbstractCommand implements CommandExecutor {
 		}
 	}
 
-	protected boolean checkMoney(final Player player) {
+	protected boolean hasMoney(final Player player) {
+
+		if (price <= 0 || hasPerm(player, "HomeSpawnWarp.nofee", false, false)) {
+
+			return true;
+
+		} else {
+			if (plugin.economy.getBalance(player.getName()) >= price) {
+
+				return true;
+
+			} else {
+
+				Tools.getMessage("not-enough-money");
+				return false;
+
+			}
+		}
+	}
+
+	protected void takeMoney(final Player player) {
 
 		if (price <= 0) {
-			return true;
+			return;
 		}
 
 		if (!hasPerm(player, "HomeSpawnWarp.nofee", false, false)) {
-			if (plugin.economy.getBalance(player.getName()) >= price) {
 
-				plugin.economy.withdrawPlayer(player.getName(), price);
+			plugin.economy.withdrawPlayer(player.getName(), price);
 
-				if (price < 2 && price > 0) {
-					player.sendMessage(ChatColor.AQUA
-							+ plugin.economy.format(price) + " "
-							+ plugin.economy.currencyNameSingular()
-							+ " has been taken from your account!");
-				} else {
-					player.sendMessage(ChatColor.AQUA
-							+ plugin.economy.format(price) + " "
-							+ plugin.economy.currencyNamePlural()
-							+ " has been taken from your account!");
-				}
-
-				return true;
+			if (price < 2 && price > 0) {
+				player.sendMessage(ChatColor.AQUA
+						+ plugin.economy.format(price) + " "
+						+ plugin.economy.currencyNameSingular()
+						+ " has been taken from your account!");
 			} else {
-				Tools.getMessage("not-enough-money");
-				return false;
+				player.sendMessage(ChatColor.AQUA
+						+ plugin.economy.format(price) + " "
+						+ plugin.economy.currencyNamePlural()
+						+ " has been taken from your account!");
 			}
+
 		} else {
-			return true;
+			return;
 		}
 
 	}
