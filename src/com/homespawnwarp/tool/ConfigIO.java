@@ -18,8 +18,6 @@ public final class ConfigIO {
 	private final static HashMap<String, File> configFiles = new HashMap<String, File>();
 	private static JavaPlugin main;
 
-	// TODO Make add default messages when missing
-
 	private ConfigIO() {
 		// initial constructor
 	}
@@ -56,9 +54,6 @@ public final class ConfigIO {
 			YamlConfiguration defConfig = YamlConfiguration
 					.loadConfiguration(defConfigStream);
 			configs.get(configName).setDefaults(defConfig);
-			/* configs.get(configName).options().copyDefaults(true);
-			save(configName);*/
-
 		}
 	}
 

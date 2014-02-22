@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import com.homespawnwarp.main.HomeSpawnWarp;
 import com.homespawnwarp.tool.Tools;
 
-final public class HomeListCommand extends HomeSpawnWarpCommand {
+final public class HomeListCommand extends AbstractCommand {
 
 	public HomeListCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted, boolean isConsoleSendable) {

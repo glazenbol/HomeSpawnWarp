@@ -7,7 +7,7 @@ import com.homespawnwarp.main.HomeSpawnWarp;
 import com.homespawnwarp.tool.Teleportation;
 import com.homespawnwarp.tool.TeleportationType;
 
-public abstract class TeleportCommand extends HomeSpawnWarpCommand {
+public abstract class TeleportCommand extends AbstractCommand {
 
 	public TeleportCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted, boolean isConsoleSendable) {

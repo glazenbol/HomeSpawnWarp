@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import com.homespawnwarp.main.HomeSpawnWarp;
 import com.homespawnwarp.tool.Tools;
 
-public abstract class HomeSpawnWarpCommand implements CommandExecutor {
+public abstract class AbstractCommand implements CommandExecutor {
 
 	protected HomeSpawnWarp plugin;
 
@@ -24,7 +24,7 @@ public abstract class HomeSpawnWarpCommand implements CommandExecutor {
 	abstract boolean doCommand(Player player, CommandSender sender,
 			Command cmd, String commandLabel, String[] args);
 
-	public HomeSpawnWarpCommand(final HomeSpawnWarp plugin,
+	public AbstractCommand(final HomeSpawnWarp plugin,
 			final String commandPermission, boolean isDefaultPermitted,
 			boolean isConsoleSendable) {
 
@@ -56,15 +56,11 @@ public abstract class HomeSpawnWarpCommand implements CommandExecutor {
 
 				if (hasPerm(sender, commandPermission, isDefaultPermitted, true)) {
 
-					boolean finishedCorrectly = doCommand(player, sender, cmd,
-							commandLabel, args);
-					if (finishedCorrectly) {
-						takeMoney(player);
-					}
+					doCommand(player, sender, cmd, commandLabel, args);
 
 				}
 			} else {
-				sender.sendMessage(Tools.getMessage("cannot-perform")); 
+				sender.sendMessage(Tools.getMessage("cannot-perform"));
 			}
 		}
 		return false;
@@ -97,11 +93,11 @@ public abstract class HomeSpawnWarpCommand implements CommandExecutor {
 					sender.sendMessage(Tools.getMessage("no-permission"));
 				}
 				return false;
-			} //WORKS!!
+			} // WORKS!!
 		}
 	}
 
-	protected boolean takeMoney(final Player player) {
+	protected boolean checkMoney(final Player player) {
 
 		if (price <= 0) {
 			return true;

@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import com.homespawnwarp.main.HomeSpawnWarp;
 import com.homespawnwarp.tool.Tools;
 
-final public class DelHomeCommand extends HomeSpawnWarpCommand {
+final public class DelHomeCommand extends AbstractCommand {
 
 	public DelHomeCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted, boolean isConsoleSendable) {
@@ -19,6 +19,7 @@ final public class DelHomeCommand extends HomeSpawnWarpCommand {
 			String commandLabel, String[] args) {
 
 		if (args.length == 0) {
+			
 			if (Tools.getLocations().contains(
 					"homes." + player.getName() + ".default.x")) {
 
