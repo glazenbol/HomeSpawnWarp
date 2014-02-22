@@ -32,12 +32,12 @@ import com.homespawnwarp.tool.ConfigIO;
 import com.homespawnwarp.tool.Teleportation;
 import com.homespawnwarp.tool.Tools;
 
-final public class HomeSpawnWarp extends JavaPlugin {
+final public class HomeSpawnWarp extends JavaPlugin { // TODO Make vault work!
 
 	final static Logger logger = Logger.getLogger("Minecraft");
 	final static String emblem = "[HomeSpawnWarp]";
 
-	public Economy economy;
+	public Economy economy = null;
 
 	public static JavaPlugin hsw;
 
@@ -80,9 +80,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		if (setupEconomy()) {
-			logger.info(emblem + " Using vault!");
-		} else {
+		if (!setupEconomy()) {
 			logger.warning(emblem
 					+ " Vault not found. Economic features disabled!");
 		}
@@ -129,12 +127,11 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		Tools.getConfig();
 		Tools.getLocations();
 		Tools.getMessages();
-		
 
 		ConfigIO.save("messages");
 		ConfigIO.save("locations");
 		ConfigIO.save("config");
-		
+
 		ConfigIO.saveDefault("messages");
 		ConfigIO.saveDefault("locations");
 		ConfigIO.saveDefault("config");

@@ -9,7 +9,7 @@ import com.homespawnwarp.main.HomeSpawnWarp;
 import com.homespawnwarp.tool.LocationIO;
 import com.homespawnwarp.tool.Tools;
 
-final public class SetWarpCommand extends HomeSpawnWarpCommand {
+final public class SetWarpCommand extends AbstractCommand {
 
 	public SetWarpCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted, boolean isConsoleSendable) {

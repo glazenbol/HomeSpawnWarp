@@ -11,7 +11,7 @@ import com.homespawnwarp.main.HomeSpawnWarp;
 import com.homespawnwarp.tool.LocationIO;
 import com.homespawnwarp.tool.Tools;
 
-final public class SetHomeCommand extends HomeSpawnWarpCommand {
+final public class SetHomeCommand extends AbstractCommand {
 
 	public int group1;
 	public int group2;

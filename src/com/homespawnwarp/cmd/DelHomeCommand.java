@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import com.homespawnwarp.main.HomeSpawnWarp;
 import com.homespawnwarp.tool.Tools;
 
-final public class DelHomeCommand extends HomeSpawnWarpCommand {
+final public class DelHomeCommand extends AbstractCommand {
 
 	public DelHomeCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted, boolean isConsoleSendable) {

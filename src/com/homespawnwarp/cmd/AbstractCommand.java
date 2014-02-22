@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import com.homespawnwarp.main.HomeSpawnWarp;
 import com.homespawnwarp.tool.Tools;
 
-public abstract class HomeSpawnWarpCommand implements CommandExecutor {
+public abstract class AbstractCommand implements CommandExecutor {
 
 	protected HomeSpawnWarp plugin;
 
@@ -24,7 +24,7 @@ public abstract class HomeSpawnWarpCommand implements CommandExecutor {
 	abstract boolean doCommand(Player player, CommandSender sender,
 			Command cmd, String commandLabel, String[] args);
 
-	public HomeSpawnWarpCommand(final HomeSpawnWarp plugin,
+	public AbstractCommand(final HomeSpawnWarp plugin,
 			final String commandPermission, boolean isDefaultPermitted,
 			boolean isConsoleSendable) {
 
