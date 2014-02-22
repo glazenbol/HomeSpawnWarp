@@ -42,7 +42,5 @@ final public class DelHomeCommand extends HomeSpawnWarpCommand {
 			}
 		}
 		return false;
-		// Je suis cool
-		
 	}
 }
