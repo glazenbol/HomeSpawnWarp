@@ -34,7 +34,7 @@ final public class SpawnCommand extends TeleportCommand {
 
 					if (l != null) {
 
-						teleportPlayer(player, l, TeleportationType.SPAWN);
+						teleportPlayer(player, l, TeleportationType.SPAWN, price);
 
 					} else {
 						player.sendMessage(Tools.getMessage("no-spawn-set"));
@@ -56,7 +56,7 @@ final public class SpawnCommand extends TeleportCommand {
 			if (l != null) {
 
 				teleportPlayer(player, l,
-						TeleportationType.SPAWN);
+						TeleportationType.SPAWN, price);
 
 			} else {
 				player.sendMessage(Tools.getMessage("no-spawn-set"));

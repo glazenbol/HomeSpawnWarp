@@ -20,7 +20,7 @@ final public class Teleportation {
 	static private HashMap<String, TeleportRequest> teleportRequests = new HashMap<String, TeleportRequest>();
 
 	public static boolean createTeleportWarmup(final Player player,
-			final Location l, final TeleportationType type) {
+			final Location l, final TeleportationType type, double price) {
 		if (useWarmups) {
 			if (teleportWarmups.containsKey(player.getName())) {
 				return true;
@@ -30,27 +30,27 @@ final public class Teleportation {
 					if (homeWarmup <= 0) {
 						return false;
 					} else {
-						teleportWarmups
-								.put(player.getName(), new TeleportWarmup(
-										player, l, type, homeWarmup));
+						teleportWarmups.put(player.getName(),
+								new TeleportWarmup(player, l, type, homeWarmup,
+										price));
 					}
 					break;
 				case SPAWN:
 					if (spawnWarmup <= 0) {
 						return false;
 					} else {
-						teleportWarmups
-								.put(player.getName(), new TeleportWarmup(
-										player, l, type, spawnWarmup));
+						teleportWarmups.put(player.getName(),
+								new TeleportWarmup(player, l, type,
+										spawnWarmup, price));
 					}
 					break;
 				case WARP:
 					if (warpWarmup <= 0) {
 						return false;
 					} else {
-						teleportWarmups
-								.put(player.getName(), new TeleportWarmup(
-										player, l, type, warpWarmup));
+						teleportWarmups.put(player.getName(),
+								new TeleportWarmup(player, l, type, warpWarmup,
+										price));
 					}
 					break;
 				case REQUEST:
@@ -59,7 +59,7 @@ final public class Teleportation {
 					} else {
 						teleportWarmups.put(player.getName(),
 								new TeleportWarmup(player, l, type,
-										requestWarmup));
+										requestWarmup, price));
 					}
 					break;
 				}
@@ -86,7 +86,7 @@ final public class Teleportation {
 	}
 
 	public static void createRequest(final Player player,
-			final Player targetPlayer) {
+			final Player targetPlayer, double price) {
 		teleportRequests.put(targetPlayer.getName(), new TeleportRequest(
 				player, targetPlayer));
 		new Thread(teleportRequests.get(targetPlayer.getName())).start();
@@ -101,27 +101,30 @@ final public class Teleportation {
 	}
 
 	public static void teleportPlayer(final Player player, final Location l,
-			final TeleportationType type, final boolean sendMessage,
-			final boolean useWarmup) {
+			final TeleportationType type, double price,
+			final boolean sendMessage, final boolean useWarmup) {
 
 		if ((!player.hasPermission("HomeSpawnWarp.nowarmup") || !player.isOp())
 				&& useWarmup) {
-			if (createTeleportWarmup(player, l, type)) {
+			if (createTeleportWarmup(player, l, type, price)) {
 				return;
 			}
 		}
 
-		HomeSpawnWarp.plugin.getServer().getPluginManager()
-				.callEvent(new TeleportEvent(player, type, l, sendMessage));
+		HomeSpawnWarp.plugin
+				.getServer()
+				.getPluginManager()
+				.callEvent(
+						new TeleportEvent(player, type, l, sendMessage, price));
 	}
 
 	public static void teleportPlayer(final Player player, final Location l,// default
 																			// teleporting
-			final TeleportationType type) {
-		teleportPlayer(player, l, type, true, true);
+			final TeleportationType type, double price) {
+		teleportPlayer(player, l, type, price, true, true);
 	}
 
-	public static boolean acceptRequest(Player player) {
+	public static boolean acceptRequest(Player player, double price) {
 
 		if (teleportRequests.containsKey(player.getName())
 				&& teleportRequests.get(player.getName()).arePlayersOnline()) {
@@ -131,7 +134,7 @@ final public class Teleportation {
 							.getName());
 
 			teleportPlayer(teleportRequests.get(player.getName()).getSender(),
-					player.getLocation(), TeleportationType.REQUEST);
+					player.getLocation(), TeleportationType.REQUEST, price);
 
 			return true;
 		} else {

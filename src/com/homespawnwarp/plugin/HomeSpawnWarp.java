@@ -182,7 +182,7 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 	}
 
 	private boolean setupEconomy() {
-		
+
 		RegisteredServiceProvider<Economy> economyProvider = getServer()
 				.getServicesManager().getRegistration(
 						net.milkbowl.vault.economy.Economy.class);
@@ -194,44 +194,45 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 	}
 
 	private void setupPrices() {
+		
 		ConfigurationSection cs = Tools.getConfig().getConfigurationSection(
 				"prices");
-
+		
 		if (cs.contains("sethome")) {
-			MoneyMachine.sethome = cs.getDouble("sethome");
+			setHomeCommand.setPrice(cs.getDouble("sethome"));
 		}
 		if (cs.contains("home")) {
-			MoneyMachine.home = cs.getDouble("home");
+			homeCommand.setPrice(cs.getDouble("home"));
 		}
 		if (cs.contains("homelist")) {
-			MoneyMachine.homelist = cs.getDouble("homelist");
+			homeListCommand.setPrice(cs.getDouble("homelist"));
 		}
 		if (cs.contains("delhome")) {
-			MoneyMachine.delhome = cs.getDouble("delhome");
+			delHomeCommand.setPrice(cs.getDouble("delhome"));
 		}
 		if (cs.contains("setspawn")) {
-			MoneyMachine.setspawn = cs.getDouble("setspawn");
+			setSpawnCommand.setPrice(cs.getDouble("setspawn"));
 		}
 		if (cs.contains("spawn")) {
-			MoneyMachine.spawn = cs.getDouble("spawn");
+			spawnCommand.setPrice(cs.getDouble("spawn"));
 		}
 		if (cs.contains("setwarp")) {
-			MoneyMachine.setwarp = cs.getDouble("setwarp");
+			setWarpCommand.setPrice(cs.getDouble("setwarp"));
 		}
 		if (cs.contains("warp")) {
-			MoneyMachine.warp = cs.getDouble("warp");
+			warpCommand.setPrice(cs.getDouble("warp"));
 		}
 		if (cs.contains("warplist")) {
-			MoneyMachine.warplist = cs.getDouble("warplist");
+			warpListCommand.setPrice(cs.getDouble("warplist"));
 		}
 		if (cs.contains("delwarp")) {
-			MoneyMachine.delwarp = cs.getDouble("delwarp");
+			delWarpCommand.setPrice(cs.getDouble("delwarp"));
 		}
 		if (cs.contains("warpto")) {
-			MoneyMachine.warpto = cs.getDouble("warpto");
+			delWarpCommand.setPrice(cs.getDouble("warpto"));
 		}
 		if (cs.contains("warpaccept")) {
-			MoneyMachine.warpaccept = cs.getDouble("warpaccept");
+			warpAcceptCommand.setPrice(cs.getDouble("warpaccept"));
 		}
 	}
 

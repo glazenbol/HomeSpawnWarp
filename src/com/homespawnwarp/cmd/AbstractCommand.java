@@ -1,6 +1,5 @@
 package com.homespawnwarp.cmd;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,10 +15,9 @@ public abstract class AbstractCommand implements CommandExecutor {
 	protected String commandPermission;
 	protected boolean isDefaultPermitted;
 
-	protected boolean costsMoney;
-	protected double price;
-
 	protected boolean isConsoleSendable;
+
+	protected double price;
 
 	abstract boolean doCommand(Player player, CommandSender sender,
 			Command cmd, String commandLabel, String[] args);
@@ -32,16 +30,6 @@ public abstract class AbstractCommand implements CommandExecutor {
 		this.commandPermission = commandPermission;
 		this.isDefaultPermitted = isDefaultPermitted;
 		this.isConsoleSendable = isConsoleSendable;
-
-		costsMoney = false;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-		if (price > 0) {
-			costsMoney = true;
-			//It goes thru here yes
-		}
 	}
 
 	@Override
@@ -56,11 +44,10 @@ public abstract class AbstractCommand implements CommandExecutor {
 				player = (Player) sender;
 
 				if (hasPerm(sender, commandPermission, isDefaultPermitted, true)) {
-					if (!costsMoney || (costsMoney && hasMoney(player))) {
-						if (doCommand(player, sender, cmd, commandLabel, args)) {
-							takeMoney(player);
-						}
-					}
+
+					if (doCommand(player, sender, cmd, commandLabel, args))
+						;
+
 				}
 			} else {
 				sender.sendMessage(Tools.getMessage("cannot-perform"));
@@ -69,14 +56,13 @@ public abstract class AbstractCommand implements CommandExecutor {
 		return false;
 	}
 
-	protected boolean hasPerm(final CommandSender sender,
-			final String permission, final boolean isDefaultPermitted) {
+	public boolean hasPerm(final CommandSender sender, final String permission,
+			final boolean isDefaultPermitted) {
 		return hasPerm(sender, permission, isDefaultPermitted, true);
 	}
 
-	protected boolean hasPerm(final CommandSender sender,
-			final String permission, final boolean isDefaultPermitted,
-			final boolean sendMessage) {
+	public boolean hasPerm(final CommandSender sender, final String permission,
+			final boolean isDefaultPermitted, final boolean sendMessage) {
 		if (isDefaultPermitted) {
 			if (sender.hasPermission(permission)
 					|| !sender.isPermissionSet(permission)) {
@@ -100,52 +86,8 @@ public abstract class AbstractCommand implements CommandExecutor {
 		}
 	}
 
-	protected boolean hasMoney(final Player player) {
-
-		if (price <= 0 || hasPerm(player, "HomeSpawnWarp.nofee", false, false)) {
-
-			return true;
-
-		} else {
-			if (plugin.economy.getBalance(player.getName()) >= price) {
-
-				return true;
-
-			} else {
-
-				Tools.getMessage("not-enough-money");
-				return false;
-
-			}
-		}
-	}
-
-	protected void takeMoney(final Player player) {
-
-		if (price <= 0) {
-			return;
-		}
-
-		if (!hasPerm(player, "HomeSpawnWarp.nofee", false, false)) {
-
-			plugin.economy.withdrawPlayer(player.getName(), price);
-
-			if (price < 2 && price > 0) {
-				player.sendMessage(ChatColor.AQUA
-						+ plugin.economy.format(price) + " "
-						+ plugin.economy.currencyNameSingular()
-						+ Tools.getMessage("is-taken-from-account"));
-			} else {
-				player.sendMessage(ChatColor.AQUA
-						+ plugin.economy.format(price) + " "
-						+ plugin.economy.currencyNamePlural()
-						+ Tools.getMessage("is-taken-from-account"));
-			}
-
-		} else {
-			return;
-		}
-
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	protected boolean containsIllegalChars(final String s,

@@ -20,7 +20,7 @@ public class TeleportListener implements Listener {
 		Player player = te.getPlayer();
 		Location l = te.getLocation();
 		
-		if (MoneyMachine.takeMoney(player, type)) {
+		if (MoneyMachine.takeMoney(player, te.getPrice(), type)) {
 
 
 			if (!l.getChunk().isLoaded()) {
