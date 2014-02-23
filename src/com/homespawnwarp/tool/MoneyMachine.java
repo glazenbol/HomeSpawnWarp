@@ -37,7 +37,7 @@ public class MoneyMachine {// TODO make this the only money taking device
 
 			} else {
 
-				Tools.getMessage("not-enough-money");
+				player.sendMessage(Tools.getMessage("not-enough-money"));// TODO FIX DOUBLE also in teleport listener
 				return false;
 
 			}

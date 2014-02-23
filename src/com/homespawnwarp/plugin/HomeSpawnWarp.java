@@ -103,14 +103,18 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 
 	@Override
 	public void onEnable() {
+
+		initCommands(this);
+		setupPrices();
+		setupWarmups();
+		setupHomelimits();
+		
 		if (setupEconomy()) {
 			logger.info(emblem + " Using vault!");
 		} else {
 			logger.warning(emblem
 					+ " Vault not found. Economic features disabled!");
 		}
-
-		initCommands(this);// TODO test if this works
 
 		if (useExactSpawn) {
 			new RespawnListener(this);
@@ -152,10 +156,6 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 		useGeneralSpawn = Tools.getConfig().getBoolean("usegeneralspawn");
 		cancelWarmupsOnMove = Tools.getConfig().getBoolean(
 				"cancelwarmupsonmove");
-
-		setupPrices();
-		setupWarmups();
-		setupHomelimits();
 	}
 
 	private void setupWarmups() {
