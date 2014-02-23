@@ -35,7 +35,7 @@ import com.homespawnwarp.tool.MoneyMachine;
 import com.homespawnwarp.tool.Teleportation;
 import com.homespawnwarp.tool.Tools;
 
-final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
+final public class HomeSpawnWarp extends JavaPlugin {
 
 	final static Logger logger = Logger.getLogger("Minecraft");
 	final static String emblem = "[HomeSpawnWarp]";

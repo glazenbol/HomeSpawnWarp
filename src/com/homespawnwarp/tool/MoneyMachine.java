@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 
-public class MoneyMachine {// TODO make this the only money taking device
+public class MoneyMachine {
 
 	public static Economy economy;
 
@@ -20,9 +20,9 @@ public class MoneyMachine {// TODO make this the only money taking device
 			return true;
 
 		} else {
-			if (economy.getBalance(player.getName()) >= price) { // Fix price
+			if (economy.getBalance(player.getName()) >= price) { // TODO fix plural sentences
 
-				economy.withdrawPlayer(player.getName(), price);
+				economy.withdrawPlayer(player.getName(), price);// TODO add different cost groups via permissions
 
 				if (price < 2 && price > 0) {
 					player.sendMessage(ChatColor.AQUA + economy.format(price)
@@ -36,10 +36,7 @@ public class MoneyMachine {// TODO make this the only money taking device
 				return true;
 
 			} else {
-
-				player.sendMessage(Tools.getMessage("not-enough-money"));// TODO FIX DOUBLE also in teleport listener
 				return false;
-
 			}
 		}
 	}

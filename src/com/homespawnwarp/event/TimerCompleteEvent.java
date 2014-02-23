@@ -16,15 +16,18 @@ public class TimerCompleteEvent extends Event {
 	private double price;
 
 	public TimerCompleteEvent(final Player player, final Location l,
-			final TeleportationType type,double price) {
+			final TeleportationType type, double price) {
 		this.player = player;
 		this.location = l;
 		this.type = type;
 		this.price = price;
 	}
 
-	@Override
 	public HandlerList getHandlers() {
+		return handlers;
+	}
+
+	public static HandlerList getHandlerList() {
 		return handlers;
 	}
 

@@ -25,8 +25,11 @@ public class TeleportEvent extends Event {
 		this.price = price;
 	}
 
-	@Override
 	public HandlerList getHandlers() {
+		return handlers;
+	}
+
+	public static HandlerList getHandlerList() {
 		return handlers;
 	}
 
@@ -45,7 +48,7 @@ public class TeleportEvent extends Event {
 	public Location getLocation() {
 		return l;
 	}
-	
+
 	public double getPrice() {
 		return price;
 	}

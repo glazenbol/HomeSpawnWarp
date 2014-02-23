@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.Tools;
 
-public abstract class AbstractCommand implements CommandExecutor {
+public abstract class AbstractCommand implements CommandExecutor { // TODO Make ALL commands money costable
 
 	protected HomeSpawnWarp plugin;
 

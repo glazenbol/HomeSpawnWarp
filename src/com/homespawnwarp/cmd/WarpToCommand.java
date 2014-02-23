@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.Tools;
 
-final public class WarpToCommand extends TeleportCommand {// TODO fix command
+final public class WarpToCommand extends TeleportCommand {
 
 	public WarpToCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted, boolean isConsoleSendable) {
@@ -25,7 +25,7 @@ final public class WarpToCommand extends TeleportCommand {// TODO fix command
 						+ targetPlayer.getName()));
 				return true;
 			} else {
-				player.sendMessage(Tools.getMessage("player-not-online"));
+				player.sendMessage(Tools.getMessage("player-not-online"));// TODO fix command messages
 			}
 		} else {
 

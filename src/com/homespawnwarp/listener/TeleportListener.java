@@ -14,7 +14,7 @@ import com.homespawnwarp.tool.Tools;
 public class TeleportListener implements Listener {
 	
 	public TeleportListener(final HomeSpawnWarp plugin) {
-		plugin.getServer().getPluginManager().registerEvents(this, plugin);
+		plugin.getServer().getPluginManager().registerEvents(this, plugin);//DOESNT WORK
 	}
 
 	@EventHandler
