@@ -16,39 +16,23 @@ final public class LocationIO {
 		Tools.getLocations().set(path + ".z", location.getZ());
 		Tools.getLocations().set(path + ".yaw", location.getYaw());
 		Tools.getLocations().set(path + ".pitch", location.getPitch());
+		ConfigIO.save("Locations");
 
-		if (!HomeSpawnWarp.leightWeightMode) {
-			ConfigIO.save("Locations");
-		}
 	}
 
 	public static Location read(final String path) {
 
 		if (ConfigIO.get("Locations").contains(path)) {
 			World w = HomeSpawnWarp.plugin.getServer().getWorld(
-					Tools.getLocations().getString(path + ".world")); // Cuz
-																			// there
-																			// is
-																			// no
-																			// other
-																			// way
-																			// to
-																			// do
-																			// this,
-																			// I
-																			// mean,
-																			// you
-																			// can't
-																			// get
-																			// the
-																			// server
-																			// statically
+					Tools.getLocations().getString(path + ".world"));
+			
 			if (w != null) {
 				return new Location(w, Tools.getLocations().getDouble(
 						path + ".x"), Tools.getLocations().getDouble(
 						path + ".y"), Tools.getLocations().getDouble(
-						path + ".z"), (float) Tools.getLocations()
-						.getDouble(path + ".yaw"), (float) Tools.getLocations().getDouble(path + ".pitch"));
+						path + ".z"), (float) Tools.getLocations().getDouble(
+						path + ".yaw"), (float) Tools.getLocations().getDouble(
+						path + ".pitch"));
 			} else {
 				return null;
 			}

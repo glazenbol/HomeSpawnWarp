@@ -5,6 +5,9 @@ import java.util.HashMap;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import com.homespawnwarp.event.TeleportEvent;
+import com.homespawnwarp.plugin.HomeSpawnWarp;
+
 final public class Teleportation {
 
 	private static boolean useWarmups = false;
@@ -74,7 +77,8 @@ final public class Teleportation {
 
 	public static void setWarmups(double homeWarmup, double spawnWarmup,
 			double warpWarmup, double requestWarmup) {
-		useWarmups = (homeWarmup > 0 || spawnWarmup > 0 || warpWarmup > 0 && requestWarmup > 0);
+		useWarmups = (homeWarmup > 0 || spawnWarmup > 0 || warpWarmup > 0
+				&& requestWarmup > 0);
 		Teleportation.homeWarmup = (int) homeWarmup;
 		Teleportation.spawnWarmup = (int) spawnWarmup;
 		Teleportation.warpWarmup = (int) warpWarmup;
@@ -107,27 +111,8 @@ final public class Teleportation {
 			}
 		}
 
-		if (!l.getChunk().isLoaded()) {
-			l.getChunk().load();
-		}
-
-		if (sendMessage) {
-			switch (type) {
-			case HOME:
-				player.sendMessage(Tools.getMessage("teleport-to-home"));
-				break;
-			case SPAWN:
-				player.sendMessage(Tools.getMessage("teleport-to-spawn"));
-				break;
-			case WARP:
-				player.sendMessage(Tools.getMessage("teleport-to-warp"));
-				break;
-			default:
-				break;
-			}
-		}
-
-		player.teleport(l);// TODO HERE1
+		HomeSpawnWarp.plugin.getServer().getPluginManager()
+				.callEvent(new TeleportEvent(player, type, l, sendMessage));
 	}
 
 	public static void teleportPlayer(final Player player, final Location l,// default

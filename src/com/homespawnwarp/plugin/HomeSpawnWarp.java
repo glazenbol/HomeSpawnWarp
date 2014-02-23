@@ -6,6 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
+
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.event.HandlerList;
@@ -29,6 +30,7 @@ import com.homespawnwarp.listener.PlayerMoveListener;
 import com.homespawnwarp.listener.RespawnListener;
 import com.homespawnwarp.listener.TimerCompleteListener;
 import com.homespawnwarp.tool.ConfigIO;
+import com.homespawnwarp.tool.MoneyMachine;
 import com.homespawnwarp.tool.Teleportation;
 import com.homespawnwarp.tool.Tools;
 
@@ -37,39 +39,61 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 	final static Logger logger = Logger.getLogger("Minecraft");
 	final static String emblem = "[HomeSpawnWarp]";
 
-	public Economy economy;
-
 	public static JavaPlugin plugin;
 
 	public static boolean useGeneralSpawn;
-	public static boolean leightWeightMode;
 	public static boolean useExactSpawn;
 	public static boolean cancelWarmupsOnMove;
 
-	private final SetHomeCommand setHomeCommand = new SetHomeCommand(this,
-			"HomeSpawnWarp.sethome", true, false);
-	private final HomeCommand homeCommand = new HomeCommand(this,
-			"HomeSpawnWarp.home", true, false);
-	private final HomeListCommand homeListCommand = new HomeListCommand(this,
-			"HomeSpawnWarp.homelist", true, false);
-	private final DelHomeCommand delHomeCommand = new DelHomeCommand(this,
-			"HomeSpawnWarp.delhome", true, false);
-	private final SetSpawnCommand setSpawnCommand = new SetSpawnCommand(this,
-			"HomeSpawnWarp.setspawn", false, false);
-	private final SpawnCommand spawnCommand = new SpawnCommand(this,
-			"HomeSpawnWarp.spawn", true, false);
-	private final SetWarpCommand setWarpCommand = new SetWarpCommand(this,
-			"HomeSpawnWarp.setwarp", false, false);
-	private final WarpCommand warpCommand = new WarpCommand(this,
-			"HomeSpawnWarp.warp", true, false);
-	private final WarpListCommand warpListCommand = new WarpListCommand(this,
-			"HomeSpawnWarp.warplist", true, true);
-	private final DelWarpCommand delWarpCommand = new DelWarpCommand(this,
-			"HomeSpawnWarp.delwarp", false, true);
-	private final WarpToCommand warpToCommand = new WarpToCommand(this,
-			"HomeSpawnWarp.warpto", true, false);
-	private final WarpAcceptCommand warpAcceptCommand = new WarpAcceptCommand(
-			this, "HomeSpawnWarp.warpaccept", true, false);
+	public static SetHomeCommand setHomeCommand;
+	public static HomeCommand homeCommand;
+	public static HomeListCommand homeListCommand;
+	public static DelHomeCommand delHomeCommand;
+	public static SetSpawnCommand setSpawnCommand;
+	public static SpawnCommand spawnCommand;
+	public static SetWarpCommand setWarpCommand;
+	public static WarpCommand warpCommand;
+	public static WarpListCommand warpListCommand;
+	public static DelWarpCommand delWarpCommand;
+	public static WarpToCommand warpToCommand;
+	public static WarpAcceptCommand warpAcceptCommand;
+
+	private static void initCommands(HomeSpawnWarp hsw) {
+		setHomeCommand = new SetHomeCommand(hsw, "HomeSpawnWarp.sethome", true,
+				false);
+		homeCommand = new HomeCommand(hsw, "HomeSpawnWarp.home", true, false);
+		homeListCommand = new HomeListCommand(hsw, "HomeSpawnWarp.homelist",
+				true, false);
+		delHomeCommand = new DelHomeCommand(hsw, "HomeSpawnWarp.delhome", true,
+				false);
+		setSpawnCommand = new SetSpawnCommand(hsw, "HomeSpawnWarp.setspawn",
+				false, false);
+		spawnCommand = new SpawnCommand(hsw, "HomeSpawnWarp.spawn", true, false);
+		setWarpCommand = new SetWarpCommand(hsw, "HomeSpawnWarp.setwarp",
+				false, false);
+		warpCommand = new WarpCommand(hsw, "HomeSpawnWarp.warp", true, false);
+		warpListCommand = new WarpListCommand(hsw, "HomeSpawnWarp.warplist",
+				true, true);
+		delWarpCommand = new DelWarpCommand(hsw, "HomeSpawnWarp.delwarp",
+				false, true);
+		warpToCommand = new WarpToCommand(hsw, "HomeSpawnWarp.warpto", true,
+				false);
+		warpAcceptCommand = new WarpAcceptCommand(hsw,
+				"HomeSpawnWarp.warpaccept", true, false);
+
+		plugin.getCommand("sethome").setExecutor(setHomeCommand);
+		plugin.getCommand("home").setExecutor(homeCommand);
+		plugin.getCommand("homelist").setExecutor(homeListCommand);
+		plugin.getCommand("delhome").setExecutor(delHomeCommand);
+		plugin.getCommand("setspawn").setExecutor(setSpawnCommand);
+		plugin.getCommand("spawn").setExecutor(spawnCommand);
+		plugin.getCommand("setwarp").setExecutor(setWarpCommand);
+		plugin.getCommand("warp").setExecutor(warpCommand);
+		plugin.getCommand("warplist").setExecutor(warpListCommand);
+		plugin.getCommand("delwarp").setExecutor(delWarpCommand);
+		plugin.getCommand("warpto").setExecutor(warpToCommand);
+		plugin.getCommand("warpaccept").setExecutor(warpAcceptCommand);
+	}
 
 	@Override
 	public void onDisable() {
@@ -86,18 +110,7 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 					+ " Vault not found. Economic features disabled!");
 		}
 
-		getCommand("sethome").setExecutor(setHomeCommand);
-		getCommand("home").setExecutor(homeCommand);
-		getCommand("homelist").setExecutor(homeListCommand);
-		getCommand("delhome").setExecutor(delHomeCommand);
-		getCommand("setspawn").setExecutor(setSpawnCommand);
-		getCommand("spawn").setExecutor(spawnCommand);
-		getCommand("setwarp").setExecutor(setWarpCommand);
-		getCommand("warp").setExecutor(warpCommand);
-		getCommand("warplist").setExecutor(warpListCommand);
-		getCommand("delwarp").setExecutor(delWarpCommand);
-		getCommand("warpto").setExecutor(warpToCommand);
-		getCommand("warpaccept").setExecutor(warpAcceptCommand);
+		initCommands(this);// TODO test if this works
 
 		if (useExactSpawn) {
 			new RespawnListener(this);
@@ -111,8 +124,6 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 				new PlayerMoveListener(this);
 			}
 		}
-
-		logger.info(emblem + " LeightWeightMode = " + leightWeightMode);
 		logger.info(emblem + " UseExactSpawn = " + useExactSpawn);
 		logger.info(emblem + " UseGeneralSpawn = " + useGeneralSpawn);
 		logger.info(emblem + " CancelWarmupsOnMove = " + cancelWarmupsOnMove);
@@ -122,21 +133,21 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 
 	@Override
 	public void onLoad() {
-		ConfigIO.init(this);
 		plugin = this;
-		
+
+		ConfigIO.init(this);
+
 		ConfigIO.saveDefault("messages");
 		ConfigIO.saveDefault("locations");
 		ConfigIO.saveDefault("config");
-		
+
 		Tools.getConfig().options().copyDefaults(true);
 		Tools.getLocations().options().copyDefaults(true);
 		Tools.getMessages().options().copyDefaults(true);
-		
+
 		ConfigIO.save("messages");
 		ConfigIO.save("config");
-		
-		leightWeightMode = Tools.getConfig().getBoolean("leightweigtmode");
+
 		useExactSpawn = Tools.getConfig().getBoolean("useexactspawn");
 		useGeneralSpawn = Tools.getConfig().getBoolean("usegeneralspawn");
 		cancelWarmupsOnMove = Tools.getConfig().getBoolean(
@@ -154,7 +165,7 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 						.getConfig().getDouble("warmups.warp") * 1000, Tools
 						.getConfig().getDouble("warmups.request") * 1000);
 	}
-	
+
 	private void setupHomelimits() {
 		setHomeCommand.group1 = Tools.getConfig().getInt("group1");
 		setHomeCommand.group2 = Tools.getConfig().getInt("group2");
@@ -171,14 +182,15 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 	}
 
 	private boolean setupEconomy() {
+		
 		RegisteredServiceProvider<Economy> economyProvider = getServer()
 				.getServicesManager().getRegistration(
 						net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null) {
-			economy = economyProvider.getProvider();
+			MoneyMachine.economy = economyProvider.getProvider();
 		}
 
-		return (economy != null);
+		return (MoneyMachine.economy != null);
 	}
 
 	private void setupPrices() {
@@ -186,34 +198,40 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 				"prices");
 
 		if (cs.contains("sethome")) {
-			setHomeCommand.setPrice(cs.getDouble("sethome"));
+			MoneyMachine.sethome = cs.getDouble("sethome");
 		}
 		if (cs.contains("home")) {
-			homeCommand.setPrice(cs.getDouble("home"));
+			MoneyMachine.home = cs.getDouble("home");
 		}
 		if (cs.contains("homelist")) {
-			homeListCommand.setPrice(cs.getDouble("homelist"));
+			MoneyMachine.homelist = cs.getDouble("homelist");
+		}
+		if (cs.contains("delhome")) {
+			MoneyMachine.delhome = cs.getDouble("delhome");
 		}
 		if (cs.contains("setspawn")) {
-			setSpawnCommand.setPrice(cs.getDouble("setspawn"));
+			MoneyMachine.setspawn = cs.getDouble("setspawn");
 		}
 		if (cs.contains("spawn")) {
-			spawnCommand.setPrice(cs.getDouble("spawn"));
+			MoneyMachine.spawn = cs.getDouble("spawn");
 		}
 		if (cs.contains("setwarp")) {
-			setWarpCommand.setPrice(cs.getDouble("setwarp"));
+			MoneyMachine.setwarp = cs.getDouble("setwarp");
 		}
 		if (cs.contains("warp")) {
-			warpCommand.setPrice(cs.getDouble("warp"));
+			MoneyMachine.warp = cs.getDouble("warp");
 		}
 		if (cs.contains("warplist")) {
-			warpListCommand.setPrice(cs.getDouble("warplist"));
+			MoneyMachine.warplist = cs.getDouble("warplist");
 		}
 		if (cs.contains("delwarp")) {
-			delWarpCommand.setPrice(cs.getDouble("delwarp"));
+			MoneyMachine.delwarp = cs.getDouble("delwarp");
 		}
 		if (cs.contains("warpto")) {
-			delWarpCommand.setPrice(cs.getDouble("warpto"));
+			MoneyMachine.warpto = cs.getDouble("warpto");
+		}
+		if (cs.contains("warpaccept")) {
+			MoneyMachine.warpaccept = cs.getDouble("warpaccept");
 		}
 	}
 
