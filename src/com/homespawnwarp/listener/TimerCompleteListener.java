@@ -4,7 +4,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import com.homespawnwarp.event.TimerCompleteEvent;
-import com.homespawnwarp.main.HomeSpawnWarp;
+import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.Teleportation;
 
 public class TimerCompleteListener implements Listener {

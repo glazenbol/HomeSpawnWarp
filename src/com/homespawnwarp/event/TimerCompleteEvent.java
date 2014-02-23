@@ -21,11 +21,8 @@ public class TimerCompleteEvent extends Event {
 		this.type = type;
 	}
 
+	@Override
 	public HandlerList getHandlers() {
-		return handlers;
-	}
-
-	public static HandlerList getHandlerList() {
 		return handlers;
 	}
 

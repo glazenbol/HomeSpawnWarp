@@ -74,7 +74,7 @@ final public class Teleportation {
 
 	public static void setWarmups(double homeWarmup, double spawnWarmup,
 			double warpWarmup, double requestWarmup) {
-		useWarmups = true;
+		useWarmups = (homeWarmup > 0 || spawnWarmup > 0 || warpWarmup > 0 && requestWarmup > 0);
 		Teleportation.homeWarmup = (int) homeWarmup;
 		Teleportation.spawnWarmup = (int) spawnWarmup;
 		Teleportation.warpWarmup = (int) warpWarmup;
@@ -126,7 +126,8 @@ final public class Teleportation {
 				break;
 			}
 		}
-		player.teleport(l);
+
+		player.teleport(l);// TODO HERE1
 	}
 
 	public static void teleportPlayer(final Player player, final Location l,// default

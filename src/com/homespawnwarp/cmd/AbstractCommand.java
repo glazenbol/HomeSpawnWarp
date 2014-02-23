@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.main.HomeSpawnWarp;
+import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.Tools;
 
 public abstract class AbstractCommand implements CommandExecutor {
@@ -40,6 +40,7 @@ public abstract class AbstractCommand implements CommandExecutor {
 		this.price = price;
 		if (price > 0) {
 			costsMoney = true;
+			//It goes thru here yes
 		}
 	}
 
@@ -55,7 +56,7 @@ public abstract class AbstractCommand implements CommandExecutor {
 				player = (Player) sender;
 
 				if (hasPerm(sender, commandPermission, isDefaultPermitted, true)) {
-					if (costsMoney && hasMoney(player)) {
+					if (!costsMoney || (costsMoney && hasMoney(player))) {
 						if (doCommand(player, sender, cmd, commandLabel, args)) {
 							takeMoney(player);
 						}
@@ -133,12 +134,12 @@ public abstract class AbstractCommand implements CommandExecutor {
 				player.sendMessage(ChatColor.AQUA
 						+ plugin.economy.format(price) + " "
 						+ plugin.economy.currencyNameSingular()
-						+ " has been taken from your account!");
+						+ Tools.getMessage("is-taken-from-account"));
 			} else {
 				player.sendMessage(ChatColor.AQUA
 						+ plugin.economy.format(price) + " "
 						+ plugin.economy.currencyNamePlural()
-						+ " has been taken from your account!");
+						+ Tools.getMessage("is-taken-from-account"));
 			}
 
 		} else {

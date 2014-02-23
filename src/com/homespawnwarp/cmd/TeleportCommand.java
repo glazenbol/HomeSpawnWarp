@@ -3,11 +3,11 @@ package com.homespawnwarp.cmd;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.main.HomeSpawnWarp;
+import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.Teleportation;
 import com.homespawnwarp.tool.TeleportationType;
 
-public abstract class TeleportCommand extends AbstractCommand {
+public abstract class TeleportCommand extends AbstractCommand {//TODO MAKE THIS TAKE MONEY ONLY WHEN TELEPORT FINISHES CORRECTLY
 
 	public TeleportCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted, boolean isConsoleSendable) {

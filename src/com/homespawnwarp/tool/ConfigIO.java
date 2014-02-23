@@ -10,7 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.homespawnwarp.main.HomeSpawnWarp;
+import com.homespawnwarp.plugin.HomeSpawnWarp;
 
 public final class ConfigIO {
 
@@ -44,7 +44,7 @@ public final class ConfigIO {
 		configName = configName.toLowerCase();
 
 		if (!configFiles.containsKey(configName)) {
-			configFiles.put(configName, HomeSpawnWarp.hsw.getDataFolder());
+			configFiles.put(configName, HomeSpawnWarp.plugin.getDataFolder());
 		}
 
 		configs.put(configName, YamlConfiguration.loadConfiguration(configFiles
@@ -64,12 +64,12 @@ public final class ConfigIO {
 
 		if (!configFiles.containsKey(configName)) {
 			configFiles.put(configName,
-					new File(HomeSpawnWarp.hsw.getDataFolder(), configName
+					new File(HomeSpawnWarp.plugin.getDataFolder(), configName
 							+ ".yml"));
 		}
 
 		if (!configFiles.get(configName).exists()) {
-			HomeSpawnWarp.hsw.saveResource(configName + ".yml", false);
+			HomeSpawnWarp.plugin.saveResource(configName + ".yml", false);
 		}
 	}
 

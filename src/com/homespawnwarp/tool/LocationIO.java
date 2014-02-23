@@ -3,7 +3,7 @@ package com.homespawnwarp.tool;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-import com.homespawnwarp.main.HomeSpawnWarp;
+import com.homespawnwarp.plugin.HomeSpawnWarp;
 
 final public class LocationIO {
 
@@ -25,7 +25,7 @@ final public class LocationIO {
 	public static Location read(final String path) {
 
 		if (ConfigIO.get("Locations").contains(path)) {
-			World w = HomeSpawnWarp.hsw.getServer().getWorld(
+			World w = HomeSpawnWarp.plugin.getServer().getWorld(
 					Tools.getLocations().getString(path + ".world")); // Cuz
 																			// there
 																			// is

@@ -4,7 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.event.TimerCompleteEvent;
-import com.homespawnwarp.main.HomeSpawnWarp;
+import com.homespawnwarp.plugin.HomeSpawnWarp;
 
 public final class TeleportWarmup implements Runnable {
 
@@ -34,7 +34,7 @@ public final class TeleportWarmup implements Runnable {
 		}
 
 		if (!isCancelled) {
-			HomeSpawnWarp.hsw.getServer().getPluginManager()
+			HomeSpawnWarp.plugin.getServer().getPluginManager()
 					.callEvent(new TimerCompleteEvent(player, l, type));
 		}
 		Teleportation.removeWarmup(player);

@@ -1,4 +1,4 @@
-package com.homespawnwarp.main;
+package com.homespawnwarp.plugin;
 
 import java.util.logging.Logger;
 
@@ -39,7 +39,7 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 
 	public Economy economy;
 
-	public static JavaPlugin hsw;
+	public static JavaPlugin plugin;
 
 	public static boolean useGeneralSpawn;
 	public static boolean leightWeightMode;
@@ -123,7 +123,7 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 	@Override
 	public void onLoad() {
 		ConfigIO.init(this);
-		hsw = this;
+		plugin = this;
 		
 		ConfigIO.saveDefault("messages");
 		ConfigIO.saveDefault("locations");
@@ -144,12 +144,7 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 
 		setupPrices();
 		setupWarmups();
-
-		setHomeCommand.group1 = Tools.getConfig().getInt("group1");
-		setHomeCommand.group2 = Tools.getConfig().getInt("group2");
-		setHomeCommand.group3 = Tools.getConfig().getInt("group3");
-		setHomeCommand.group4 = Tools.getConfig().getInt("group4");
-		setHomeCommand.group5 = Tools.getConfig().getInt("group5");
+		setupHomelimits();
 	}
 
 	private void setupWarmups() {
@@ -158,6 +153,14 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 						.getConfig().getDouble("warmups.spawn") * 1000, Tools
 						.getConfig().getDouble("warmups.warp") * 1000, Tools
 						.getConfig().getDouble("warmups.request") * 1000);
+	}
+	
+	private void setupHomelimits() {
+		setHomeCommand.group1 = Tools.getConfig().getInt("group1");
+		setHomeCommand.group2 = Tools.getConfig().getInt("group2");
+		setHomeCommand.group3 = Tools.getConfig().getInt("group3");
+		setHomeCommand.group4 = Tools.getConfig().getInt("group4");
+		setHomeCommand.group5 = Tools.getConfig().getInt("group5");
 	}
 
 	@Override

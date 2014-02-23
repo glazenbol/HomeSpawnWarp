@@ -1,5 +1,5 @@
 name: HomeSpawnWarp
-main: com.homespawnwarp.main.HomeSpawnWarp
+main: com.homespawnwarp.plugin.HomeSpawnWarp
 version: 0.9
 description: HomeSpawnWarp Beta
 author: pieter3457
