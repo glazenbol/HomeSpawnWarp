@@ -6,11 +6,16 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import com.homespawnwarp.event.TeleportEvent;
+import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.MoneyMachine;
 import com.homespawnwarp.tool.TeleportationType;
 import com.homespawnwarp.tool.Tools;
 
 public class TeleportListener implements Listener {
+	
+	public TeleportListener(final HomeSpawnWarp plugin) {
+		plugin.getServer().getPluginManager().registerEvents(this, plugin);
+	}
 
 	@EventHandler
 	public void OnTeleportEvent(TeleportEvent te) {

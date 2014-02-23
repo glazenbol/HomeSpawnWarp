@@ -28,6 +28,7 @@ import com.homespawnwarp.cmd.WarpToCommand;
 import com.homespawnwarp.listener.JoinListener;
 import com.homespawnwarp.listener.PlayerMoveListener;
 import com.homespawnwarp.listener.RespawnListener;
+import com.homespawnwarp.listener.TeleportListener;
 import com.homespawnwarp.listener.TimerCompleteListener;
 import com.homespawnwarp.tool.ConfigIO;
 import com.homespawnwarp.tool.MoneyMachine;
@@ -116,6 +117,11 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 					+ " Vault not found. Economic features disabled!");
 		}
 
+		
+		
+		// LISTENERS!!!!!!!!!!!!!
+		new TeleportListener(this);
+		
 		if (useExactSpawn) {
 			new RespawnListener(this);
 			new JoinListener(this);
@@ -235,5 +241,4 @@ final public class HomeSpawnWarp extends JavaPlugin { // TODO FIX VAULT ECONOMY
 			warpAcceptCommand.setPrice(cs.getDouble("warpaccept"));
 		}
 	}
-
 }
