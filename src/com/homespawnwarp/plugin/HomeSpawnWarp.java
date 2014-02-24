@@ -193,10 +193,10 @@ final public class HomeSpawnWarp extends JavaPlugin {
 				.getServicesManager().getRegistration(
 						net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null) {
-			MoneyMachine.economy = economyProvider.getProvider();
+			MoneyMachine.setEconomy(economyProvider.getProvider());
 		}
 
-		return (MoneyMachine.economy != null);
+		return (MoneyMachine.getEconomy() != null);
 	}
 
 	private void setupPrices() {

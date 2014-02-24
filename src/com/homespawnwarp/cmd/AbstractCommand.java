@@ -6,9 +6,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.tool.MoneyMachine;
 import com.homespawnwarp.tool.Tools;
 
-public abstract class AbstractCommand implements CommandExecutor { // TODO Make ALL commands money costable
+public abstract class AbstractCommand implements CommandExecutor { // TODO Make
+																	// ALL
+																	// commands
+																	// money
+																	// costable
 
 	protected HomeSpawnWarp plugin;
 
@@ -44,9 +49,11 @@ public abstract class AbstractCommand implements CommandExecutor { // TODO Make 
 				player = (Player) sender;
 
 				if (hasPerm(sender, commandPermission, isDefaultPermitted, true)) {
-
-					if (doCommand(player, sender, cmd, commandLabel, args))
-						;
+					if (MoneyMachine.checkMoney(player, price)) {
+						if (doCommand(player, sender, cmd, commandLabel, args)) {
+							MoneyMachine.takeMoney(player, price);
+						}
+					}
 
 				}
 			} else {

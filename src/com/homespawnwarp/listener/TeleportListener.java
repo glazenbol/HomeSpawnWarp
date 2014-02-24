@@ -14,7 +14,7 @@ import com.homespawnwarp.tool.Tools;
 public class TeleportListener implements Listener {
 	
 	public TeleportListener(final HomeSpawnWarp plugin) {
-		plugin.getServer().getPluginManager().registerEvents(this, plugin);//DOESNT WORK
+		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
 	@EventHandler
@@ -25,7 +25,7 @@ public class TeleportListener implements Listener {
 		Player player = te.getPlayer();
 		Location l = te.getLocation();
 		
-		if (MoneyMachine.takeMoney(player, te.getPrice(), type)) {
+		if (MoneyMachine.takeMoney(player, te.getPrice())) {
 
 
 			if (!l.getChunk().isLoaded()) {

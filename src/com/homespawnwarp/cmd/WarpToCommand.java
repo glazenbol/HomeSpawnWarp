@@ -23,7 +23,6 @@ final public class WarpToCommand extends TeleportCommand {
 				createRequest(player, targetPlayer, price);
 				player.sendMessage(Tools.getMessage("sent-request"
 						+ targetPlayer.getName()));
-				return true;
 			} else {
 				player.sendMessage(Tools.getMessage("player-not-online"));// TODO fix command messages
 			}

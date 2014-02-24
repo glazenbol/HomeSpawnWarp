@@ -49,7 +49,6 @@ final public class HomeListCommand extends AbstractCommand {
 		} else {
 			player.sendMessage(Tools.getMessage("none"));
 		}
-
-		return false;
+		return true;
 	}
 }

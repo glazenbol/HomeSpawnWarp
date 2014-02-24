@@ -25,6 +25,6 @@ public abstract class TeleportCommand extends AbstractCommand {
 	}
 
 	protected boolean acceptRequest(Player player) {
-		return Teleportation.acceptRequest(player, price);
+		return Teleportation.acceptRequest(player, price);// TODO Move command contents to command from Teleportattion
 	}
 }
