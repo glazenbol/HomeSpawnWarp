@@ -11,18 +11,26 @@ public class MoneyMachine {
 
 	public static Economy economy;
 
-	public static boolean takeMoney(Player player, double price, TeleportationType type) {
+	public static boolean takeMoney(Player player, double price,
+			TeleportationType type) {
 
-		if (price <= 0
+		if (economy == null
+				|| price <= 0
 				|| HomeSpawnWarp.homeCommand.hasPerm(player,
 						"homespawnwarp.nofee", false, false)) {
 
 			return true;
 
 		} else {
-			if (economy.getBalance(player.getName()) >= price) { // TODO fix plural sentences
+			if (economy.getBalance(player.getName()) >= price) { // TODO fix
+																	// plural
+																	// sentences
 
-				economy.withdrawPlayer(player.getName(), price);// TODO add different cost groups via permissions
+				economy.withdrawPlayer(player.getName(), price);// TODO add
+																// different
+																// cost groups
+																// via
+																// permissions
 
 				if (price < 2 && price > 0) {
 					player.sendMessage(ChatColor.AQUA + economy.format(price)
