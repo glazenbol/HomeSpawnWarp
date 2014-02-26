@@ -13,9 +13,11 @@ public class MoneyMachine {
 
 	public static boolean takeMoney(Player player, double price) {
 
-	
-
-		if(checkMoney(player, price, false)){
+		if (canPassWithoutPaying(player, price)) {
+			return true;
+		}
+		
+		if (canAfford(player, price)) {
 			// TODO fix
 			// plural
 			// sentences
@@ -25,34 +27,42 @@ public class MoneyMachine {
 			// cost groups
 			// via
 			// permissions
-
-			if (price < 2 && price > 0) {
-				player.sendMessage(ChatColor.AQUA + getEconomy().format(price)
-						+ " " + getEconomy().currencyNameSingular()
-						+ Tools.getMessage("is-taken-from-account"));
-			} else {
-				player.sendMessage(ChatColor.AQUA + getEconomy().format(price)
-						+ " " + getEconomy().currencyNamePlural()
-						+ Tools.getMessage("is-taken-from-account"));
+			if (price > 0) {
+				if (price < 2 && price > 0) {
+					player.sendMessage(ChatColor.AQUA
+							+ getEconomy().format(price) + " "
+							+ getEconomy().currencyNameSingular()
+							+ Tools.getMessage("is-taken-from-account"));
+				} else {
+					player.sendMessage(ChatColor.AQUA
+							+ getEconomy().format(price) + " "
+							+ getEconomy().currencyNamePlural()
+							+ Tools.getMessage("is-taken-from-account"));
+				}
 			}
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
-	public static boolean checkMoney(Player player, double price) {
-		return checkMoney(player, price, true);
+
+	public static boolean canPassWithoutPaying(Player player, double price) {
+		
+		return (getEconomy() == null || price <= 0 || HomeSpawnWarp.homeCommand
+				.hasPerm(player, "homespawnwarp.nofee", false, false));
+
 	}
 
-	public static boolean checkMoney(Player player, double price,boolean sendMessage) {
-		boolean canAfford = (getEconomy() == null
-				|| price <= 0
-				|| HomeSpawnWarp.homeCommand.hasPerm(player,
-						"homespawnwarp.nofee", false, false) || getEconomy()
-				.getBalance(player.getName()) >= price);
-		return canAfford;
+	public static boolean canAfford(Player player, double price) {
 
+		return getEconomy().getBalance(player.getName()) >= price;
+
+	}
+	
+	
+	// Combines canPassWithoutPaying with canAfford
+	public static boolean checkMoney(Player player, double price) {
+		return canPassWithoutPaying(player, price) || canAfford(player, price);
 	}
 
 	public static Economy getEconomy() {
@@ -62,4 +72,5 @@ public class MoneyMachine {
 	public static void setEconomy(Economy economy) {
 		MoneyMachine.economy = economy;
 	}
+
 }
