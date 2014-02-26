@@ -129,12 +129,13 @@ final public class Teleportation {
 		if (teleportRequests.containsKey(player.getName())
 				&& teleportRequests.get(player.getName()).arePlayersOnline()) {
 
-			player.sendMessage(Tools.getMessage("teleport-to-player")
-					+ teleportRequests.get(player.getName()).getSender()
-							.getName());
+			Player sender = teleportRequests.get(player.getName()).getSender();
 
-			teleportPlayer(teleportRequests.get(player.getName()).getSender(),
-					player.getLocation(), TeleportationType.REQUEST, price);
+			sender.sendMessage(player
+					+ Tools.getMessage("accepted-your-request"));
+
+			teleportPlayer(sender, player.getLocation(),
+					TeleportationType.REQUEST, price);
 
 			return true;
 		} else {
