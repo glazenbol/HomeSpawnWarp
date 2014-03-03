@@ -2,7 +2,6 @@ package com.homespawnwarp.tool;
 
 import java.util.HashMap;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -18,7 +17,7 @@ final public class Teleportation {
 	private static int requestWarmup;
 
 	static private HashMap<String, TeleportWarmup> teleportWarmups = new HashMap<String, TeleportWarmup>();
-	static private HashMap<String, TeleportRequest> teleportRequests = new HashMap<String, TeleportRequest>();
+	static public HashMap<String, TeleportRequest> teleportRequests = new HashMap<String, TeleportRequest>();
 
 	public static boolean createTeleportWarmup(final Player player,
 			final Location l, final TeleportationType type, double price) {
@@ -123,26 +122,6 @@ final public class Teleportation {
 																			// teleporting
 			final TeleportationType type, double price) {
 		teleportPlayer(player, l, type, price, true, true);
-	}
-
-	public static boolean acceptRequest(Player player, double price) {
-
-		if (teleportRequests.containsKey(player.getName())
-				&& teleportRequests.get(player.getName()).arePlayersOnline()) {
-
-			Player sender = teleportRequests.get(player.getName()).getSender();
-
-			sender.sendMessage(ChatColor.AQUA + player.getName()
-					+ Tools.getMessage("accepted-your-request"));
-
-			teleportPlayer(sender, player.getLocation(),
-					TeleportationType.REQUEST, price);
-
-			return true;
-		} else {
-			player.sendMessage(Tools.getMessage("no-request"));
-		}
-		return false;
 	}
 
 	public static boolean warmupsContainsPlayer(Player player) {

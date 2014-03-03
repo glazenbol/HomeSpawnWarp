@@ -23,8 +23,4 @@ public abstract class TeleportCommand extends AbstractCommand {
 			double price) {
 		Teleportation.createRequest(player, targetPlayer, price);
 	}
-
-	protected boolean acceptRequest(Player player) {
-		return Teleportation.acceptRequest(player, price);// TODO Move command contents to command from Teleportattion
-	}
 }
