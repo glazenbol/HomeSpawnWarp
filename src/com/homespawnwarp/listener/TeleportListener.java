@@ -48,8 +48,6 @@ public class TeleportListener implements Listener {
 				}
 			}
 			player.teleport(l); // ALL teleports go thru here
-		} else {
-			player.sendMessage(Tools.getMessage("not-enough-money"));
 		}
 	}
 }

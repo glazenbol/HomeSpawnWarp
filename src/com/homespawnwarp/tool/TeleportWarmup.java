@@ -41,6 +41,10 @@ public final class TeleportWarmup implements Runnable {
 		}
 		Teleportation.removeWarmup(player);
 	}
+	
+	public TeleportationType getType() {
+		return type;
+	}
 
 	public void cancel() {
 		isCancelled = true;

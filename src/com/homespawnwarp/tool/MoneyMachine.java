@@ -37,11 +37,12 @@ public class MoneyMachine {
 					player.sendMessage(ChatColor.AQUA
 							+ getEconomy().format(price) + " "
 							+ getEconomy().currencyNamePlural()
-							+ Tools.getMessage("is-taken-from-account"));
+							+ Tools.getMessage("are-taken-from-account"));
 				}
 			}
 			return true;
 		} else {
+			player.sendMessage(Tools.getMessage("not-enough-money"));
 			return false;
 		}
 	}

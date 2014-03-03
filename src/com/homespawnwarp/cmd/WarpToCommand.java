@@ -32,12 +32,12 @@ final public class WarpToCommand extends TeleportCommand {
 				new Thread(tr).start();
 
 			} else {
-				player.sendMessage(Tools.getMessage("player-not-online"));// TODO
-																			// fix
-																			// command
-																			// messages
+				player.sendMessage(Tools.getMessage("player-not-online"));
 			}
-		} else {
+		} else {// TODO bug around these commands, when cancelled by movement,
+				// and performed fast again can say no pending invites while
+				// there is an invite, this is caused by another invit who
+				// cancels the other one because its cancelled
 
 			player.sendMessage(Tools.getMessage("too-few-arguments"));
 		}

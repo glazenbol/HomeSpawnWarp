@@ -53,6 +53,9 @@ public abstract class AbstractCommand implements CommandExecutor { // TODO Make
 						if (doCommand(player, sender, cmd, commandLabel, args)) {
 							MoneyMachine.takeMoney(player, price);
 						}
+					} else {
+
+						player.sendMessage(Tools.getMessage("not-enough-money"));
 					}
 
 				}

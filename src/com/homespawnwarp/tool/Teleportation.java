@@ -16,10 +16,8 @@ final public class Teleportation {
 	private static int warpWarmup;
 	private static int requestWarmup;
 
-	static private HashMap<String, TeleportWarmup> teleportWarmups = new HashMap<String, TeleportWarmup>();
-	static public HashMap<String, TeleportRequest> teleportRequests = new HashMap<String, TeleportRequest>();// Posible
-																												// volatile
-																												// needed
+	static volatile public HashMap<String, TeleportWarmup> teleportWarmups = new HashMap<String, TeleportWarmup>();
+	static volatile public HashMap<String, TeleportRequest> teleportRequests = new HashMap<String, TeleportRequest>();
 
 	public static boolean createTeleportWarmup(final Player player,
 			final Location l, final TeleportationType type, double price) {
@@ -134,5 +132,6 @@ final public class Teleportation {
 
 	public static void cancel(Player player) {
 		teleportWarmups.get(player.getName()).cancel();
+		removeRequest(player);// THIS IS A BIT TRICKY
 	}
 }
