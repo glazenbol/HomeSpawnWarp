@@ -20,9 +20,9 @@ final public class WarpToCommand extends TeleportCommand {
 		if (args.length != 0) {
 			Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 			if (targetPlayer != null && targetPlayer.isOnline()) {
+				player.sendMessage(Tools.getMessage("sent-request")
+						+ targetPlayer.getName());
 				createRequest(player, targetPlayer, price);
-				player.sendMessage(Tools.getMessage("sent-request"
-						+ targetPlayer.getName()));
 			} else {
 				player.sendMessage(Tools.getMessage("player-not-online"));// TODO fix command messages
 			}
