@@ -31,7 +31,7 @@ final public class WarpAcceptCommand extends TeleportCommand {
 			player2.sendMessage(ChatColor.AQUA + player.getName()
 					+ Tools.getMessage("accepted-your-request"));
 
-			teleportPlayer(player2, player.getLocation(),
+			teleportPlayer(player2, Teleportation.teleportRequests.get(player.getName()).getLocation(),
 					TeleportationType.REQUEST, price);
 			Teleportation.removeRequest(player);
 

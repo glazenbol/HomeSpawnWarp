@@ -1,17 +1,20 @@
 package com.homespawnwarp.tool;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public final class TeleportRequest implements Runnable {
 
 	private Player player;
 	private Player targetPlayer;
+	private Location thenLocation;
 	private static final int timeOut = 20;
 
 	public TeleportRequest(Player player, Player targetPlayer) {
 		this.player = player;
 		this.targetPlayer = targetPlayer;
+		this.thenLocation = targetPlayer.getLocation();
 	}
 
 	public boolean arePlayersOnline() {
@@ -33,5 +36,9 @@ public final class TeleportRequest implements Runnable {
 		}
 
 		Teleportation.removeRequest(targetPlayer);
+	}
+
+	public Location getLocation() {
+		return thenLocation;
 	}
 }
