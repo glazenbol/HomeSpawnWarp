@@ -2,6 +2,7 @@ package com.homespawnwarp.tool;
 
 import java.util.HashMap;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -131,7 +132,7 @@ final public class Teleportation {
 
 			Player sender = teleportRequests.get(player.getName()).getSender();
 
-			sender.sendMessage(player
+			sender.sendMessage(ChatColor.AQUA + player.getName()
 					+ Tools.getMessage("accepted-your-request"));
 
 			teleportPlayer(sender, player.getLocation(),
