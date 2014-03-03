@@ -17,7 +17,9 @@ final public class Teleportation {
 	private static int requestWarmup;
 
 	static private HashMap<String, TeleportWarmup> teleportWarmups = new HashMap<String, TeleportWarmup>();
-	static public HashMap<String, TeleportRequest> teleportRequests = new HashMap<String, TeleportRequest>();
+	static public HashMap<String, TeleportRequest> teleportRequests = new HashMap<String, TeleportRequest>();// Posible
+																												// volatile
+																												// needed
 
 	public static boolean createTeleportWarmup(final Player player,
 			final Location l, final TeleportationType type, double price) {
@@ -93,7 +95,9 @@ final public class Teleportation {
 	}
 
 	public static void removeRequest(final Player targetPlayer) {
-		teleportRequests.remove(targetPlayer.getName());
+		if (teleportRequests.containsKey(targetPlayer.getName())) {
+			teleportRequests.remove(targetPlayer.getName());
+		}
 	}
 
 	public static void removeWarmup(final Player player) {

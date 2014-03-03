@@ -24,7 +24,7 @@ public final class TeleportRequest implements Runnable {
 	
 	@Override
 	public void run() {
-		targetPlayer.sendMessage(ChatColor.DARK_AQUA + player.getName()
+		targetPlayer.sendMessage(ChatColor.AQUA + player.getName()
 				+ Tools.getMessage("teleport-to-you"));
 		try {
 			Thread.sleep(timeOut * 1000);

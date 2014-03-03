@@ -18,9 +18,4 @@ public abstract class TeleportCommand extends AbstractCommand {
 			TeleportationType type, double price) {
 		Teleportation.teleportPlayer(player, l, type, price);
 	}
-
-	protected void createRequest(Player player, Player targetPlayer,
-			double price) {
-		Teleportation.createRequest(player, targetPlayer, price);
-	}
 }
