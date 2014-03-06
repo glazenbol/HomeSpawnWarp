@@ -43,6 +43,8 @@ public class TeleportListener implements Listener {
 				case WARP:
 					player.sendMessage(Tools.getMessage("teleport-to-warp"));
 					break;
+				case REQUEST:
+					player.sendMessage(Tools.getMessage("teleporting"));
 				default:
 					break;
 				}
