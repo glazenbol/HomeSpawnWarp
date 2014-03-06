@@ -235,7 +235,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 			delWarpCommand.setPrice(cs.getDouble("delwarp"));
 		}
 		if (cs.contains("warpto")) {
-			delWarpCommand.setPrice(cs.getDouble("warpto"));
+			warpToCommand.setPrice(cs.getDouble("warpto"));
 		}
 		if (cs.contains("warpaccept")) {
 			warpAcceptCommand.setPrice(cs.getDouble("warpaccept"));
