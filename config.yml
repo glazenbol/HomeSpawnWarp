@@ -22,14 +22,24 @@ warmups:
   spawn: 0
   warp: 0
   request: 0
-# Prices for commands. You can add any command to this and put its price behind
-# to make it cost money. You can bypass players from paying money by giving them the
-# HomeSpawnWarp.nofee permission.
+# Prices for commands. You can bypass players from paying money 
+# by giving them the HomeSpawnWarp.nofee permission.
 prices:
-  home: 0
-  spawn: 0
-  warp: 0
+  home1: 0
+  home2: 0
+  home3: 0
+  spawn1: 0
+  spawn2: 0
+  spawn3: 0
+  warp1: 0
+  warp2: 0
+  warp3: 0
+  request1: 0
+  request2: 0
+  request3: 0
 
+
+# Homegroups, specifies how many homes a group is allowed to have.
 group1: 1
 group2: 2
 group3: 3

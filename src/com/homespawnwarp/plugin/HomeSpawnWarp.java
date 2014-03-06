@@ -109,7 +109,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		setupPrices();
 		setupWarmups();
 		setupHomelimits();
-		
+
 		if (setupEconomy()) {
 			logger.info(emblem + " Using vault!");
 		} else {
@@ -117,11 +117,9 @@ final public class HomeSpawnWarp extends JavaPlugin {
 					+ " Vault not found. Economic features disabled!");
 		}
 
-		
-		
 		// LISTENERS!!!!!!!!!!!!!
 		new TeleportListener(this);
-		
+
 		if (useExactSpawn) {
 			new RespawnListener(this);
 			new JoinListener(this);
@@ -200,45 +198,47 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	}
 
 	private void setupPrices() {
-		
-		ConfigurationSection cs = Tools.getConfig().getConfigurationSection(
-				"prices");
-		
-		if (cs.contains("sethome")) {
-			setHomeCommand.setPrice(cs.getDouble("sethome"));
-		}
-		if (cs.contains("home")) {
-			homeCommand.setPrice(cs.getDouble("home"));
-		}
-		if (cs.contains("homelist")) {
-			homeListCommand.setPrice(cs.getDouble("homelist"));
-		}
-		if (cs.contains("delhome")) {
-			delHomeCommand.setPrice(cs.getDouble("delhome"));
-		}
-		if (cs.contains("setspawn")) {
-			setSpawnCommand.setPrice(cs.getDouble("setspawn"));
-		}
-		if (cs.contains("spawn")) {
-			spawnCommand.setPrice(cs.getDouble("spawn"));
-		}
-		if (cs.contains("setwarp")) {
-			setWarpCommand.setPrice(cs.getDouble("setwarp"));
-		}
-		if (cs.contains("warp")) {
-			warpCommand.setPrice(cs.getDouble("warp"));
-		}
-		if (cs.contains("warplist")) {
-			warpListCommand.setPrice(cs.getDouble("warplist"));
-		}
-		if (cs.contains("delwarp")) {
-			delWarpCommand.setPrice(cs.getDouble("delwarp"));
-		}
-		if (cs.contains("warpto")) {
-			warpToCommand.setPrice(cs.getDouble("warpto"));
-		}
-		if (cs.contains("warpaccept")) {
-			warpAcceptCommand.setPrice(cs.getDouble("warpaccept"));
-		}
+
+		homeCommand.setPrices(Tools.getConfig().getDouble("prices.home1"),
+				Tools.getConfig().getDouble("prices.home2"), Tools.getConfig()
+						.getDouble("prices.home3"));
+		spawnCommand.setPrices(Tools.getConfig().getDouble("prices.spawn1"),
+				Tools.getConfig().getDouble("prices.spawn2"), Tools.getConfig()
+						.getDouble("prices.spawn3"));
+		warpCommand.setPrices(Tools.getConfig().getDouble("prices.warp1"),
+				Tools.getConfig().getDouble("prices.warp2"), Tools.getConfig()
+						.getDouble("prices.warp3"));
+		warpToCommand.setPrices(Tools.getConfig().getDouble("prices.request1"),
+				Tools.getConfig().getDouble("prices.request2"), Tools
+						.getConfig().getDouble("prices.request3"));
+		//TODO MAKE SURE THIS WORKS
+
+		/*
+		 * ConfigurationSection cs = Tools.getConfig().getConfigurationSection(
+		 * "prices");
+		 * 
+		 * if (cs.contains("sethome")) {
+		 * setHomeCommand.setPrice(cs.getDouble("sethome")); } if
+		 * (cs.contains("home")) { homeCommand.setPrice(cs.getDouble("home")); }
+		 * if (cs.contains("homelist")) {
+		 * homeListCommand.setPrice(cs.getDouble("homelist")); } if
+		 * (cs.contains("delhome")) {
+		 * delHomeCommand.setPrice(cs.getDouble("delhome")); } if
+		 * (cs.contains("setspawn")) {
+		 * setSpawnCommand.setPrice(cs.getDouble("setspawn")); } if
+		 * (cs.contains("spawn")) {
+		 * spawnCommand.setPrice(cs.getDouble("spawn")); } if
+		 * (cs.contains("setwarp")) {
+		 * setWarpCommand.setPrice(cs.getDouble("setwarp")); } if
+		 * (cs.contains("warp")) { warpCommand.setPrice(cs.getDouble("warp")); }
+		 * if (cs.contains("warplist")) {
+		 * warpListCommand.setPrice(cs.getDouble("warplist")); } if
+		 * (cs.contains("delwarp")) {
+		 * delWarpCommand.setPrice(cs.getDouble("delwarp")); } if
+		 * (cs.contains("warpto")) {
+		 * warpToCommand.setPrice(cs.getDouble("warpto")); } if
+		 * (cs.contains("warpaccept")) {
+		 * warpAcceptCommand.setPrice(cs.getDouble("warpaccept")); }
+		 */
 	}
 }

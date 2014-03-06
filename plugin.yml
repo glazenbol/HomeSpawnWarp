@@ -1,6 +1,6 @@
 name: HomeSpawnWarp
 main: com.homespawnwarp.plugin.HomeSpawnWarp
-version: 0.9
+version: 0.9.1
 description: HomeSpawnWarp Beta
 author: pieter3457
 softdepend: [Vault]

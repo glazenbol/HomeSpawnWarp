@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.MoneyMachine;
 import com.homespawnwarp.tool.Tools;
 
 public abstract class AbstractCommand implements CommandExecutor {
@@ -17,8 +16,6 @@ public abstract class AbstractCommand implements CommandExecutor {
 	protected boolean isDefaultPermitted;
 
 	protected boolean isConsoleSendable;
-
-	protected double price;
 
 	abstract boolean doCommand(Player player, CommandSender sender,
 			Command cmd, String commandLabel, String[] args);
@@ -45,14 +42,14 @@ public abstract class AbstractCommand implements CommandExecutor {
 				player = (Player) sender;
 
 				if (hasPerm(sender, commandPermission, isDefaultPermitted, true)) {
-					if (MoneyMachine.checkMoney(player, price)) {
+					//if (MoneyMachine.checkMoney(player, price)) {
 						if (doCommand(player, sender, cmd, commandLabel, args)) {
-							MoneyMachine.takeMoney(player, price);
+							//@returns wether the command is done or not
 						}
-					} else {
-
+					/*} else {
+						//Not using this no more
 						player.sendMessage(Tools.getMessage("not-enough-money"));
-					}
+					}*/
 
 				}
 			} else {
@@ -90,10 +87,6 @@ public abstract class AbstractCommand implements CommandExecutor {
 				return false;
 			} // WORKS!!
 		}
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
 	}
 
 	protected boolean containsIllegalChars(final String s,

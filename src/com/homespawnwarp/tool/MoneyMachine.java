@@ -19,11 +19,7 @@ public class MoneyMachine {
 		
 		if (canAfford(player, price)) {
 
-			getEconomy().withdrawPlayer(player.getName(), price);// TODO add
-			// different
-			// cost groups
-			// via
-			// permissions
+			getEconomy().withdrawPlayer(player.getName(), price);
 			if (price > 0) {
 				if (price < 2 && price > 0) {
 					player.sendMessage(ChatColor.AQUA
