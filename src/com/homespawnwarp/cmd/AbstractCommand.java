@@ -9,11 +9,7 @@ import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.MoneyMachine;
 import com.homespawnwarp.tool.Tools;
 
-public abstract class AbstractCommand implements CommandExecutor { // TODO Make
-																	// ALL
-																	// commands
-																	// money
-																	// costable
+public abstract class AbstractCommand implements CommandExecutor {
 
 	protected HomeSpawnWarp plugin;
 

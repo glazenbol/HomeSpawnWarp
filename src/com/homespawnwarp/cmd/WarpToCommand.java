@@ -37,6 +37,7 @@ final public class WarpToCommand extends TeleportCommand {
 				// and performed fast again can say no pending invites while
 				// there is an invite, this is caused by another invit who
 				// cancels the other one because its cancelled
+				//PROBABLY FIXED!!! WARPTO WORKS
 
 			player.sendMessage(Tools.getMessage("too-few-arguments"));
 		}

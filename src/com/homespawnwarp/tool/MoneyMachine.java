@@ -18,9 +18,6 @@ public class MoneyMachine {
 		}
 		
 		if (canAfford(player, price)) {
-			// TODO fix
-			// plural
-			// sentences
 
 			getEconomy().withdrawPlayer(player.getName(), price);// TODO add
 			// different
