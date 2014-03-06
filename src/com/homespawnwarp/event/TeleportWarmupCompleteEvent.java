@@ -7,7 +7,7 @@ import org.bukkit.event.HandlerList;
 
 import com.homespawnwarp.tool.TeleportationType;
 
-public class TimerCompleteEvent extends Event {
+public class TeleportWarmupCompleteEvent extends Event {
 
 	private static final HandlerList handlers = new HandlerList();
 	private TeleportationType type;
@@ -15,7 +15,7 @@ public class TimerCompleteEvent extends Event {
 	private Location location;
 	private double price;
 
-	public TimerCompleteEvent(final Player player, final Location l,
+	public TeleportWarmupCompleteEvent(final Player player, final Location l,
 			final TeleportationType type, double price) {
 		this.player = player;
 		this.location = l;

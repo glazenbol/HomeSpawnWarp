@@ -29,7 +29,7 @@ import com.homespawnwarp.listener.JoinListener;
 import com.homespawnwarp.listener.PlayerMoveListener;
 import com.homespawnwarp.listener.RespawnListener;
 import com.homespawnwarp.listener.TeleportListener;
-import com.homespawnwarp.listener.TimerCompleteListener;
+import com.homespawnwarp.listener.TeleportWarmupCompleteListener;
 import com.homespawnwarp.tool.ConfigIO;
 import com.homespawnwarp.tool.MoneyMachine;
 import com.homespawnwarp.tool.Teleportation;
@@ -128,7 +128,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		}
 
 		if (Teleportation.usesWarmup()) {
-			new TimerCompleteListener(this);
+			new TeleportWarmupCompleteListener(this);
 
 			if (cancelWarmupsOnMove) {
 				new PlayerMoveListener(this);
