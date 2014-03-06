@@ -37,4 +37,4 @@ teleportation-cancelled-by-move: "§4The teleportation was cancelled by movement!
 not-enough-money: "§4You don't have enough money to perform this command!"
 is-taken-from-account: "§3 has been taken from your account!"
 are-taken-from-account: "§3 have been taken from your account!"
-you-accepted-request: "§3You accepted the request of "
+you-accepted-request-of: "§3You accepted the request of "
