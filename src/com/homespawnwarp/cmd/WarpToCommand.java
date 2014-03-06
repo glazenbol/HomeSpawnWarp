@@ -25,7 +25,6 @@ final public class WarpToCommand extends TeleportCommand {
 			if (targetPlayer != null && targetPlayer.isOnline()) {
 				player.sendMessage(Tools.getMessage("sent-request")
 						+ ChatColor.AQUA + targetPlayer.getName());
-				// createRequest(player, targetPlayer, price);
 
 				TeleportRequest tr = new TeleportRequest(player, targetPlayer);
 				Teleportation.teleportRequests.put(targetPlayer.getName(), tr);
