@@ -2,13 +2,11 @@ package com.homespawnwarp.plugin;
 
 import java.util.logging.Logger;
 
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
-
-import net.milkbowl.vault.economy.Economy;
-
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -198,7 +196,12 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	}
 
 	private void setupPrices() {
-
+		
+		homeCommand.setupPrices();
+		spawnCommand.setupPrices();
+		warpCommand.setupPrices();
+		warpToCommand.setupPrices();
+		/*
 		homeCommand.setPrices(Tools.getConfig().getDouble("prices.home1"),
 				Tools.getConfig().getDouble("prices.home2"), Tools.getConfig()
 						.getDouble("prices.home3"));
@@ -213,7 +216,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 						.getConfig().getDouble("prices.request3"));
 		//TODO MAKE SURE THIS WORKS
 
-		/*
+		
 		 * ConfigurationSection cs = Tools.getConfig().getConfigurationSection(
 		 * "prices");
 		 * 

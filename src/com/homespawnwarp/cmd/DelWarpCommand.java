@@ -34,4 +34,9 @@ final public class DelWarpCommand extends AbstractCommand {
 		}
 		return false;
 	}
+
+	@Override
+	public String getName() {
+		return "delwarp";
+	}
 }

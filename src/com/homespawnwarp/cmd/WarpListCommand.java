@@ -50,4 +50,9 @@ final public class WarpListCommand extends AbstractCommand {
 
 		return false;
 	}
+
+	@Override
+	public String getName() {
+		return "warplist";
+	}
 }

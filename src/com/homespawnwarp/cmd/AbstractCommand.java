@@ -17,13 +17,13 @@ public abstract class AbstractCommand implements CommandExecutor {
 
 	protected boolean isConsoleSendable;
 
+	abstract public String getName();
 	abstract boolean doCommand(Player player, CommandSender sender,
 			Command cmd, String commandLabel, String[] args);
 
 	public AbstractCommand(final HomeSpawnWarp plugin,
 			final String commandPermission, boolean isDefaultPermitted,
 			boolean isConsoleSendable) {
-
 		this.plugin = plugin;
 		this.commandPermission = commandPermission;
 		this.isDefaultPermitted = isDefaultPermitted;

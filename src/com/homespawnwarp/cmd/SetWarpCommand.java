@@ -33,4 +33,9 @@ final public class SetWarpCommand extends AbstractCommand {
 		}
 		return true;
 	}
+
+	@Override
+	public String getName() {
+		return "setwarp";
+	}
 }

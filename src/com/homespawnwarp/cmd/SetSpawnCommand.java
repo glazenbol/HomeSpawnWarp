@@ -32,4 +32,9 @@ final public class SetSpawnCommand extends AbstractCommand {
 		player.sendMessage(Tools.getMessage("set-spawn"));
 		return true;
 	}
+
+	@Override
+	public String getName() {
+		return "setspawn";
+	}
 }

@@ -48,4 +48,9 @@ final public class HomeCommand extends TeleportCommand {
 
 		return false;
 	}
+
+	@Override
+	public String getName() {
+		return "home";
+	}
 }

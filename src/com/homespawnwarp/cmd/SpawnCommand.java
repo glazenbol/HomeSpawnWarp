@@ -64,4 +64,9 @@ final public class SpawnCommand extends TeleportCommand {
 		}
 		return false;
 	}
+
+	@Override
+	public String getName() {
+		return "spawn";
+	}
 }

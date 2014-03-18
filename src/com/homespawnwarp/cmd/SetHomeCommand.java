@@ -16,7 +16,7 @@ final public class SetHomeCommand extends AbstractCommand {
 	public int group1;
 	public int group2;
 	public int group3;
-	public int group4;
+	public int group4;// TODO CHANGE TO ARRAY
 	public int group5;
 
 	public SetHomeCommand(HomeSpawnWarp plugin, String commandPermission,
@@ -36,7 +36,7 @@ final public class SetHomeCommand extends AbstractCommand {
 					.getKeys(false);
 			homeAmount = homeNames.size();
 			if (args.length != 0 && homeNames.contains(args[0])) {
-				homeAmount --;
+				homeAmount--;
 			}
 		} else {
 			homeAmount = 0;
@@ -48,7 +48,7 @@ final public class SetHomeCommand extends AbstractCommand {
 			// Without args
 			if (Tools.getLocations().contains(
 					"homes." + player.getName() + ".default")) {
-				homeAmount --;
+				homeAmount--;
 			}
 
 			if (checkMaxHomes(player, homeAmount)) {
@@ -131,6 +131,11 @@ final public class SetHomeCommand extends AbstractCommand {
 				}
 			}
 		}
+	}
+
+	@Override
+	public String getName() {
+		return "sethome";
 	}
 
 }

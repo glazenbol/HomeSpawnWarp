@@ -44,4 +44,9 @@ final public class DelHomeCommand extends AbstractCommand {
 		}
 		return false;
 	}
+
+	@Override
+	public String getName() {
+		return "delhome";
+	}
 }

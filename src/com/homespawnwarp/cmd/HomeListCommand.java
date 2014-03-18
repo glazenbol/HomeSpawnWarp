@@ -51,4 +51,9 @@ final public class HomeListCommand extends AbstractCommand {
 		}
 		return true;
 	}
+
+	@Override
+	public String getName() {
+		return "homelist";
+	}
 }

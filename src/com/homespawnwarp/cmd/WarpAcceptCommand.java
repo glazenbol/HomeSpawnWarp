@@ -42,4 +42,10 @@ final public class WarpAcceptCommand extends TeleportCommand {
 		}
 		return false;
 	}
+
+
+	@Override
+	public String getName() {
+		return "warpaccept";
+	}
 }

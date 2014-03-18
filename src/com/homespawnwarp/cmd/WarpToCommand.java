@@ -43,4 +43,9 @@ final public class WarpToCommand extends TeleportCommand {
 		}
 		return false;
 	}
+
+	@Override
+	public String getName() {
+		return "warpto";
+	}
 }
