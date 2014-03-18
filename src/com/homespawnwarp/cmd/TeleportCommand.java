@@ -6,9 +6,9 @@ import org.bukkit.entity.Player;
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.Teleportation;
 import com.homespawnwarp.tool.TeleportationType;
+import com.homespawnwarp.tool.Tools;
 
 public abstract class TeleportCommand extends AbstractCommand {
-
 
 	protected double[] price = new double[5];
 
@@ -23,9 +23,10 @@ public abstract class TeleportCommand extends AbstractCommand {
 	}
 
 	public void setupPrices() {
-		//this.price1 = price1;
-		//this.price2 = price2;
-		//this.price3 = price3;
+		for (int i = 0; i < price.length; i++) {
+			price[i] = Tools.getConfig().getDouble("prices." + getName() + i);
+			//Warpto is just warpto
+		}
 	}
 
 	protected double getPrice(Player player) {

@@ -28,20 +28,29 @@ prices:
   home1: 0
   home2: 0
   home3: 0
+  home4: 0
+  home5: 0
   spawn1: 0
   spawn2: 0
   spawn3: 0
+  spawn4: 0
+  spawn5: 0
   warp1: 0
   warp2: 0
   warp3: 0
-  request1: 0
-  request2: 0
-  request3: 0
+  warp4: 0
+  warp5: 0
+  warpto1: 0
+  warpto2: 0
+  warpto3: 0
+  warpto4: 0
+  warpto5: 0
 
 
 # Homegroups, specifies how many homes a group is allowed to have.
-group1: 1
-group2: 2
-group3: 3
-group4: 5
-group5: 10
+homelimits:
+  group1: 1
+  group2: 2
+  group3: 3
+  group4: 5
+  group5: 10

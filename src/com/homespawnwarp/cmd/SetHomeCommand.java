@@ -13,15 +13,14 @@ import com.homespawnwarp.tool.Tools;
 
 final public class SetHomeCommand extends AbstractCommand {
 
-	public int group1;
-	public int group2;
-	public int group3;
-	public int group4;// TODO CHANGE TO ARRAY
-	public int group5;
+	int[] homelimit = new int[5];
 
 	public SetHomeCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted, boolean isConsoleSendable) {
 		super(plugin, commandPermission, isDefaultPermitted, isConsoleSendable);
+		for (int i = 0; i < homelimit.length; i ++) {
+			homelimit[i] =Tools.getConfig().getInt("homelimits.group"+ i);
+		}
 	}
 
 	@Override
@@ -79,58 +78,25 @@ final public class SetHomeCommand extends AbstractCommand {
 		return true;
 	}
 
-	private boolean checkMaxHomes(Player player, int homeAmount) {
-		boolean g1 = false;
-		boolean g2 = false;
-		boolean g3 = false;
-		boolean g4 = false;
-		boolean g5 = false;
-
-		if (hasPerm(player, "HomeSpawnWarp.home.GROUP1", true, false)) {
-			g1 = true;
-		}
-
-		if (hasPerm(player, "HomeSpawnWarp.home.GROUP2", false, false)) {
-			g2 = true;
-		}
-
-		if (hasPerm(player, "HomeSpawnWarp.home.GROUP3", false, false)) {
-			g3 = true;
-		}
-
-		if (hasPerm(player, "HomeSpawnWarp.home.GROUP4", false, false)) {
-			g4 = true;
-		}
-
-		if (hasPerm(player, "HomeSpawnWarp.home.GROUP5", false, false)) {
-			g5 = true;
-		}
+	private boolean checkMaxHomes(Player player, int homeAmount) {// TODO
+		boolean[] isInGroup = new boolean[homelimit.length];
 
 		if (hasPerm(player, "HomeSpawnWarp.home.UNLIMITED", false, false)) {
 			return true;
 		}
 
-		if (g1 && homeAmount < group1) {
-			return true;
-		} else {
-			if (g2 && homeAmount < group2) {
-				return true;
-			} else {
-				if (g3 && homeAmount < group3) {
-					return true;
-				} else {
-					if (g4 && homeAmount < group4) {
-						return true;
-					} else {
-						if (g5 && homeAmount < group5) {
-							return true;
-						} else {
-							return false;
-						}
-					}
-				}
+		for (int i = 0; i < homelimit.length; i++) {
+			if (hasPerm(player, "HomeSpawnWarp.home.GROUP" + i, true, false)) {
+				isInGroup[i] = true;
 			}
 		}
+
+		for (int i = 0; i < homelimit.length; i++) {
+			if (isInGroup[i] && homeAmount < homelimit[i]) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
