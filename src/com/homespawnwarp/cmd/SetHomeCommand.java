@@ -19,7 +19,7 @@ final public class SetHomeCommand extends AbstractCommand {
 			boolean isDefaultPermitted, boolean isConsoleSendable) {
 		super(plugin, commandPermission, isDefaultPermitted, isConsoleSendable);
 		for (int i = 0; i < homelimit.length; i ++) {
-			homelimit[i] =Tools.getConfig().getInt("homelimits.group"+ i);
+			homelimit[i] =Tools.getConfig().getInt("homelimits.group"+ (i+1));
 		}
 	}
 
@@ -85,8 +85,12 @@ final public class SetHomeCommand extends AbstractCommand {
 			return true;
 		}
 
-		for (int i = 0; i < homelimit.length; i++) {
-			if (hasPerm(player, "HomeSpawnWarp.home.GROUP" + i, true, false)) {
+		if (hasPerm(player, "HomeSpawnWarp.home.GROUP" + 1, true, false)) {
+			isInGroup[0] = true;
+		}
+		
+		for (int i = 1; i < homelimit.length; i++) {
+			if (hasPerm(player, "HomeSpawnWarp.home.GROUP" + (i + 1), false, false)) {
 				isInGroup[i] = true;
 			}
 		}
