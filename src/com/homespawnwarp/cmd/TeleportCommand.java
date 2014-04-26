@@ -38,6 +38,9 @@ public abstract class TeleportCommand extends AbstractCommand {
 		String perm = "HomeSpawnWarp.prices." + getName();
 
 		if (hasPerm(player, perm + 1, true, false)) {
+			if (price[0] <= 0) {
+				return 0;
+			}
 			isInGroup[0] = true;
 		}
 
@@ -46,12 +49,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 		for (int i = 1; i < price.length; i++) {
 			if (hasPerm(player, perm + (i + 1), false, false)) {
 				if (price[i] <= 0) {
-					plugin.getLogger()
-							.warning(
-									HomeSpawnWarp.emblem
-											+ " a price is 0, if you want a group free acces you should give it the HomeSpawnWarp.nofee permission");
-					return 0; // Price is 0, this shouldn't occur but just in
-								// case
+					return 0;
 				}
 				prices.add(price[i]);
 			}
