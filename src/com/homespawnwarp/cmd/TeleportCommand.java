@@ -1,6 +1,6 @@
 package com.homespawnwarp.cmd;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -26,25 +26,46 @@ public abstract class TeleportCommand extends AbstractCommand {
 
 	public void setupPrices() {
 		for (int i = 0; i < price.length; i++) {
-			price[i] = Tools.getConfig().getDouble("prices." + getName() + (i+1));
-			//Warpto is just warpto
+			price[i] = Tools.getConfig().getDouble(
+					"prices." + getName() + (i + 1));
+			// Warpto is just warpto
 		}
 	}
 
 	protected double getPrice(Player player) {
 
 		boolean[] isInGroup = new boolean[price.length];
+		String perm = "HomeSpawnWarp.prices." + getName();
 
-		if (hasPerm(player, "HomeSpawnWarp.prices." + getName() + 1, true, false)) {
+		if (hasPerm(player, perm + 1, true, false)) {
 			isInGroup[0] = true;
 		}
-		
-		ArrayList<Integer> prices = new ArrayList<Integer>();
-		
+
+		HashSet<Double> prices = new HashSet<Double>();
+
 		for (int i = 1; i < price.length; i++) {
-			if (hasPerm(player, "HomeSpawnWarp.home.GROUP" + (i + 1), false, false)) {
-				isInGroup[i] = true;
+			if (hasPerm(player, perm + (i + 1), false, false)) {
+				if (price[i] <= 0) {
+					plugin.getLogger()
+							.warning(
+									HomeSpawnWarp.emblem
+											+ " a price is 0, if you want a group free acces you should give it the HomeSpawnWarp.nofee permission");
+					return 0; // Price is 0, this shouldn't occur but just in
+								// case
+				}
+				prices.add(price[i]);
 			}
 		}
+
+		// Get the lowest price permitted for that user
+		double lowestVal = 0;
+
+		for (Double curVal : prices) {
+			if (curVal < lowestVal) {
+				lowestVal = curVal;
+			}
+		}
+		return lowestVal;
+
 	}
 }

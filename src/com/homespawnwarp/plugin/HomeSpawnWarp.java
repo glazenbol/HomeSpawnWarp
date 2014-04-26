@@ -35,8 +35,8 @@ import com.homespawnwarp.tool.Tools;
 
 final public class HomeSpawnWarp extends JavaPlugin {
 
-	final static Logger logger = Logger.getLogger("Minecraft");
-	final static String emblem = "[HomeSpawnWarp]";
+	public final static Logger logger = Logger.getLogger("Minecraft");
+	public final static String emblem = "[HomeSpawnWarp]";
 
 	public static JavaPlugin plugin;
 
@@ -170,7 +170,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
 		sender.sendMessage(ChatColor.AQUA + "Command not implemented yet!");
-		return false;
+		return false; //When forgetting something...
 	}
 
 	private boolean setupEconomy() {
