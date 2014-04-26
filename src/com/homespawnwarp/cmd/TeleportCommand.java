@@ -1,5 +1,7 @@
 package com.homespawnwarp.cmd;
 
+import java.util.ArrayList;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -37,7 +39,9 @@ public abstract class TeleportCommand extends AbstractCommand {
 			isInGroup[0] = true;
 		}
 		
-		for (int i = 1; i < homelimit.length; i++) {
+		ArrayList<Integer> prices = new ArrayList<Integer>();
+		
+		for (int i = 1; i < price.length; i++) {
 			if (hasPerm(player, "HomeSpawnWarp.home.GROUP" + (i + 1), false, false)) {
 				isInGroup[i] = true;
 			}
