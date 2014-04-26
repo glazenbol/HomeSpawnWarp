@@ -24,14 +24,23 @@ public abstract class TeleportCommand extends AbstractCommand {
 
 	public void setupPrices() {
 		for (int i = 0; i < price.length; i++) {
-			price[i] = Tools.getConfig().getDouble("prices." + getName() + i);
+			price[i] = Tools.getConfig().getDouble("prices." + getName() + (i+1));
 			//Warpto is just warpto
 		}
 	}
 
 	protected double getPrice(Player player) {
 
-		return 0;
-		// hasPerm(sender, permission, true, false)// TODO
+		boolean[] isInGroup = new boolean[price.length];
+
+		if (hasPerm(player, "HomeSpawnWarp.prices." + getName() + 1, true, false)) {
+			isInGroup[0] = true;
+		}
+		
+		for (int i = 1; i < homelimit.length; i++) {
+			if (hasPerm(player, "HomeSpawnWarp.home.GROUP" + (i + 1), false, false)) {
+				isInGroup[i] = true;
+			}
+		}
 	}
 }

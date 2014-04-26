@@ -78,7 +78,7 @@ final public class SetHomeCommand extends AbstractCommand {
 		return true;
 	}
 
-	private boolean checkMaxHomes(Player player, int homeAmount) {// TODO
+	private boolean checkMaxHomes(Player player, int homeAmount) {
 		boolean[] isInGroup = new boolean[homelimit.length];
 
 		if (hasPerm(player, "HomeSpawnWarp.home.UNLIMITED", false, false)) {
