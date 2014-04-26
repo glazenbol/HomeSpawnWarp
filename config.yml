@@ -22,6 +22,7 @@ warmups:
   spawn: 0
   warp: 0
   request: 0
+  
 # Prices for commands. You can bypass players from paying money 
 # by giving them the HomeSpawnWarp.nofee permission.
 prices:
