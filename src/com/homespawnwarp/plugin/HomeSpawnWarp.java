@@ -2,8 +2,6 @@ package com.homespawnwarp.plugin;
 
 import java.util.logging.Logger;
 
-import net.milkbowl.vault.economy.Economy;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -102,7 +100,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		//TODO Make commands initialize tru constructors
+		// TODO Make commands initialize tru constructors
 		initCommands(this);
 		setupPrices();
 		setupWarmups();
@@ -166,20 +164,24 @@ final public class HomeSpawnWarp extends JavaPlugin {
 						.getConfig().getDouble("warmups.warp") * 1000, Tools
 						.getConfig().getDouble("warmups.request") * 1000);
 	}
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
 		sender.sendMessage(ChatColor.AQUA + "Command not implemented yet!");
-		return false; //When forgetting something...
+		return false; // When forgetting something...
 	}
 
 	private boolean setupEconomy() {
-
-		RegisteredServiceProvider<Economy> economyProvider = getServer()
+		if (getServer().getPluginManager().getPlugin("Vault") == null) {
+			return false;
+		}
+		RegisteredServiceProvider<net.milkbowl.vault.economy.Economy> economyProvider = getServer()
 				.getServicesManager().getRegistration(
 						net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null) {
 			MoneyMachine.setEconomy(economyProvider.getProvider());
+
 		}
 
 		return (MoneyMachine.getEconomy() != null);

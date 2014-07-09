@@ -35,7 +35,7 @@ final public class WarpToCommand extends TeleportCommand {
 			}
 		} else {// TODO bug around these commands, when cancelled by movement,
 				// and performed fast again can say no pending invites while
-				// there is an invite, this is caused by another invit who
+				// there is an invite, this is caused by another invite who
 				// cancels the other one because its cancelled
 				//PROBABLY FIXED!!! WARPTO WORKS
 
