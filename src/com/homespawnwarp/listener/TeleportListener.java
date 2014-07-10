@@ -10,6 +10,7 @@ import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.FireworkEffectGenerator;
 import com.homespawnwarp.tool.FireworkEffectPlayer;
 import com.homespawnwarp.tool.MoneyMachine;
+import com.homespawnwarp.tool.PermissionAgent;
 import com.homespawnwarp.tool.TeleportationType;
 import com.homespawnwarp.tool.Tools;
 
@@ -57,10 +58,12 @@ public class TeleportListener implements Listener {
 				}
 			}
 
-			if (fwep != null) {
+			if (fwep != null
+					&& PermissionAgent.hasPerm(player,
+							"HomeSpawnWarp.teleporteffect", true, false)) {
 				try {
 					fwep.playFirework(player.getWorld(), player.getLocation(),
-							FireworkEffectGenerator.randomEffect());
+							FireworkEffectGenerator.randomBurstEffect());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

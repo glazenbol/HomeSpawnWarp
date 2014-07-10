@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.tool.PermissionAgent;
 import com.homespawnwarp.tool.Teleportation;
 import com.homespawnwarp.tool.TeleportationType;
 import com.homespawnwarp.tool.Tools;
@@ -37,7 +38,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 		boolean[] isInGroup = new boolean[price.length];
 		String perm = "HomeSpawnWarp.prices." + getName();
 
-		if (hasPerm(player, perm + 1, true, false)) {
+		if (PermissionAgent.hasPerm(player, perm + 1, true, false)) {
 			if (price[0] <= 0) {
 				return 0;
 			}
@@ -47,7 +48,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 		HashSet<Double> prices = new HashSet<Double>();
 
 		for (int i = 1; i < price.length; i++) {
-			if (hasPerm(player, perm + (i + 1), false, false)) {
+			if (PermissionAgent.hasPerm(player, perm + (i + 1), false, false)) {
 				if (price[i] <= 0) {
 					return 0;
 				}

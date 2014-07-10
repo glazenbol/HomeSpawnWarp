@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.LocationIO;
+import com.homespawnwarp.tool.PermissionAgent;
 import com.homespawnwarp.tool.Tools;
 
 final public class SetHomeCommand extends AbstractCommand {
@@ -18,8 +19,9 @@ final public class SetHomeCommand extends AbstractCommand {
 	public SetHomeCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted, boolean isConsoleSendable) {
 		super(plugin, commandPermission, isDefaultPermitted, isConsoleSendable);
-		for (int i = 0; i < homelimit.length; i ++) {
-			homelimit[i] =Tools.getConfig().getInt("homelimits.group"+ (i+1));
+		for (int i = 0; i < homelimit.length; i++) {
+			homelimit[i] = Tools.getConfig().getInt(
+					"homelimits.group" + (i + 1));
 		}
 	}
 
@@ -81,16 +83,19 @@ final public class SetHomeCommand extends AbstractCommand {
 	private boolean checkMaxHomes(Player player, int homeAmount) {
 		boolean[] isInGroup = new boolean[homelimit.length];
 
-		if (hasPerm(player, "HomeSpawnWarp.home.UNLIMITED", false, false)) {
+		if (PermissionAgent.hasPerm(player, "HomeSpawnWarp.home.UNLIMITED",
+				false, false)) {
 			return true;
 		}
 
-		if (hasPerm(player, "HomeSpawnWarp.home.GROUP" + 1, true, false)) {
+		if (PermissionAgent.hasPerm(player, "HomeSpawnWarp.home.GROUP" + 1,
+				true, false)) {
 			isInGroup[0] = true;
 		}
-		
+
 		for (int i = 1; i < homelimit.length; i++) {
-			if (hasPerm(player, "HomeSpawnWarp.home.GROUP" + (i + 1), false, false)) {
+			if (PermissionAgent.hasPerm(player, "HomeSpawnWarp.home.GROUP"
+					+ (i + 1), false, false)) {
 				isInGroup[i] = true;
 			}
 		}

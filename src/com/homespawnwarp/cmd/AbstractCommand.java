@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.tool.PermissionAgent;
 import com.homespawnwarp.tool.Tools;
 
 public abstract class AbstractCommand implements CommandExecutor {
@@ -41,7 +42,7 @@ public abstract class AbstractCommand implements CommandExecutor {
 
 				player = (Player) sender;
 
-				if (hasPerm(sender, commandPermission, isDefaultPermitted, true)) {
+				if (PermissionAgent.hasPerm(sender, commandPermission, isDefaultPermitted, true)) {
 					//if (MoneyMachine.checkMoney(player, price)) {
 						if (doCommand(player, sender, cmd, commandLabel, args)) {
 							//@returns wether the command is done or not
@@ -57,36 +58,6 @@ public abstract class AbstractCommand implements CommandExecutor {
 			}
 		}
 		return false;
-	}
-
-	public boolean hasPerm(final CommandSender sender, final String permission,
-			final boolean isDefaultPermitted) {
-		return hasPerm(sender, permission, isDefaultPermitted, true);
-	}
-
-	public boolean hasPerm(final CommandSender sender, final String permission,
-			final boolean isDefaultPermitted, final boolean sendMessage) {
-		if (isDefaultPermitted) {
-			if (sender.hasPermission(permission)
-					|| !sender.isPermissionSet(permission)) {
-				return true;
-			} else {
-				if (sendMessage) {
-					sender.sendMessage(Tools.getMessage("no-permission"));
-				}
-				return false;
-			}
-		} else {
-			if (sender.hasPermission(permission)
-					|| (!sender.isPermissionSet(permission) && sender.isOp())) {
-				return true;
-			} else {
-				if (sendMessage) {
-					sender.sendMessage(Tools.getMessage("no-permission"));
-				}
-				return false;
-			} // WORKS!!
-		}
 	}
 
 	protected boolean containsIllegalChars(final String s,

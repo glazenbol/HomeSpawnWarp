@@ -5,8 +5,6 @@ import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
-
 public class MoneyMachine {
 
 	private static Economy economy;
@@ -16,7 +14,7 @@ public class MoneyMachine {
 		if (canPassWithoutPaying(player, price)) {
 			return true;
 		}
-		
+
 		if (canAfford(player, price)) {
 
 			getEconomy().withdrawPlayer(player.getName(), price);
@@ -41,9 +39,9 @@ public class MoneyMachine {
 	}
 
 	public static boolean canPassWithoutPaying(Player player, double price) {
-		
-		return (getEconomy() == null || price <= 0 || HomeSpawnWarp.homeCommand
-				.hasPerm(player, "homespawnwarp.nofee", false, false));
+
+		return (getEconomy() == null || price <= 0 || PermissionAgent.hasPerm(
+				player, "homespawnwarp.nofee", false, false));
 
 	}
 
@@ -52,8 +50,7 @@ public class MoneyMachine {
 		return getEconomy().getBalance(player.getName()) >= price;
 
 	}
-	
-	
+
 	// Combines canPassWithoutPaying with canAfford
 	public static boolean checkMoney(Player player, double price) {
 		return canPassWithoutPaying(player, price) || canAfford(player, price);

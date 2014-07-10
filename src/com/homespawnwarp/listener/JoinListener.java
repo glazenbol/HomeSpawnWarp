@@ -20,7 +20,7 @@ public class JoinListener implements Listener {
 	}
 
 	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent e) {
+	public void onPlayerJoin(PlayerJoinEvent e) { // TODO fix unneccesery firework effects
 		if (!e.getPlayer().hasPlayedBefore()) {
 
 			String[] s = Tools.getLocations().getConfigurationSection("spawn")
