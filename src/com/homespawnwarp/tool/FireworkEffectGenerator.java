@@ -17,7 +17,7 @@ public class FireworkEffectGenerator {
 		Color c1 = getColor(r1i);
 		Color c2 = getColor(r2i);
 		
-		int rt = r.nextInt(4) + 1;
+		int rt = r.nextInt(3) + 1;
 		Type type = Type.BALL;
 		if (rt == 1)
 			type = Type.BALL;
@@ -25,8 +25,6 @@ public class FireworkEffectGenerator {
 			type = Type.BALL_LARGE;
 		if (rt == 3)
 			type = Type.BURST;
-		if (rt == 4)
-			type = Type.STAR;
 		
 		return FireworkEffect.builder()
 				.flicker(r.nextBoolean()).withColor(c1).withFade(c2)
