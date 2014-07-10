@@ -52,7 +52,7 @@ public final class ConfigIO {
 		InputStream defConfigStream = main.getResource(configName + ".yml");
 		if (defConfigStream != null) {
 			YamlConfiguration defConfig = YamlConfiguration
-					.loadConfiguration(defConfigStream);
+					.loadConfiguration(defConfigStream);//TODO Look up what's deprecated about this and how to fix it
 			configs.get(configName).setDefaults(defConfig);
 		}
 	}

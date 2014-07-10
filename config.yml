@@ -12,6 +12,7 @@
 
 useexactspawn: true
 usegeneralspawn: true
+usefireworkeffects: true
 cancelwarmupsonmove: false
 
 # Warmup time in seconds per command. Specify a negative or zero number

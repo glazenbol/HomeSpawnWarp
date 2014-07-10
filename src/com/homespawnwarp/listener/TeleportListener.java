@@ -7,26 +7,33 @@ import org.bukkit.event.Listener;
 
 import com.homespawnwarp.event.TeleportEvent;
 import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.tool.FireworkEffectGenerator;
+import com.homespawnwarp.tool.FireworkEffectPlayer;
 import com.homespawnwarp.tool.MoneyMachine;
 import com.homespawnwarp.tool.TeleportationType;
 import com.homespawnwarp.tool.Tools;
 
 public class TeleportListener implements Listener {
-	
-	public TeleportListener(final HomeSpawnWarp plugin) {
+
+	private FireworkEffectPlayer fwep;
+
+	public TeleportListener(final HomeSpawnWarp plugin,
+			boolean useFireworkEffects) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
+		if (useFireworkEffects) {
+			fwep = new FireworkEffectPlayer();
+		}
 	}
 
 	@EventHandler
 	public void OnTeleportEvent(TeleportEvent te) {
-		
+
 		boolean sendMessage = te.sendMessage();
 		TeleportationType type = te.getTeleportationType();
 		Player player = te.getPlayer();
 		Location l = te.getLocation();
-		
-		if (MoneyMachine.takeMoney(player, te.getPrice())) {
 
+		if (MoneyMachine.takeMoney(player, te.getPrice())) {
 
 			if (!l.getChunk().isLoaded()) {
 				l.getChunk().load();
@@ -49,7 +56,18 @@ public class TeleportListener implements Listener {
 					break;
 				}
 			}
+
+			if (fwep != null) {
+				try {
+					fwep.playFirework(player.getWorld(), player.getLocation(),
+							FireworkEffectGenerator.randomEffect());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
 			player.teleport(l); // ALL teleports go thru here
 		}
 	}
+
 }

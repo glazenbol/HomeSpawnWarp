@@ -38,9 +38,10 @@ final public class HomeSpawnWarp extends JavaPlugin {
 
 	public static JavaPlugin plugin;
 
-	public static boolean useGeneralSpawn;
-	public static boolean useExactSpawn;
-	public static boolean cancelWarmupsOnMove;
+	public boolean useGeneralSpawn;
+	public boolean useExactSpawn;
+	public boolean useFireworkEffects;
+	public boolean cancelWarmupsOnMove;// TODO unstaticify
 
 	public static SetHomeCommand setHomeCommand;
 	public static HomeCommand homeCommand;
@@ -113,7 +114,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		}
 
 		// LISTENERS!!!!!!!!!!!!!
-		new TeleportListener(this);
+		new TeleportListener(this,useFireworkEffects);
 
 		if (useExactSpawn) {
 			new RespawnListener(this);
@@ -153,6 +154,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 
 		useExactSpawn = Tools.getConfig().getBoolean("useexactspawn");
 		useGeneralSpawn = Tools.getConfig().getBoolean("usegeneralspawn");
+		useFireworkEffects = Tools.getConfig().getBoolean("usefireworkeffects");
 		cancelWarmupsOnMove = Tools.getConfig().getBoolean(
 				"cancelwarmupsonmove");
 	}

@@ -37,7 +37,7 @@ public class RespawnListener implements Listener {
 				e.setRespawnLocation(l);
 
 			} else {
-				if (HomeSpawnWarp.useGeneralSpawn) {
+				if (plugin.useGeneralSpawn) {
 					// Exact general spawn teleport
 					String[] s = Tools.getLocations()
 							.getConfigurationSection("spawn").getKeys(false)

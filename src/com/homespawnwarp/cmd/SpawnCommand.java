@@ -21,7 +21,7 @@ final public class SpawnCommand extends TeleportCommand {
 	boolean doCommand(Player player, CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
 
-		if (HomeSpawnWarp.useGeneralSpawn) {
+		if (plugin.useGeneralSpawn) {
 
 			// Exact general spawn teleport
 			if (Tools.getLocations().contains("spawn")) {
