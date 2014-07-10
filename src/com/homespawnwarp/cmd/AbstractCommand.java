@@ -19,6 +19,7 @@ public abstract class AbstractCommand implements CommandExecutor {
 	protected boolean isConsoleSendable;
 
 	abstract public String getName();
+
 	abstract boolean doCommand(Player player, CommandSender sender,
 			Command cmd, String commandLabel, String[] args);
 
@@ -42,15 +43,17 @@ public abstract class AbstractCommand implements CommandExecutor {
 
 				player = (Player) sender;
 
-				if (PermissionAgent.hasPerm(sender, commandPermission, isDefaultPermitted, true)) {
-					//if (MoneyMachine.checkMoney(player, price)) {
-						if (doCommand(player, sender, cmd, commandLabel, args)) {
-							//@returns wether the command is done or not
-						}
-					/*} else {
-						//Not using this no more
-						player.sendMessage(Tools.getMessage("not-enough-money"));
-					}*/
+				if (PermissionAgent.hasPerm(sender, commandPermission,
+						isDefaultPermitted, true)) {
+					// if (MoneyMachine.checkMoney(player, price)) {
+					if (doCommand(player, sender, cmd, commandLabel, args)) {
+						// @returns wether the command is done or not
+					}
+					/*
+					 * } else { //Not using this no more
+					 * player.sendMessage(Tools.getMessage("not-enough-money"));
+					 * }
+					 */
 
 				}
 			} else {

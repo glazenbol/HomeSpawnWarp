@@ -43,20 +43,20 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	public boolean useFireworkEffects;
 	public boolean cancelWarmupsOnMove;// TODO unstaticify
 
-	public static SetHomeCommand setHomeCommand;
-	public static HomeCommand homeCommand;
-	public static HomeListCommand homeListCommand;
-	public static DelHomeCommand delHomeCommand;
-	public static SetSpawnCommand setSpawnCommand;
-	public static SpawnCommand spawnCommand;
-	public static SetWarpCommand setWarpCommand;
-	public static WarpCommand warpCommand;
-	public static WarpListCommand warpListCommand;
-	public static DelWarpCommand delWarpCommand;
-	public static WarpToCommand warpToCommand;
-	public static WarpAcceptCommand warpAcceptCommand;
+	public SetHomeCommand setHomeCommand;
+	public HomeCommand homeCommand;
+	public HomeListCommand homeListCommand;
+	public DelHomeCommand delHomeCommand;
+	public SetSpawnCommand setSpawnCommand;
+	public SpawnCommand spawnCommand;
+	public SetWarpCommand setWarpCommand;
+	public WarpCommand warpCommand;
+	public WarpListCommand warpListCommand;
+	public DelWarpCommand delWarpCommand;
+	public WarpToCommand warpToCommand;
+	public WarpAcceptCommand warpAcceptCommand;
 
-	private static void initCommands(HomeSpawnWarp hsw) {
+	private void initCommands(HomeSpawnWarp hsw) {
 		setHomeCommand = new SetHomeCommand(hsw, "HomeSpawnWarp.sethome", true,
 				false);
 		homeCommand = new HomeCommand(hsw, "HomeSpawnWarp.home", true, false);

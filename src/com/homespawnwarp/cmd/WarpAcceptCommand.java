@@ -33,7 +33,7 @@ final public class WarpAcceptCommand extends TeleportCommand {
 					+ Tools.getMessage("accepted-your-request"));
 
 			teleportPlayer(player2, Teleportation.teleportRequests.get(player.getName()).getLocation(),
-					TeleportationType.REQUEST, HomeSpawnWarp.warpToCommand.getPrice(player2));
+					TeleportationType.REQUEST, getPrice(player2));
 			Teleportation.removeRequest(player);
 
 			return true;
@@ -43,6 +43,14 @@ final public class WarpAcceptCommand extends TeleportCommand {
 		return false;
 	}
 
+	@Override
+	public void setupPrices() {
+		for (int i = 0; i < price.length; i++) {
+			price[i] = Tools.getConfig().getDouble(
+					"prices.warpto" + (i + 1));
+			// Warpto for warpaccept, cuz warpaccept is doing the money taking
+		}
+	}
 
 	@Override
 	public String getName() {

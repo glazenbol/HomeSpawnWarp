@@ -65,7 +65,6 @@ public class TeleportListener implements Listener {
 					fwep.playFirework(player.getWorld(), player.getLocation(),
 							FireworkEffectGenerator.randomBurstEffect());
 				} catch (Exception e) {
-					e.printStackTrace();
 				}
 			}
 
