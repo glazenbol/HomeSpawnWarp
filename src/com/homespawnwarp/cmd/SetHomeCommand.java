@@ -85,18 +85,18 @@ final public class SetHomeCommand extends AbstractCommand {
 	private boolean checkMaxHomes(Player player, int homeAmount) {
 		boolean[] isInGroup = new boolean[homelimit.length];
 
-		if (PermissionAgent.hasPerm(player, "HomeSpawnWarp.home.UNLIMITED",
+		if (PermissionAgent.checkPerm(player, "HomeSpawnWarp.home.UNLIMITED",
 				false, false)) {
 			return true;
 		}
 
-		if (PermissionAgent.hasPerm(player, "HomeSpawnWarp.home.GROUP" + 1,
+		if (PermissionAgent.checkPerm(player, "HomeSpawnWarp.home.GROUP" + 1,
 				true, false)) {
 			isInGroup[0] = true;
 		}
 
 		for (int i = 1; i < homelimit.length; i++) {
-			if (PermissionAgent.hasPerm(player, "HomeSpawnWarp.home.GROUP"
+			if (PermissionAgent.checkPerm(player, "HomeSpawnWarp.home.GROUP"
 					+ (i + 1), false, false)) {
 				isInGroup[i] = true;
 			}

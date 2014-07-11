@@ -41,7 +41,7 @@ public abstract class AbstractCommand implements CommandExecutor {
 
 				player = (Player) sender;
 
-				if (PermissionAgent.hasPerm(sender, commandPermission,
+				if (PermissionAgent.checkPerm(sender, commandPermission,
 						isDefaultPermitted, true)) {
 					// if (MoneyMachine.checkMoney(player, price)) {
 					if (doCommand(player, sender, cmd, commandLabel, args)) {

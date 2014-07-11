@@ -59,7 +59,7 @@ public class TeleportListener implements Listener {
 			}
 
 			if (fwep != null
-					&& PermissionAgent.hasPerm(player,
+					&& PermissionAgent.checkPerm(player,
 							"HomeSpawnWarp.teleporteffect", true, false)) {
 				try {
 					fwep.playFirework(player.getWorld(), player.getLocation(),

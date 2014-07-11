@@ -4,12 +4,12 @@ import org.bukkit.command.CommandSender;
 
 public class PermissionAgent {
 
-	public static boolean hasPerm(final CommandSender sender, final String permission,
+	public static boolean checkPerm(final CommandSender sender, final String permission,
 			final boolean isDefaultPermitted) {
-		return hasPerm(sender, permission, isDefaultPermitted, true);
+		return checkPerm(sender, permission, isDefaultPermitted, true);
 	}
 
-	public static boolean hasPerm(final CommandSender sender, final String permission,
+	public static boolean checkPerm(final CommandSender sender, final String permission,
 			final boolean isDefaultPermitted, final boolean sendMessage) {
 		if (isDefaultPermitted) {
 			if (sender.hasPermission(permission)

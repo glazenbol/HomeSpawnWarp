@@ -40,7 +40,7 @@ public class MoneyMachine {
 
 	public static boolean canPassWithoutPaying(Player player, double price) {
 
-		return (getEconomy() == null || price <= 0 || PermissionAgent.hasPerm(
+		return (getEconomy() == null || price <= 0 || PermissionAgent.checkPerm(
 				player, "homespawnwarp.nofee", false, false));
 
 	}
