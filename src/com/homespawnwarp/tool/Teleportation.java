@@ -6,9 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.event.TeleportEvent;
-import com.homespawnwarp.plugin.HomeSpawnWarp;
 
-final public class Teleportation {
+final public class Teleportation extends Tool {
 
 	private static boolean useWarmups = false;
 	private static int homeWarmup;
@@ -31,7 +30,7 @@ final public class Teleportation {
 						return false;
 					} else {
 						teleportWarmups.put(player.getName(),
-								new TeleportWarmup(player, l, type, homeWarmup,
+								new TeleportWarmup(plugin, player, l, type, homeWarmup,
 										price));
 					}
 					break;
@@ -40,7 +39,7 @@ final public class Teleportation {
 						return false;
 					} else {
 						teleportWarmups.put(player.getName(),
-								new TeleportWarmup(player, l, type,
+								new TeleportWarmup(plugin, player, l, type,
 										spawnWarmup, price));
 					}
 					break;
@@ -49,7 +48,7 @@ final public class Teleportation {
 						return false;
 					} else {
 						teleportWarmups.put(player.getName(),
-								new TeleportWarmup(player, l, type, warpWarmup,
+								new TeleportWarmup(plugin, player, l, type, warpWarmup,
 										price));
 					}
 					break;
@@ -58,7 +57,7 @@ final public class Teleportation {
 						return false;
 					} else {
 						teleportWarmups.put(player.getName(),
-								new TeleportWarmup(player, l, type,
+								new TeleportWarmup(plugin, player, l, type,
 										requestWarmup, price));
 					}
 					break;
@@ -113,8 +112,7 @@ final public class Teleportation {
 			}
 		}
 
-		HomeSpawnWarp.plugin
-				.getServer()
+		plugin.getServer()
 				.getPluginManager()
 				.callEvent(
 						new TeleportEvent(player, type, l, sendMessage, price));

@@ -16,27 +16,25 @@ public abstract class AbstractCommand implements CommandExecutor {
 	protected String commandPermission;
 	protected boolean isDefaultPermitted;
 
-	protected boolean isConsoleSendable;
-
 	abstract public String getName();
 
 	abstract boolean doCommand(Player player, CommandSender sender,
 			Command cmd, String commandLabel, String[] args);
 
 	public AbstractCommand(final HomeSpawnWarp plugin,
-			final String commandPermission, boolean isDefaultPermitted,
-			boolean isConsoleSendable) {
+			final String commandPermission, boolean isDefaultPermitted) {
 		this.plugin = plugin;
 		this.commandPermission = commandPermission;
 		this.isDefaultPermitted = isDefaultPermitted;
-		this.isConsoleSendable = isConsoleSendable;
+		
+		plugin.getCommand(getName()).setExecutor(this);
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
 		Player player = null;
-		if (isConsoleSendable) {
+		if (this instanceof ConsoleSendable) {
 			doCommand(player, sender, cmd, commandLabel, args);
 		} else {
 			if (sender instanceof Player) {

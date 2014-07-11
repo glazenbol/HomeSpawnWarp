@@ -8,15 +8,11 @@ import java.util.Set;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
-
-public final class ConfigIO {
+public final class ConfigIO extends Tool{
 
 	private final static HashMap<String, FileConfiguration> configs = new HashMap<String, FileConfiguration>();
 	private final static HashMap<String, File> configFiles = new HashMap<String, File>();
-	private static JavaPlugin main;
 
 	private ConfigIO() {
 		// initial constructor
@@ -24,9 +20,6 @@ public final class ConfigIO {
 	
 	// GETTING
 
-	public static void init(JavaPlugin main) {
-		ConfigIO.main = main;
-	}
 
 	public static FileConfiguration get(String configName) {
 
@@ -44,12 +37,12 @@ public final class ConfigIO {
 		configName = configName.toLowerCase();
 
 		if (!configFiles.containsKey(configName)) {
-			configFiles.put(configName, HomeSpawnWarp.plugin.getDataFolder());
+			configFiles.put(configName, plugin.getDataFolder());
 		}
 
 		configs.put(configName, YamlConfiguration.loadConfiguration(configFiles
 				.get(configName)));
-		InputStream defConfigStream = main.getResource(configName + ".yml");
+		InputStream defConfigStream = plugin.getResource(configName + ".yml");
 		if (defConfigStream != null) {
 			YamlConfiguration defConfig = YamlConfiguration
 					.loadConfiguration(defConfigStream);//TODO Look up what's deprecated about this and how to fix it
@@ -64,12 +57,12 @@ public final class ConfigIO {
 
 		if (!configFiles.containsKey(configName)) {
 			configFiles.put(configName,
-					new File(HomeSpawnWarp.plugin.getDataFolder(), configName
+					new File(plugin.getDataFolder(), configName
 							+ ".yml"));
 		}
 
 		if (!configFiles.get(configName).exists()) {
-			HomeSpawnWarp.plugin.saveResource(configName + ".yml", false);
+			plugin.saveResource(configName + ".yml", false);
 		}
 	}
 

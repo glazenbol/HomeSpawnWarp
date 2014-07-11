@@ -9,24 +9,14 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.homespawnwarp.cmd.DelHomeCommand;
-import com.homespawnwarp.cmd.DelWarpCommand;
-import com.homespawnwarp.cmd.HomeCommand;
-import com.homespawnwarp.cmd.HomeListCommand;
-import com.homespawnwarp.cmd.SetHomeCommand;
-import com.homespawnwarp.cmd.SetSpawnCommand;
-import com.homespawnwarp.cmd.SetWarpCommand;
-import com.homespawnwarp.cmd.SpawnCommand;
-import com.homespawnwarp.cmd.WarpAcceptCommand;
-import com.homespawnwarp.cmd.WarpCommand;
-import com.homespawnwarp.cmd.WarpListCommand;
-import com.homespawnwarp.cmd.WarpToCommand;
 import com.homespawnwarp.listener.JoinListener;
 import com.homespawnwarp.listener.PlayerMoveListener;
 import com.homespawnwarp.listener.RespawnListener;
 import com.homespawnwarp.listener.TeleportListener;
 import com.homespawnwarp.listener.TeleportWarmupCompleteListener;
+import com.homespawnwarp.tool.CommandManager;
 import com.homespawnwarp.tool.ConfigIO;
+import com.homespawnwarp.tool.LocationIO;
 import com.homespawnwarp.tool.MoneyMachine;
 import com.homespawnwarp.tool.Teleportation;
 import com.homespawnwarp.tool.Tools;
@@ -36,62 +26,15 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	public final static Logger logger = Logger.getLogger("Minecraft");
 	public final static String emblem = "[HomeSpawnWarp]";
 
-	public static JavaPlugin plugin;
+	public JavaPlugin plugin;
 
 	public boolean useGeneralSpawn;
 	public boolean useExactSpawn;
 	public boolean useFireworkEffects;
 	public boolean cancelWarmupsOnMove;// TODO unstaticify
+	
+	private CommandManager cManager;
 
-	public SetHomeCommand setHomeCommand;
-	public HomeCommand homeCommand;
-	public HomeListCommand homeListCommand;
-	public DelHomeCommand delHomeCommand;
-	public SetSpawnCommand setSpawnCommand;
-	public SpawnCommand spawnCommand;
-	public SetWarpCommand setWarpCommand;
-	public WarpCommand warpCommand;
-	public WarpListCommand warpListCommand;
-	public DelWarpCommand delWarpCommand;
-	public WarpToCommand warpToCommand;
-	public WarpAcceptCommand warpAcceptCommand;
-
-	private void initCommands(HomeSpawnWarp hsw) {
-		setHomeCommand = new SetHomeCommand(hsw, "HomeSpawnWarp.sethome", true,
-				false);
-		homeCommand = new HomeCommand(hsw, "HomeSpawnWarp.home", true, false);
-		homeListCommand = new HomeListCommand(hsw, "HomeSpawnWarp.homelist",
-				true, false);
-		delHomeCommand = new DelHomeCommand(hsw, "HomeSpawnWarp.delhome", true,
-				false);
-		setSpawnCommand = new SetSpawnCommand(hsw, "HomeSpawnWarp.setspawn",
-				false, false);
-		spawnCommand = new SpawnCommand(hsw, "HomeSpawnWarp.spawn", true, false);
-		setWarpCommand = new SetWarpCommand(hsw, "HomeSpawnWarp.setwarp",
-				false, false);
-		warpCommand = new WarpCommand(hsw, "HomeSpawnWarp.warp", true, false);
-		warpListCommand = new WarpListCommand(hsw, "HomeSpawnWarp.warplist",
-				true, true);
-		delWarpCommand = new DelWarpCommand(hsw, "HomeSpawnWarp.delwarp",
-				false, true);
-		warpToCommand = new WarpToCommand(hsw, "HomeSpawnWarp.warpto", true,
-				false);
-		warpAcceptCommand = new WarpAcceptCommand(hsw,
-				"HomeSpawnWarp.warpaccept", true, false);
-
-		plugin.getCommand("sethome").setExecutor(setHomeCommand);
-		plugin.getCommand("home").setExecutor(homeCommand);
-		plugin.getCommand("homelist").setExecutor(homeListCommand);
-		plugin.getCommand("delhome").setExecutor(delHomeCommand);
-		plugin.getCommand("setspawn").setExecutor(setSpawnCommand);
-		plugin.getCommand("spawn").setExecutor(spawnCommand);
-		plugin.getCommand("setwarp").setExecutor(setWarpCommand);
-		plugin.getCommand("warp").setExecutor(warpCommand);
-		plugin.getCommand("warplist").setExecutor(warpListCommand);
-		plugin.getCommand("delwarp").setExecutor(delWarpCommand);
-		plugin.getCommand("warpto").setExecutor(warpToCommand);
-		plugin.getCommand("warpaccept").setExecutor(warpAcceptCommand);
-	}
 
 	@Override
 	public void onDisable() {
@@ -102,8 +45,10 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		// TODO Make commands initialize tru constructors
-		initCommands(this);
-		setupPrices();
+		cManager = new CommandManager(this);
+		cManager.initCommands();
+		
+		
 		setupWarmups();
 
 		if (setupEconomy()) {
@@ -139,6 +84,9 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	public void onLoad() {
 		plugin = this;
 
+		//Initialize tools
+		LocationIO.init(this);
+		Teleportation.init(this);
 		ConfigIO.init(this);
 
 		ConfigIO.saveDefault("messages");
@@ -164,7 +112,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 				Tools.getConfig().getDouble("warmups.home") * 1000, Tools
 						.getConfig().getDouble("warmups.spawn") * 1000, Tools
 						.getConfig().getDouble("warmups.warp") * 1000, Tools
-						.getConfig().getDouble("warmups.request") * 1000);
+						.getConfig().getDouble("warmups.warpto") * 1000);
 	}
 
 	@Override
@@ -187,14 +135,5 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		}
 
 		return (MoneyMachine.getEconomy() != null);
-	}
-
-	private void setupPrices() {
-
-		homeCommand.setupPrices();
-		spawnCommand.setupPrices();
-		warpCommand.setupPrices();
-		warpToCommand.setupPrices();
-
 	}
 }

@@ -12,9 +12,11 @@ import com.homespawnwarp.tool.Tools;
 
 final public class WarpToCommand extends TeleportCommand {
 
+
 	public WarpToCommand(HomeSpawnWarp plugin, String commandPermission,
-			boolean isDefaultPermitted, boolean isConsoleSendable) {
-		super(plugin, commandPermission, isDefaultPermitted, isConsoleSendable);
+			boolean isDefaultPermitted) {
+		super(plugin, commandPermission, isDefaultPermitted);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

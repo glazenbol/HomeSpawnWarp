@@ -11,8 +11,8 @@ import com.homespawnwarp.tool.Tools;
 final public class HomeListCommand extends AbstractCommand {
 
 	public HomeListCommand(HomeSpawnWarp plugin, String commandPermission,
-			boolean isDefaultPermitted, boolean isConsoleSendable) {
-		super(plugin, commandPermission, isDefaultPermitted, isConsoleSendable);
+			boolean isDefaultPermitted) {
+		super(plugin, commandPermission, isDefaultPermitted);
 	}
 
 	@Override

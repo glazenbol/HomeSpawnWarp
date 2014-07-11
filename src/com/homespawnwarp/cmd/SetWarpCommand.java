@@ -12,8 +12,8 @@ import com.homespawnwarp.tool.Tools;
 final public class SetWarpCommand extends AbstractCommand {
 
 	public SetWarpCommand(HomeSpawnWarp plugin, String commandPermission,
-			boolean isDefaultPermitted, boolean isConsoleSendable) {
-		super(plugin, commandPermission, isDefaultPermitted, isConsoleSendable);
+			boolean isDefaultPermitted) {
+		super(plugin, commandPermission, isDefaultPermitted);
 	}
 
 	@Override

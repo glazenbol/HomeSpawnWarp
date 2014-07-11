@@ -14,11 +14,13 @@ import com.homespawnwarp.tool.Tools;
 
 final public class SetHomeCommand extends AbstractCommand {
 
+
+
 	int[] homelimit = new int[5];
 
 	public SetHomeCommand(HomeSpawnWarp plugin, String commandPermission,
-			boolean isDefaultPermitted, boolean isConsoleSendable) {
-		super(plugin, commandPermission, isDefaultPermitted, isConsoleSendable);
+			boolean isDefaultPermitted) {
+		super(plugin, commandPermission, isDefaultPermitted);
 		for (int i = 0; i < homelimit.length; i++) {
 			homelimit[i] = Tools.getConfig().getInt(
 					"homelimits.group" + (i + 1));

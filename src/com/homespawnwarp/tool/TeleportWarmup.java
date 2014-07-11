@@ -14,14 +14,16 @@ public final class TeleportWarmup implements Runnable {
 	private Location l;
 	private boolean isCancelled = false;
 	private double price;
+	private HomeSpawnWarp plugin;
 
-	public TeleportWarmup(Player player, Location l, TeleportationType type,
+	public TeleportWarmup(HomeSpawnWarp plugin, Player player, Location l, TeleportationType type,
 			int warmup, double price) {
 		this.warmup = warmup;
 		this.player = player;
 		this.l = l;
 		this.type = type;
 		this.price = price;
+		this.plugin = plugin;
 	}
 
 	@Override
@@ -36,12 +38,15 @@ public final class TeleportWarmup implements Runnable {
 		}
 
 		if (!isCancelled) {
-			HomeSpawnWarp.plugin.getServer().getPluginManager()
-					.callEvent(new TeleportWarmupCompleteEvent(player, l, type, price));
+			plugin.getServer()
+					.getPluginManager()
+					.callEvent(
+							new TeleportWarmupCompleteEvent(player, l, type,
+									price));
 		}
 		Teleportation.removeWarmup(player);
 	}
-	
+
 	public TeleportationType getType() {
 		return type;
 	}

@@ -10,8 +10,8 @@ import com.homespawnwarp.tool.Tools;
 final public class DelHomeCommand extends AbstractCommand {
 
 	public DelHomeCommand(HomeSpawnWarp plugin, String commandPermission,
-			boolean isDefaultPermitted, boolean isConsoleSendable) {
-		super(plugin, commandPermission, isDefaultPermitted, isConsoleSendable);
+			boolean isDefaultPermitted) {
+		super(plugin, commandPermission, isDefaultPermitted);
 	}
 
 	@Override

@@ -3,11 +3,10 @@ package com.homespawnwarp.tool;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
-
-final public class LocationIO {
-
-	public static void write(final String path, final Location location) {
+final public class LocationIO extends Tool{
+	
+	public static void write(final String path, final Location location) {//TODO iuud's
+		
 
 		Tools.getLocations()
 				.set(path + ".world", location.getWorld().getName());
@@ -23,7 +22,7 @@ final public class LocationIO {
 	public static Location read(final String path) {
 
 		if (ConfigIO.get("Locations").contains(path)) {
-			World w = HomeSpawnWarp.plugin.getServer().getWorld(
+			World w = plugin.getServer().getWorld(
 					Tools.getLocations().getString(path + ".world"));
 			
 			if (w != null) {

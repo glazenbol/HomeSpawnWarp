@@ -7,11 +7,11 @@ import org.bukkit.entity.Player;
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.tool.Tools;
 
-final public class DelWarpCommand extends AbstractCommand {
+final public class DelWarpCommand extends AbstractCommand implements ConsoleSendable{
 
 	public DelWarpCommand(HomeSpawnWarp plugin, String commandPermission,
-			boolean isDefaultPermitted, boolean isConsoleSendable) {
-		super(plugin, commandPermission, isDefaultPermitted, isConsoleSendable);
+			boolean isDefaultPermitted) {
+		super(plugin, commandPermission, isDefaultPermitted);
 	}
 
 	@Override

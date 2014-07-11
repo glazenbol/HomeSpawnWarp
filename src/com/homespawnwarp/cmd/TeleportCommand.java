@@ -16,8 +16,14 @@ public abstract class TeleportCommand extends AbstractCommand {
 	protected double[] price = new double[5];
 
 	public TeleportCommand(HomeSpawnWarp plugin, String commandPermission,
-			boolean isDefaultPermitted, boolean isConsoleSendable) {
-		super(plugin, commandPermission, isDefaultPermitted, isConsoleSendable);
+			boolean isDefaultPermitted) {
+		
+		
+		super(plugin, commandPermission, isDefaultPermitted);
+		
+		if (this instanceof MoneyCommand) {
+			setupPrices();
+		}
 	}
 
 	protected void teleportPlayer(Player player, Location l,
