@@ -6,8 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.LocationIO;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.LocationIO;
+import com.homespawnwarp.util.Tools;
 
 final public class SetWarpCommand extends AbstractCommand {
 

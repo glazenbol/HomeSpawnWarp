@@ -14,24 +14,24 @@ import com.homespawnwarp.listener.PlayerMoveListener;
 import com.homespawnwarp.listener.RespawnListener;
 import com.homespawnwarp.listener.TeleportListener;
 import com.homespawnwarp.listener.TeleportWarmupCompleteListener;
-import com.homespawnwarp.tool.CommandManager;
-import com.homespawnwarp.tool.ConfigIO;
-import com.homespawnwarp.tool.LocationIO;
-import com.homespawnwarp.tool.MoneyMachine;
-import com.homespawnwarp.tool.Teleportation;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.CommandManager;
+import com.homespawnwarp.util.ConfigIO;
+import com.homespawnwarp.util.LocationIO;
+import com.homespawnwarp.util.MoneyMachine;
+import com.homespawnwarp.util.Teleportation;
+import com.homespawnwarp.util.Tools;
 
 final public class HomeSpawnWarp extends JavaPlugin {
 
-	public final static Logger logger = Logger.getLogger("Minecraft");
-	public final static String emblem = "[HomeSpawnWarp]";
+	public final Logger logger = Logger.getLogger("Minecraft");
+	public final String emblem = "[HomeSpawnWarp]";
 
 	public JavaPlugin plugin;
 
 	public boolean useGeneralSpawn;
 	public boolean useExactSpawn;
 	public boolean useFireworkEffects;
-	public boolean cancelWarmupsOnMove;// TODO unstaticify
+	public boolean cancelWarmupsOnMove;
 	
 	private CommandManager cManager;
 
@@ -59,7 +59,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		}
 
 		// LISTENERS!!!!!!!!!!!!!
-		new TeleportListener(this,useFireworkEffects);
+		new TeleportListener(this, useFireworkEffects);
 
 		if (useExactSpawn) {
 			new RespawnListener(this);
@@ -123,12 +123,15 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	}
 
 	private boolean setupEconomy() {
+		
 		if (getServer().getPluginManager().getPlugin("Vault") == null) {
 			return false;
 		}
+		
 		RegisteredServiceProvider<net.milkbowl.vault.economy.Economy> economyProvider = getServer()
 				.getServicesManager().getRegistration(
 						net.milkbowl.vault.economy.Economy.class);
+		
 		if (economyProvider != null) {
 			MoneyMachine.setEconomy(economyProvider.getProvider());
 

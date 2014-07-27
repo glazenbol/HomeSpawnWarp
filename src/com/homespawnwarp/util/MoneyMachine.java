@@ -1,4 +1,4 @@
-package com.homespawnwarp.tool;
+package com.homespawnwarp.util;
 
 import net.milkbowl.vault.economy.Economy;
 
@@ -17,7 +17,7 @@ public class MoneyMachine {
 
 		if (canAfford(player, price)) {
 
-			getEconomy().withdrawPlayer(player.getName(), price);
+			getEconomy().withdrawPlayer(player, price);
 			if (price > 0) {
 				if (price < 2 && price > 0) {
 					player.sendMessage(ChatColor.AQUA
@@ -40,14 +40,14 @@ public class MoneyMachine {
 
 	public static boolean canPassWithoutPaying(Player player, double price) {
 
-		return (getEconomy() == null || price <= 0 || PermissionAgent.checkPerm(
-				player, "homespawnwarp.nofee", false, false));
+		return (getEconomy() == null || price <= 0 || PermissionAgent
+				.checkPerm(player, "homespawnwarp.nofee", false, false));
 
 	}
 
 	public static boolean canAfford(Player player, double price) {
 
-		return getEconomy().getBalance(player.getName()) >= price;
+		return getEconomy().getBalance(player) >= price;
 
 	}
 

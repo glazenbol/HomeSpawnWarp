@@ -1,4 +1,4 @@
-package com.homespawnwarp.tool;
+package com.homespawnwarp.util;
 
 import org.bukkit.configuration.file.FileConfiguration;
 

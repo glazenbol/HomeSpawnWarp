@@ -1,4 +1,4 @@
-package com.homespawnwarp.tool;
+package com.homespawnwarp.util;
 
 import com.homespawnwarp.cmd.DelHomeCommand;
 import com.homespawnwarp.cmd.DelWarpCommand;

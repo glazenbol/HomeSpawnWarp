@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.Tools;
 
 final public class HomeListCommand extends AbstractCommand {
 
@@ -21,10 +21,10 @@ final public class HomeListCommand extends AbstractCommand {
 
 		player.sendMessage(Tools.getMessage("homes"));
 
-		if (Tools.getLocations().contains("homes." + player.getName())) {
+		if (Tools.getLocations().contains("homes." + player.getUniqueId())) {
 
 			String[] h = Tools.getLocations()
-					.getConfigurationSection("homes." + player.getName())
+					.getConfigurationSection("homes." + player.getUniqueId())
 					.getKeys(false).toArray(new String[0]);
 
 			if (h.length != 0) {

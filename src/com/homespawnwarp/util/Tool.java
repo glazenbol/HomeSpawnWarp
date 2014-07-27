@@ -1,4 +1,4 @@
-package com.homespawnwarp.tool;
+package com.homespawnwarp.util;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 

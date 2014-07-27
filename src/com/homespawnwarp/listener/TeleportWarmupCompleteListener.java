@@ -5,7 +5,7 @@ import org.bukkit.event.Listener;
 
 import com.homespawnwarp.event.TeleportWarmupCompleteEvent;
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.Teleportation;
+import com.homespawnwarp.util.Teleportation;
 
 public class TeleportWarmupCompleteListener implements Listener {
 

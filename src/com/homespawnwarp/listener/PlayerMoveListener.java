@@ -5,8 +5,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.Teleportation;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.Teleportation;
+import com.homespawnwarp.util.Tools;
 
 public class PlayerMoveListener implements Listener {
 

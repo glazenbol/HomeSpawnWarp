@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.Tools;
 
 final public class DelHomeCommand extends AbstractCommand {
 
@@ -21,10 +21,10 @@ final public class DelHomeCommand extends AbstractCommand {
 		if (args.length == 0) {
 			
 			if (Tools.getLocations().contains(
-					"homes." + player.getName() + ".default.x")) {
+					"homes." + player.getUniqueId() + ".default.x")) {
 
 				Tools.getLocations().set(
-						"homes." + player.getName() + ".default", null);
+						"homes." + player.getUniqueId() + ".default", null);
 				player.sendMessage(Tools.getMessage("home-deleted"));
 				return true;
 			} else {
@@ -32,10 +32,10 @@ final public class DelHomeCommand extends AbstractCommand {
 			}
 		} else {
 			if (Tools.getLocations().contains(
-					"homes." + player.getName() + "." + args[0])) {
+					"homes." + player.getUniqueId()+ "." + args[0])) {
 
 				Tools.getLocations().set(
-						"homes." + player.getName() + "." + args[0], null);
+						"homes." + player.getUniqueId() + "." + args[0], null);
 				player.sendMessage(Tools.getMessage("home-deleted"));
 				return true;
 			} else {

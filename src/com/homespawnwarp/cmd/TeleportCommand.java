@@ -6,10 +6,10 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.PermissionAgent;
-import com.homespawnwarp.tool.Teleportation;
-import com.homespawnwarp.tool.TeleportationType;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.PermissionAgent;
+import com.homespawnwarp.util.Teleportation;
+import com.homespawnwarp.util.TeleportationType;
+import com.homespawnwarp.util.Tools;
 
 public abstract class TeleportCommand extends AbstractCommand {
 

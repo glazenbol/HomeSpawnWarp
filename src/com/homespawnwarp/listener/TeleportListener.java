@@ -7,12 +7,12 @@ import org.bukkit.event.Listener;
 
 import com.homespawnwarp.event.TeleportEvent;
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.FireworkEffectGenerator;
-import com.homespawnwarp.tool.FireworkEffectPlayer;
-import com.homespawnwarp.tool.MoneyMachine;
-import com.homespawnwarp.tool.PermissionAgent;
-import com.homespawnwarp.tool.TeleportationType;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.FireworkEffectGenerator;
+import com.homespawnwarp.util.FireworkEffectPlayer;
+import com.homespawnwarp.util.MoneyMachine;
+import com.homespawnwarp.util.PermissionAgent;
+import com.homespawnwarp.util.TeleportationType;
+import com.homespawnwarp.util.Tools;
 
 public class TeleportListener implements Listener {
 

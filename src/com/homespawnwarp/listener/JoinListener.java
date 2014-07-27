@@ -6,10 +6,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.LocationIO;
-import com.homespawnwarp.tool.Teleportation;
-import com.homespawnwarp.tool.TeleportationType;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.LocationIO;
+import com.homespawnwarp.util.Teleportation;
+import com.homespawnwarp.util.TeleportationType;
+import com.homespawnwarp.util.Tools;
 
 public class JoinListener implements Listener {
 	HomeSpawnWarp plugin;

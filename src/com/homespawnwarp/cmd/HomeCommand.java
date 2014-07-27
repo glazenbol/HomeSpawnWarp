@@ -6,16 +6,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.LocationIO;
-import com.homespawnwarp.tool.TeleportationType;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.LocationIO;
+import com.homespawnwarp.util.TeleportationType;
+import com.homespawnwarp.util.Tools;
 
 final public class HomeCommand extends TeleportCommand {
 
 	public HomeCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted) {
 		super(plugin, commandPermission, isDefaultPermitted);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -23,7 +22,7 @@ final public class HomeCommand extends TeleportCommand {
 			String commandLabel, String[] args) {
 		if (args.length == 0) {
 
-			Location l = LocationIO.read("homes." + player.getName()
+			Location l = LocationIO.read("homes." + player.getUniqueId()
 					+ ".default");
 
 			if (l != null) {
@@ -36,7 +35,7 @@ final public class HomeCommand extends TeleportCommand {
 
 		} else {
 
-			Location l = LocationIO.read("homes." + player.getName() + "."
+			Location l = LocationIO.read("homes." + player.getUniqueId() + "."
 					+ args[0]);
 
 			if (l != null) {

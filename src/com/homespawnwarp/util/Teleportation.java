@@ -1,6 +1,7 @@
-package com.homespawnwarp.tool;
+package com.homespawnwarp.util;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -15,13 +16,13 @@ final public class Teleportation extends Tool {
 	private static int warpWarmup;
 	private static int requestWarmup;
 
-	static volatile public HashMap<String, TeleportWarmup> teleportWarmups = new HashMap<String, TeleportWarmup>();
-	static volatile public HashMap<String, TeleportRequest> teleportRequests = new HashMap<String, TeleportRequest>();
+	static volatile public HashMap<UUID, TeleportWarmup> teleportWarmups = new HashMap<UUID, TeleportWarmup>();
+	static volatile public HashMap<UUID, TeleportRequest> teleportRequests = new HashMap<UUID, TeleportRequest>();
 
 	public static boolean createTeleportWarmup(final Player player,
 			final Location l, final TeleportationType type, double price) {
 		if (useWarmups) {
-			if (teleportWarmups.containsKey(player.getName())) {
+			if (teleportWarmups.containsKey(player.getUniqueId())) {
 				return true;
 			} else {
 				switch (type) {
@@ -29,7 +30,7 @@ final public class Teleportation extends Tool {
 					if (homeWarmup <= 0) {
 						return false;
 					} else {
-						teleportWarmups.put(player.getName(),
+						teleportWarmups.put(player.getUniqueId(),
 								new TeleportWarmup(plugin, player, l, type, homeWarmup,
 										price));
 					}
@@ -38,7 +39,7 @@ final public class Teleportation extends Tool {
 					if (spawnWarmup <= 0) {
 						return false;
 					} else {
-						teleportWarmups.put(player.getName(),
+						teleportWarmups.put(player.getUniqueId(),
 								new TeleportWarmup(plugin, player, l, type,
 										spawnWarmup, price));
 					}
@@ -47,7 +48,7 @@ final public class Teleportation extends Tool {
 					if (warpWarmup <= 0) {
 						return false;
 					} else {
-						teleportWarmups.put(player.getName(),
+						teleportWarmups.put(player.getUniqueId(),
 								new TeleportWarmup(plugin, player, l, type, warpWarmup,
 										price));
 					}
@@ -56,13 +57,13 @@ final public class Teleportation extends Tool {
 					if (requestWarmup <= 0) {
 						return false;
 					} else {
-						teleportWarmups.put(player.getName(),
+						teleportWarmups.put(player.getUniqueId(),
 								new TeleportWarmup(plugin, player, l, type,
 										requestWarmup, price));
 					}
 					break;
 				}
-				new Thread(teleportWarmups.get(player.getName())).start();
+				new Thread(teleportWarmups.get(player.getUniqueId())).start();
 				return true;
 			}
 		} else {
@@ -86,19 +87,19 @@ final public class Teleportation extends Tool {
 
 	public static void createRequest(final Player player,
 			final Player targetPlayer, double price) {
-		teleportRequests.put(targetPlayer.getName(), new TeleportRequest(
+		teleportRequests.put(targetPlayer.getUniqueId(), new TeleportRequest(
 				player, targetPlayer));
-		new Thread(teleportRequests.get(targetPlayer.getName())).start();
+		new Thread(teleportRequests.get(targetPlayer.getUniqueId())).start();
 	}
 
 	public static void removeRequest(final Player targetPlayer) {
-		if (teleportRequests.containsKey(targetPlayer.getName())) {
-			teleportRequests.remove(targetPlayer.getName());
+		if (teleportRequests.containsKey(targetPlayer.getUniqueId())) {
+			teleportRequests.remove(targetPlayer.getUniqueId());
 		}
 	}
 
 	public static void removeWarmup(final Player player) {
-		teleportWarmups.remove(player.getName());
+		teleportWarmups.remove(player.getUniqueId());
 	}
 
 	public static void teleportPlayer(final Player player, final Location l,
@@ -125,11 +126,11 @@ final public class Teleportation extends Tool {
 	}
 
 	public static boolean warmupsContainsPlayer(Player player) {
-		return teleportWarmups.containsKey(player.getName());
+		return teleportWarmups.containsKey(player.getUniqueId());
 	}
 
 	public static void cancel(Player player) {
-		teleportWarmups.get(player.getName()).cancel();
+		teleportWarmups.get(player.getUniqueId()).cancel();
 		removeRequest(player);// THIS IS A BIT TRICKY
 	}
 }

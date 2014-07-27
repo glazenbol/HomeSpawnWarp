@@ -6,9 +6,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.TeleportRequest;
-import com.homespawnwarp.tool.Teleportation;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.TeleportRequest;
+import com.homespawnwarp.util.Teleportation;
+import com.homespawnwarp.util.Tools;
 
 final public class WarpToCommand extends TeleportCommand {
 
@@ -16,7 +16,6 @@ final public class WarpToCommand extends TeleportCommand {
 	public WarpToCommand(HomeSpawnWarp plugin, String commandPermission,
 			boolean isDefaultPermitted) {
 		super(plugin, commandPermission, isDefaultPermitted);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -32,18 +31,13 @@ final public class WarpToCommand extends TeleportCommand {
 						+ ChatColor.AQUA + targetPlayer.getName());
 
 				TeleportRequest tr = new TeleportRequest(player, targetPlayer);
-				Teleportation.teleportRequests.put(targetPlayer.getName(), tr);
+				Teleportation.teleportRequests.put(targetPlayer.getUniqueId(), tr);
 				new Thread(tr).start();
 
 			} else {
 				player.sendMessage(Tools.getMessage("player-not-online"));
 			}
-		} else {// TODO bug around these commands, when cancelled by movement,
-				// and performed fast again can say no pending invites while
-				// there is an invite, this is caused by another invite who
-				// cancels the other one because its cancelled
-				// PROBABLY FIXED!!! WARPTO WORKS
-
+		} else {
 			player.sendMessage(Tools.getMessage("too-few-arguments"));
 		}
 		return false;

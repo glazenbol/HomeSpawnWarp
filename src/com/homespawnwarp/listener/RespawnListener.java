@@ -7,8 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.LocationIO;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.LocationIO;
+import com.homespawnwarp.util.Tools;
 
 public class RespawnListener implements Listener {
 
@@ -26,7 +26,7 @@ public class RespawnListener implements Listener {
 		if (!e.isBedSpawn()) {
 			Player player = e.getPlayer();
 
-			Location l = LocationIO.read("homes." + player.getName()
+			Location l = LocationIO.read("homes." + player.getUniqueId()
 					+ ".default");
 
 			if (l != null) {

@@ -6,8 +6,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.PermissionAgent;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.PermissionAgent;
+import com.homespawnwarp.util.Tools;
 
 public abstract class AbstractCommand implements CommandExecutor {
 

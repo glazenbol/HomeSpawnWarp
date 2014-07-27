@@ -8,9 +8,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.tool.LocationIO;
-import com.homespawnwarp.tool.PermissionAgent;
-import com.homespawnwarp.tool.Tools;
+import com.homespawnwarp.util.LocationIO;
+import com.homespawnwarp.util.PermissionAgent;
+import com.homespawnwarp.util.Tools;
 
 final public class SetHomeCommand extends AbstractCommand {
 
@@ -33,9 +33,9 @@ final public class SetHomeCommand extends AbstractCommand {
 
 		int homeAmount;
 
-		if (Tools.getLocations().contains("homes." + player.getName())) {
+		if (Tools.getLocations().contains("homes." + player.getUniqueId())) {
 			Set<String> homeNames = Tools.getLocations()
-					.getConfigurationSection("homes." + player.getName())
+					.getConfigurationSection("homes." + player.getUniqueId())
 					.getKeys(false);
 			homeAmount = homeNames.size();
 			if (args.length != 0 && homeNames.contains(args[0])) {
@@ -50,12 +50,12 @@ final public class SetHomeCommand extends AbstractCommand {
 		if (args.length == 0) {
 			// Without args
 			if (Tools.getLocations().contains(
-					"homes." + player.getName() + ".default")) {
+					"homes." + player.getUniqueId() + ".default")) {
 				homeAmount--;
 			}
 
 			if (checkMaxHomes(player, homeAmount)) {
-				LocationIO.write("homes." + player.getName() + ".default", l);
+				LocationIO.write("homes." + player.getUniqueId() + ".default", l);
 
 				player.sendMessage(Tools.getMessage("default-home-set"));
 			} else {
@@ -68,7 +68,7 @@ final public class SetHomeCommand extends AbstractCommand {
 
 			if (checkMaxHomes(player, homeAmount)) {
 				if (!containsIllegalChars(args[0], sender)) {
-					LocationIO.write("homes." + player.getName() + "."
+					LocationIO.write("homes." + player.getUniqueId() + "."
 							+ args[0], l);
 
 					player.sendMessage(Tools.getMessage("home-set"));

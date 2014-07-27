@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import com.homespawnwarp.tool.TeleportationType;
+import com.homespawnwarp.util.TeleportationType;
 
 public class TeleportEvent extends Event {
 
