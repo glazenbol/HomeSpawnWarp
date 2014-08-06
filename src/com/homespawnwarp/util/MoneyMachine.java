@@ -10,8 +10,6 @@ public class MoneyMachine {
 	private static Economy economy;
 
 	public static boolean takeMoney(Player player, double price) {
-
-		System.out.println(price);
 		
 		if (canPassWithoutPaying(player, price)) {
 			return true;
