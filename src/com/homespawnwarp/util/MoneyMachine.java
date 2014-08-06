@@ -11,6 +11,8 @@ public class MoneyMachine {
 
 	public static boolean takeMoney(Player player, double price) {
 
+		System.out.println(price);
+		
 		if (canPassWithoutPaying(player, price)) {
 			return true;
 		}
@@ -42,6 +44,8 @@ public class MoneyMachine {
 
 		return (getEconomy() == null || price <= 0 || PermissionAgent
 				.checkPerm(player, Permission.NOFEE, false, false));
+		
+		
 
 	}
 

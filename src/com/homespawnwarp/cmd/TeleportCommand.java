@@ -41,25 +41,23 @@ public abstract class TeleportCommand extends AbstractCommand {
 
 	protected double getPrice(Player player) {
 
-		boolean[] isInGroup = new boolean[price.length];
+		HashSet<Double> prices = new HashSet<Double>();
 
 		if (PermissionAgent.checkPerm(player, Permission.PRICES, true, false,
 				1, getName())) {
 			if (price[0] <= 0) {
 				return 0;
+			} else {
+				prices.add(price[0]);
 			}
-			isInGroup[0] = true;
 		}
-
-		HashSet<Double> prices = new HashSet<Double>();
-
 		for (int i = 1; i < price.length; i++) {
 			if (PermissionAgent.checkPerm(player, Permission.PRICES, false,
 					false, i + 1, getName())) {
-				if (price[i] <= 0) {
-					return 0;
+
+				if (price[i] > 0) {
+					prices.add(price[i]);
 				}
-				prices.add(price[i]);
 			}
 		}
 
@@ -67,7 +65,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 		double lowestVal = 0;
 
 		for (Double curVal : prices) {
-			if (curVal < lowestVal) {
+			if (curVal > 0d && (curVal < lowestVal || lowestVal == 0)) {
 				lowestVal = curVal;
 			}
 		}

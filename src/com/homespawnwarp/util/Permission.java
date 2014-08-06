@@ -18,7 +18,7 @@ public enum Permission {
 	// Misc permissions
 	UNLIMITED_HOMES("HomeSpawnWarp.home.UNLIMITED"),
 	HOMEGROUP("HomeSpawnWarp.home.GROUP"),
-	PRICES("HomeSpawnWarp.prices"),
+	PRICES("HomeSpawnWarp.prices."),
 	
 	TELEPORTEFFECT("HomeSpawnWarp.teleporteffect"),
 	

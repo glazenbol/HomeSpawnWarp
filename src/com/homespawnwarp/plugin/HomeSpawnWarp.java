@@ -114,7 +114,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
-		sender.sendMessage(ChatColor.AQUA + "Command not implemented yet!");
+		sender.sendMessage(ChatColor.AQUA + "Command not implemented yet! :P");
 		return false; // When forgetting something...
 	}
 
