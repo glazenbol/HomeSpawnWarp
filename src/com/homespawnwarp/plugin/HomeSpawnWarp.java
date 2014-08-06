@@ -31,9 +31,8 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	public boolean useExactSpawn;
 	public boolean useFireworkEffects;
 	public boolean cancelWarmupsOnMove;
-	
-	private CommandManager cManager;
 
+	private CommandManager cManager;
 
 	@Override
 	public void onDisable() {
@@ -42,11 +41,37 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	}
 
 	@Override
+	public void onLoad() {
+		plugin = this;
+
+		ConfigIO.init(this);
+
+		ConfigIO.saveDefault("messages");
+		ConfigIO.saveDefault("locations");
+		ConfigIO.saveDefault("config");
+
+		Tools.getConfig().options().copyDefaults(true);
+		Tools.getLocations().options().copyDefaults(true);
+		Tools.getMessages().options().copyDefaults(true);
+
+		ConfigIO.save("messages");
+		ConfigIO.save("config");
+
+		useExactSpawn = Tools.getConfig().getBoolean("useexactspawn");
+		useGeneralSpawn = Tools.getConfig().getBoolean("usegeneralspawn");
+		useFireworkEffects = Tools.getConfig().getBoolean("usefireworkeffects");
+		cancelWarmupsOnMove = Tools.getConfig().getBoolean(
+				"cancelwarmupsonmove");
+
+		LocationIO.init(this);
+		Teleportation.init(this, useFireworkEffects);
+	}
+
+	@Override
 	public void onEnable() {
 		cManager = new CommandManager(this);
 		cManager.initCommands();
-		
-		
+
 		setupWarmups();
 
 		if (setupEconomy()) {
@@ -72,37 +97,10 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		}
 		logger.info(emblem + " UseExactSpawn = " + useExactSpawn);
 		logger.info(emblem + " UseGeneralSpawn = " + useGeneralSpawn);
+		logger.info(emblem + " UseFireworkEffects = " + useFireworkEffects);
 		logger.info(emblem + " CancelWarmupsOnMove = " + cancelWarmupsOnMove);
 
 		logger.info(emblem + " Enabled!");
-	}
-
-	@Override
-	public void onLoad() {
-		plugin = this;
-
-
-		ConfigIO.saveDefault("messages");
-		ConfigIO.saveDefault("locations");
-		ConfigIO.saveDefault("config");
-
-		Tools.getConfig().options().copyDefaults(true);
-		Tools.getLocations().options().copyDefaults(true);
-		Tools.getMessages().options().copyDefaults(true);
-
-		ConfigIO.save("messages");
-		ConfigIO.save("config");
-
-		useExactSpawn = Tools.getConfig().getBoolean("useexactspawn");
-		useGeneralSpawn = Tools.getConfig().getBoolean("usegeneralspawn");
-		useFireworkEffects = Tools.getConfig().getBoolean("usefireworkeffects");
-		cancelWarmupsOnMove = Tools.getConfig().getBoolean(
-				"cancelwarmupsonmove");
-		
-		//Initialize machines :P
-		LocationIO.init(this);
-		Teleportation.init(this,useFireworkEffects);
-		ConfigIO.init(this);
 	}
 
 	private void setupWarmups() {
@@ -121,15 +119,15 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	}
 
 	private boolean setupEconomy() {
-		
+
 		if (getServer().getPluginManager().getPlugin("Vault") == null) {
 			return false;
 		}
-		
+
 		RegisteredServiceProvider<net.milkbowl.vault.economy.Economy> economyProvider = getServer()
 				.getServicesManager().getRegistration(
 						net.milkbowl.vault.economy.Economy.class);
-		
+
 		if (economyProvider != null) {
 			MoneyMachine.setEconomy(economyProvider.getProvider());
 
