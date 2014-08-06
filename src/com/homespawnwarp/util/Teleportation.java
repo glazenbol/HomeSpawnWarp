@@ -10,12 +10,12 @@ import com.homespawnwarp.plugin.HomeSpawnWarp;
 
 final public class Teleportation {
 
-	private static boolean useWarmups = false;
+	private static boolean warmupsEnabled = false;
 	private static int homeWarmup;
 	private static int spawnWarmup;
 	private static int warpWarmup;
 	private static int requestWarmup;
-	
+
 	private static HomeSpawnWarp plugin;
 	private static FireworkEffectPlayer fwep;
 
@@ -23,17 +23,17 @@ final public class Teleportation {
 	static volatile public HashMap<UUID, TeleportRequest> teleportRequests = new HashMap<UUID, TeleportRequest>();
 
 	public static void init(HomeSpawnWarp plugin, boolean useFireworkEffects) {
-		
+
 		Teleportation.plugin = plugin;
-		
+
 		if (useFireworkEffects) {
 			fwep = new FireworkEffectPlayer();
 		}
 	}
-	
+
 	public static boolean createTeleportWarmup(final Player player,
 			final Location l, final TeleportationType type, double price) {
-		if (useWarmups) {
+		if (warmupsEnabled) {
 			if (teleportWarmups.containsKey(player.getUniqueId())) {
 				return true;
 			} else {
@@ -43,8 +43,8 @@ final public class Teleportation {
 						return false;
 					} else {
 						teleportWarmups.put(player.getUniqueId(),
-								new TeleportWarmup(plugin, player, l, type, homeWarmup,
-										price));
+								new TeleportWarmup(plugin, player, l, type,
+										homeWarmup, price));
 					}
 					break;
 				case SPAWN:
@@ -61,8 +61,8 @@ final public class Teleportation {
 						return false;
 					} else {
 						teleportWarmups.put(player.getUniqueId(),
-								new TeleportWarmup(plugin, player, l, type, warpWarmup,
-										price));
+								new TeleportWarmup(plugin, player, l, type,
+										warpWarmup, price));
 					}
 					break;
 				case REQUEST:
@@ -84,12 +84,12 @@ final public class Teleportation {
 	}
 
 	public static boolean usesWarmup() {
-		return useWarmups;
+		return warmupsEnabled;
 	}
 
 	public static void setWarmups(double homeWarmup, double spawnWarmup,
 			double warpWarmup, double requestWarmup) {
-		useWarmups = (homeWarmup > 0 || spawnWarmup > 0 || warpWarmup > 0
+		warmupsEnabled = (homeWarmup > 0 || spawnWarmup > 0 || warpWarmup > 0
 				&& requestWarmup > 0);
 		Teleportation.homeWarmup = (int) homeWarmup;
 		Teleportation.spawnWarmup = (int) spawnWarmup;
@@ -116,25 +116,29 @@ final public class Teleportation {
 
 	public static void teleportPlayer(final Player player, final Location l,
 			final TeleportationType type, double price,
-			final boolean sendMessage, final boolean useWarmup) {
-		
-		if (useWarmup && PermissionAgent.checkPerm(player, Permission.NOWARMUP, false, false)) {
-		
-			if (createTeleportWarmup(player, l, type, price)) {
-				return;
-			}
+			final boolean sendMessage, final boolean useWarmup,
+			final boolean useFirework) {
+
+		if (useWarmup
+				&& !PermissionAgent.checkPerm(player, Permission.NOWARMUP,
+						false, false)
+				&& createTeleportWarmup(player, l, type, price)) {
+
+			return;
+
 		}
 
-		finalizeTeleport(player, type, l, sendMessage, price);
+		finalizeTeleport(player, type, l, sendMessage, price, useFirework);
 	}
 
 	public static void teleportPlayer(final Player player, final Location l,// default
 																			// teleporting
 			final TeleportationType type, double price) {
-		teleportPlayer(player, l, type, price, true, true);
+		teleportPlayer(player, l, type, price, true, true, true);
 	}
-	
-	public static void finalizeTeleport(Player player, TeleportationType type, Location l, boolean sendMessage, double price) {
+
+	public static void finalizeTeleport(Player player, TeleportationType type,
+			Location l, boolean sendMessage, double price, boolean useFirework) {
 		if (MoneyMachine.takeMoney(player, price)) {
 
 			if (!l.getChunk().isLoaded()) {
@@ -159,7 +163,8 @@ final public class Teleportation {
 				}
 			}
 
-			if (fwep != null
+			if (useFirework
+					&& fwep != null
 					&& PermissionAgent.checkPerm(player,
 							Permission.TELEPORTEFFECT, true, false)) {
 				try {

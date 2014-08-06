@@ -43,7 +43,6 @@ final public class HomeSpawnWarp extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		// TODO Make commands initialize tru constructors
 		cManager = new CommandManager(this);
 		cManager.initCommands();
 		

@@ -18,7 +18,7 @@ public class TeleportWarmupCompleteListener implements Listener {
 		if (e.getPlayer().isOnline()) {
 
 			Teleportation.teleportPlayer(e.getPlayer(), e.getLocation(),
-					e.getTeleportationType(), e.getPrice(), true, false);
+					e.getTeleportationType(), e.getPrice(), true, false, true);
 
 		}
 	}

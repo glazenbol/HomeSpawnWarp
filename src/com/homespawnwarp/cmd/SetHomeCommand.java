@@ -90,8 +90,7 @@ final public class SetHomeCommand extends AbstractCommand {
 			return true;
 		}
 
-		if (PermissionAgent.checkPerm(player, Permission.HOMEGROUP,// TODO fix
-																	// this
+		if (PermissionAgent.checkPerm(player, Permission.HOMEGROUP,
 				true, false, 1)) {
 			isInGroup[0] = true;
 		}

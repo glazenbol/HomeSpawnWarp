@@ -13,7 +13,7 @@ final public class LocationIO {
 		LocationIO.plugin = plugin;
 	}
 	
-	public static void write(final String path, final Location location) {//TODO iuud's
+	public static void write(final String path, final Location location) {
 		
 
 		Tools.getLocations()

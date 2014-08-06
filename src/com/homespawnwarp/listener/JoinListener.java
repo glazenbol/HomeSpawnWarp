@@ -32,7 +32,7 @@ public class JoinListener implements Listener {
 				if (l != null) {
 
 					Teleportation.teleportPlayer(e.getPlayer(), l,
-							TeleportationType.SPAWN, 0, false, false);
+							TeleportationType.SPAWN, 0, false, false, false);
 				}
 			}
 		}
