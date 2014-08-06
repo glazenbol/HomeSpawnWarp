@@ -3,7 +3,15 @@ package com.homespawnwarp.util;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-final public class LocationIO extends Tool{
+import com.homespawnwarp.plugin.HomeSpawnWarp;
+
+final public class LocationIO {
+	
+	private static HomeSpawnWarp plugin;
+
+	public static void init(HomeSpawnWarp plugin) {
+		LocationIO.plugin = plugin;
+	}
 	
 	public static void write(final String path, final Location location) {//TODO iuud's
 		

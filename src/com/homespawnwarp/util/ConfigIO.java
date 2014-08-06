@@ -9,13 +9,17 @@ import java.util.Set;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-public final class ConfigIO extends Tool{
+import com.homespawnwarp.plugin.HomeSpawnWarp;
+
+public final class ConfigIO{
 
 	private final static HashMap<String, FileConfiguration> configs = new HashMap<String, FileConfiguration>();
 	private final static HashMap<String, File> configFiles = new HashMap<String, File>();
+	private static HomeSpawnWarp plugin;
 
-	private ConfigIO() {
-		// initial constructor
+	
+	public static void init(HomeSpawnWarp plugin) {
+		ConfigIO.plugin = plugin;
 	}
 	
 	// GETTING

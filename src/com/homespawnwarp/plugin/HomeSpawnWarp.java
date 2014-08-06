@@ -12,7 +12,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.homespawnwarp.listener.JoinListener;
 import com.homespawnwarp.listener.PlayerMoveListener;
 import com.homespawnwarp.listener.RespawnListener;
-import com.homespawnwarp.listener.TeleportListener;
 import com.homespawnwarp.listener.TeleportWarmupCompleteListener;
 import com.homespawnwarp.util.CommandManager;
 import com.homespawnwarp.util.ConfigIO;
@@ -59,7 +58,6 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		}
 
 		// LISTENERS!!!!!!!!!!!!!
-		new TeleportListener(this, useFireworkEffects);
 
 		if (useExactSpawn) {
 			new RespawnListener(this);
@@ -84,10 +82,6 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	public void onLoad() {
 		plugin = this;
 
-		//Initialize tools
-		LocationIO.init(this);
-		Teleportation.init(this);
-		ConfigIO.init(this);
 
 		ConfigIO.saveDefault("messages");
 		ConfigIO.saveDefault("locations");
@@ -105,6 +99,11 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		useFireworkEffects = Tools.getConfig().getBoolean("usefireworkeffects");
 		cancelWarmupsOnMove = Tools.getConfig().getBoolean(
 				"cancelwarmupsonmove");
+		
+		//Initialize machines :P
+		LocationIO.init(this);
+		Teleportation.init(this,useFireworkEffects);
+		ConfigIO.init(this);
 	}
 
 	private void setupWarmups() {
