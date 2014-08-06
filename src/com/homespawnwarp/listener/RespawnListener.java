@@ -12,8 +12,6 @@ import com.homespawnwarp.util.Tools;
 
 public class RespawnListener implements Listener {
 
-	// MAKE LISTENER FAILPROOF
-
 	HomeSpawnWarp plugin;
 
 	public RespawnListener(HomeSpawnWarp plugin) {
