@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.util.Permission;
 import com.homespawnwarp.util.PermissionAgent;
 import com.homespawnwarp.util.Teleportation;
 import com.homespawnwarp.util.TeleportationType;
@@ -15,12 +16,11 @@ public abstract class TeleportCommand extends AbstractCommand {
 
 	protected double[] price = new double[5];
 
-	public TeleportCommand(HomeSpawnWarp plugin, String commandPermission,
+	public TeleportCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted) {
-		
-		
+
 		super(plugin, commandPermission, isDefaultPermitted);
-		
+
 		if (this instanceof MoneyCommand) {
 			setupPrices();
 		}
@@ -42,9 +42,9 @@ public abstract class TeleportCommand extends AbstractCommand {
 	protected double getPrice(Player player) {
 
 		boolean[] isInGroup = new boolean[price.length];
-		String perm = "HomeSpawnWarp.prices." + getName();
 
-		if (PermissionAgent.checkPerm(player, perm + 1, true, false)) {
+		if (PermissionAgent.checkPerm(player, Permission.PRICES, true, false,
+				1, getName())) {
 			if (price[0] <= 0) {
 				return 0;
 			}
@@ -54,7 +54,8 @@ public abstract class TeleportCommand extends AbstractCommand {
 		HashSet<Double> prices = new HashSet<Double>();
 
 		for (int i = 1; i < price.length; i++) {
-			if (PermissionAgent.checkPerm(player, perm + (i + 1), false, false)) {
+			if (PermissionAgent.checkPerm(player, Permission.PRICES, false,
+					false, i + 1, getName())) {
 				if (price[i] <= 0) {
 					return 0;
 				}

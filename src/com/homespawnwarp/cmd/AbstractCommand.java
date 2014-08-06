@@ -6,14 +6,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.util.Permission;
 import com.homespawnwarp.util.PermissionAgent;
 import com.homespawnwarp.util.Tools;
 
 public abstract class AbstractCommand implements CommandExecutor {
 
 	protected HomeSpawnWarp plugin;
-
-	protected String commandPermission;
+	
+	protected Permission commandPermission;
 	protected boolean isDefaultPermitted;
 
 	abstract public String getName();
@@ -22,10 +23,10 @@ public abstract class AbstractCommand implements CommandExecutor {
 			Command cmd, String commandLabel, String[] args);
 
 	public AbstractCommand(final HomeSpawnWarp plugin,
-			final String commandPermission, boolean isDefaultPermitted) {
+			final Permission commandPermission, boolean isDefaultPermitted) {
 		this.plugin = plugin;
-		this.commandPermission = commandPermission;
 		this.isDefaultPermitted = isDefaultPermitted;
+		this.commandPermission = commandPermission;
 		
 		plugin.getCommand(getName()).setExecutor(this);
 	}

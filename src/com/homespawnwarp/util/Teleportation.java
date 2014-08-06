@@ -117,9 +117,9 @@ final public class Teleportation {
 	public static void teleportPlayer(final Player player, final Location l,
 			final TeleportationType type, double price,
 			final boolean sendMessage, final boolean useWarmup) {
-
-		if ((!player.hasPermission("HomeSpawnWarp.nowarmup") || !player.isOp())
-				&& useWarmup) {
+		
+		if (useWarmup && PermissionAgent.checkPerm(player, Permission.NOWARMUP, false, false)) {
+		
 			if (createTeleportWarmup(player, l, type, price)) {
 				return;
 			}
@@ -161,7 +161,7 @@ final public class Teleportation {
 
 			if (fwep != null
 					&& PermissionAgent.checkPerm(player,
-							"HomeSpawnWarp.teleporteffect", true, false)) {
+							Permission.TELEPORTEFFECT, true, false)) {
 				try {
 					fwep.playFirework(player.getWorld(), player.getLocation(),
 							FireworkEffectGenerator.randomBurstEffect());

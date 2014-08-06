@@ -7,12 +7,13 @@ import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.util.LocationIO;
+import com.homespawnwarp.util.Permission;
 import com.homespawnwarp.util.TeleportationType;
 import com.homespawnwarp.util.Tools;
 
 final public class SpawnCommand extends TeleportCommand {
 
-	public SpawnCommand(HomeSpawnWarp plugin, String commandPermission,
+	public SpawnCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted) {
 		super(plugin, commandPermission, isDefaultPermitted);
 	}

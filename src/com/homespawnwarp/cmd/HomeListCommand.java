@@ -6,11 +6,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.util.Permission;
 import com.homespawnwarp.util.Tools;
 
 final public class HomeListCommand extends AbstractCommand {
 
-	public HomeListCommand(HomeSpawnWarp plugin, String commandPermission,
+	public HomeListCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted) {
 		super(plugin, commandPermission, isDefaultPermitted);
 	}

@@ -7,11 +7,12 @@ import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 import com.homespawnwarp.util.LocationIO;
+import com.homespawnwarp.util.Permission;
 import com.homespawnwarp.util.Tools;
 
 final public class SetWarpCommand extends AbstractCommand {
 
-	public SetWarpCommand(HomeSpawnWarp plugin, String commandPermission,
+	public SetWarpCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted) {
 		super(plugin, commandPermission, isDefaultPermitted);
 	}

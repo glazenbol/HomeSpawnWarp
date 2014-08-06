@@ -23,25 +23,17 @@ public class CommandManager {
 	}
 
 	public void initCommands() {
-		new SetHomeCommand(plugin, "HomeSpawnWarp.sethome",
-				true);
-		new HomeCommand(plugin, "HomeSpawnWarp.home", true);
-		new HomeListCommand(plugin, "HomeSpawnWarp.homelist",
-				true);
-		new DelHomeCommand(plugin, "HomeSpawnWarp.delhome",
-				true);
-		new SetSpawnCommand(plugin, "HomeSpawnWarp.setspawn",
-				false);
-		new SpawnCommand(plugin, "HomeSpawnWarp.spawn", true);
-		new SetWarpCommand(plugin, "HomeSpawnWarp.setwarp",
-				false);
-		new WarpCommand(plugin, "HomeSpawnWarp.warp", true);
-		new WarpListCommand(plugin, "HomeSpawnWarp.warplist",
-				true);
-		new DelWarpCommand(plugin, "HomeSpawnWarp.delwarp",
-				false);
-		new WarpToCommand(plugin, "HomeSpawnWarp.warpto", true);
-		new WarpAcceptCommand(plugin,
-				"HomeSpawnWarp.warpaccept", true);
+		new SetHomeCommand(plugin, Permission.SETHOME, true);
+		new HomeCommand(plugin, Permission.HOME, true);
+		new HomeListCommand(plugin, Permission.HOMELIST, true);
+		new DelHomeCommand(plugin, Permission.DELHOME, true);
+		new SetSpawnCommand(plugin, Permission.SETSPAWN, false);
+		new SpawnCommand(plugin, Permission.SPAWN, true);
+		new SetWarpCommand(plugin, Permission.SETWARP, false);
+		new WarpCommand(plugin, Permission.WARP, true);
+		new WarpListCommand(plugin, Permission.WARPLIST, true);
+		new DelWarpCommand(plugin, Permission.DELWARP, false);
+		new WarpToCommand(plugin, Permission.WARPTO, true);
+		new WarpAcceptCommand(plugin, Permission.WARPACCEPT, true);
 	}
 }
