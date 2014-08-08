@@ -20,7 +20,7 @@ final public class WarpListCommand extends AbstractCommand implements
 	@Override
 	boolean doCommand(Player player, CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
-
+		
 		sender.sendMessage(Tools.getMessage("warps"));
 		if (Tools.getLocations().contains("warps")) {
 			String[] w = Tools.getLocations().getConfigurationSection("warps")

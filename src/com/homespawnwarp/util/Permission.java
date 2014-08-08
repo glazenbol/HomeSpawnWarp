@@ -10,6 +10,7 @@ public enum Permission {
 	SETSPAWN("HomeSpawnWarp.setspawn"),
 	SPAWN("HomeSpawnWarp.spawn"),
 	SETWARP("HomeSpawnWarp.setwarp"),
+	SETPRICEDWARP("HomeSpawnWarp.setwarp.priced"),
 	WARP("HomeSpawnWarp.warp"),
 	WARPLIST("HomeSpawnWarp.warplist"),
 	DELWARP("HomeSpawnWarp.delwarp"),

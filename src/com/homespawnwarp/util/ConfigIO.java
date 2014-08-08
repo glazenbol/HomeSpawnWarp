@@ -49,8 +49,7 @@ public final class ConfigIO {
 
 		if (defaultConfig != null) {
 			YamlConfiguration defConfig = YamlConfiguration
-					.loadConfiguration(defaultConfig);// TODO Confirm this to
-														// work
+					.loadConfiguration(defaultConfig);
 			configs.get(configName).setDefaults(defConfig);
 		}
 	}

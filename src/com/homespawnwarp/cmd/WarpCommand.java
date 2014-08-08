@@ -27,7 +27,14 @@ final public class WarpCommand extends TeleportCommand {
 
 			if (l != null) {
 
-				teleportPlayer(player, l, TeleportationType.WARP, getPrice(player), warmup);
+				double price;
+				if (LocationIO.checkPriced("warps." + args[0])) {
+					price = LocationIO.readPrice("warps.");
+				} else {
+					price = getPrice(player);
+				}
+
+				teleportPlayer(player, l, TeleportationType.WARP, price, warmup);
 
 			} else {
 				player.sendMessage(Tools.getMessage("wrong-warpname"));

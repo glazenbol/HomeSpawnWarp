@@ -13,6 +13,7 @@ public final class TeleportWarmup implements Runnable {
 	private Location l;
 	private boolean isCancelled = false;
 	private double price;
+	@SuppressWarnings("unused")
 	private HomeSpawnWarp plugin;
 
 	public TeleportWarmup(HomeSpawnWarp plugin, Player player, Location l,
@@ -36,14 +37,9 @@ public final class TeleportWarmup implements Runnable {
 			e.printStackTrace();
 		}
 
-		if (!isCancelled) {
-			if (player.isOnline()) {
+		if (!isCancelled && player.isOnline()) { 
 
-				Teleportation.teleportPlayer(player, l, type, price, true,
-						true, 0);
-			} else {
-				// TODO send message user left the game
-			}
+			Teleportation.teleportPlayer(player, l, type, price, true, true, 0);
 		}
 
 		Teleportation.removeWarmup(player);

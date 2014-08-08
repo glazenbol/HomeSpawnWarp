@@ -6,15 +6,15 @@ import org.bukkit.World;
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 
 final public class LocationIO {
-	
+
 	private static HomeSpawnWarp plugin;
 
 	public static void init(HomeSpawnWarp plugin) {
 		LocationIO.plugin = plugin;
 	}
-	
+
+
 	public static void write(final String path, final Location location) {
-		
 
 		Tools.getLocations()
 				.set(path + ".world", location.getWorld().getName());
@@ -27,12 +27,31 @@ final public class LocationIO {
 
 	}
 
+	public static void write(final String path, final Location location,
+			double customPrice) {
+
+		write(path, location);
+
+		Tools.getLocations().set(path + ".price", customPrice);
+		ConfigIO.save("Locations");// TODO custom prices warps
+
+	}
+	
+
+	public static boolean checkPriced(final String path) {
+		return Tools.getLocations().contains(path + ".price");
+	}
+	
+	public static double readPrice(final String path) {
+		return Tools.getLocations().getDouble(path + ".price");
+	}
+
 	public static Location read(final String path) {
 
 		if (ConfigIO.get("Locations").contains(path)) {
 			World w = plugin.getServer().getWorld(
 					Tools.getLocations().getString(path + ".world"));
-			
+
 			if (w != null) {
 				return new Location(w, Tools.getLocations().getDouble(
 						path + ".x"), Tools.getLocations().getDouble(
