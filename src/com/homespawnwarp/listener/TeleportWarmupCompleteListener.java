@@ -18,8 +18,10 @@ public class TeleportWarmupCompleteListener implements Listener {
 		if (e.getPlayer().isOnline()) {
 
 			Teleportation.teleportPlayer(e.getPlayer(), e.getLocation(),
-					e.getTeleportationType(), e.getPrice(), true, false, true);
-
+					e.getTeleportationType(), e.getPrice(), true, true, 0);
+			//TODO Remove this class together with warmupcompleteEvent
+		} else {
+			// TODO send message user left the game
 		}
 	}
 }

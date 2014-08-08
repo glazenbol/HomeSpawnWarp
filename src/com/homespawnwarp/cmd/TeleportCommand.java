@@ -14,7 +14,9 @@ import com.homespawnwarp.util.Tools;
 
 public abstract class TeleportCommand extends AbstractCommand {
 
+	public static boolean usingWarmups = false;
 	protected double[] price = new double[5];
+	protected int warmup;
 
 	public TeleportCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted, String name) {
@@ -22,17 +24,25 @@ public abstract class TeleportCommand extends AbstractCommand {
 		super(plugin, commandPermission, isDefaultPermitted, name);
 
 		setupPrices();
+		setupWarmup();
 	}
 
 	protected void teleportPlayer(Player player, Location l,
-			TeleportationType type, double price) {
-		Teleportation.teleportPlayer(player, l, type, price);
+			TeleportationType type, double price, int warmup) {
+		Teleportation.teleportPlayer(player, l, type, price, warmup);
 	}
 
-	public void setupPrices() {
+	protected void setupPrices() {
 		for (int i = 0; i < price.length; i++) {
 			price[i] = Tools.getConfig().getDouble("prices." + name + (i + 1));
 			// Warpto is just warpto
+		}
+	}
+
+	private void setupWarmup() {
+		warmup = (int) (Tools.getConfig().getDouble("warmups." + name) * 1000);
+		if (warmup > 0) {
+			TeleportCommand.usingWarmups = true;
 		}
 	}
 

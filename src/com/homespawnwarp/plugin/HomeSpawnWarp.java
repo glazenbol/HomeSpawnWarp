@@ -9,6 +9,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.homespawnwarp.cmd.TeleportCommand;
 import com.homespawnwarp.listener.JoinListener;
 import com.homespawnwarp.listener.PlayerMoveListener;
 import com.homespawnwarp.listener.RespawnListener;
@@ -88,7 +89,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 			new JoinListener(this);
 		}
 
-		if (Teleportation.usesWarmup()) {
+		if (TeleportCommand.usingWarmups) {
 			new TeleportWarmupCompleteListener(this);
 
 			if (cancelWarmupsOnMove) {
@@ -104,11 +105,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 	}
 
 	private void setupWarmups() {
-		Teleportation.setWarmups(
-				Tools.getConfig().getDouble("warmups.home") * 1000, Tools
-						.getConfig().getDouble("warmups.spawn") * 1000, Tools
-						.getConfig().getDouble("warmups.warp") * 1000, Tools
-						.getConfig().getDouble("warmups.warpto") * 1000); //TODO move to teleportCommands via commandmanager
+		//TODO move to teleportCommands
 	}
 
 	@Override

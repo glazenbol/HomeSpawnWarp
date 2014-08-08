@@ -35,7 +35,7 @@ final public class WarpAcceptCommand extends TeleportCommand {
 					+ Tools.getMessage("accepted-your-request"));
 
 			teleportPlayer(player2, Teleportation.teleportRequests.get(player.getUniqueId()).getLocation(),
-					TeleportationType.REQUEST, getPrice(player2));
+					TeleportationType.REQUEST, getPrice(player2),warmup);
 			Teleportation.removeRequest(player);
 
 			return true;

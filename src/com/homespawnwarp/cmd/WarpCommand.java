@@ -27,7 +27,7 @@ final public class WarpCommand extends TeleportCommand {
 
 			if (l != null) {
 
-				teleportPlayer(player, l, TeleportationType.WARP, getPrice(player));
+				teleportPlayer(player, l, TeleportationType.WARP, getPrice(player), warmup);
 
 			} else {
 				player.sendMessage(Tools.getMessage("wrong-warpname"));

@@ -28,7 +28,7 @@ final public class HomeCommand extends TeleportCommand {
 
 			if (l != null) {
 
-				teleportPlayer(player, l, TeleportationType.HOME, getPrice(player));
+				teleportPlayer(player, l, TeleportationType.HOME, getPrice(player), warmup);
 				
 			} else {
 				player.sendMessage(Tools.getMessage("no-home-set"));
@@ -41,7 +41,7 @@ final public class HomeCommand extends TeleportCommand {
 
 			if (l != null) {
 
-				teleportPlayer(player, l, TeleportationType.HOME, getPrice(player));
+				teleportPlayer(player, l, TeleportationType.HOME, getPrice(player), warmup);
 			} else {
 				player.sendMessage(Tools.getMessage("wrong-homename"));
 			}
