@@ -15,8 +15,8 @@ final public class WarpToCommand extends TeleportCommand {
 
 
 	public WarpToCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted) {
-		super(plugin, commandPermission, isDefaultPermitted);
+			boolean isDefaultPermitted, String name) {
+		super(plugin, commandPermission, isDefaultPermitted, name);
 	}
 
 	@Override
@@ -44,8 +44,4 @@ final public class WarpToCommand extends TeleportCommand {
 		return false;
 	}
 
-	@Override
-	public String getName() {
-		return "warpto";
-	}
 }

@@ -108,7 +108,7 @@ final public class HomeSpawnWarp extends JavaPlugin {
 				Tools.getConfig().getDouble("warmups.home") * 1000, Tools
 						.getConfig().getDouble("warmups.spawn") * 1000, Tools
 						.getConfig().getDouble("warmups.warp") * 1000, Tools
-						.getConfig().getDouble("warmups.warpto") * 1000);
+						.getConfig().getDouble("warmups.warpto") * 1000); //TODO move to teleportCommands via commandmanager
 	}
 
 	@Override

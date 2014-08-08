@@ -13,8 +13,8 @@ import com.homespawnwarp.util.Tools;
 final public class SetWarpCommand extends AbstractCommand {
 
 	public SetWarpCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted) {
-		super(plugin, commandPermission, isDefaultPermitted);
+			boolean isDefaultPermitted, String name) {
+		super(plugin, commandPermission, isDefaultPermitted, name);
 	}
 
 	@Override
@@ -35,8 +35,4 @@ final public class SetWarpCommand extends AbstractCommand {
 		return true;
 	}
 
-	@Override
-	public String getName() {
-		return "setwarp";
-	}
 }

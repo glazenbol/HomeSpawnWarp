@@ -16,19 +16,18 @@ public abstract class AbstractCommand implements CommandExecutor {
 	
 	protected Permission commandPermission;
 	protected boolean isDefaultPermitted;
-
-	abstract public String getName();
+	public String name;
 
 	abstract boolean doCommand(Player player, CommandSender sender,
 			Command cmd, String commandLabel, String[] args);
 
 	public AbstractCommand(final HomeSpawnWarp plugin,
-			final Permission commandPermission, boolean isDefaultPermitted) {
+			final Permission commandPermission, boolean isDefaultPermitted, String name) {
 		this.plugin = plugin;
 		this.isDefaultPermitted = isDefaultPermitted;
 		this.commandPermission = commandPermission;
-		
-		plugin.getCommand(getName()).setExecutor(this);
+		this.name = name;
+		plugin.getCommand(name).setExecutor(this);
 	}
 
 	@Override

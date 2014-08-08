@@ -11,7 +11,6 @@ import com.homespawnwarp.cmd.SetHomeCommand;
 import com.homespawnwarp.cmd.SetSpawnCommand;
 import com.homespawnwarp.cmd.SetWarpCommand;
 import com.homespawnwarp.cmd.SpawnCommand;
-import com.homespawnwarp.cmd.TeleportCommand;
 import com.homespawnwarp.cmd.WarpAcceptCommand;
 import com.homespawnwarp.cmd.WarpCommand;
 import com.homespawnwarp.cmd.WarpListCommand;
@@ -30,26 +29,23 @@ public class CommandManager {
 
 	public void initCommands() {
 
-		cmds.add(new SetHomeCommand(plugin, Permission.SETHOME, true));
-		cmds.add(new HomeCommand(plugin, Permission.HOME, true));
-		cmds.add(new HomeListCommand(plugin, Permission.HOMELIST, true));
-		cmds.add(new DelHomeCommand(plugin, Permission.DELHOME, true));
-		cmds.add(new SetSpawnCommand(plugin, Permission.SETSPAWN, false));
-		cmds.add(new SpawnCommand(plugin, Permission.SPAWN, true));
-		cmds.add(new SetWarpCommand(plugin, Permission.SETWARP, false));
-		cmds.add(new WarpCommand(plugin, Permission.WARP, true));
-		cmds.add(new WarpListCommand(plugin, Permission.WARPLIST, true));
-		cmds.add(new DelWarpCommand(plugin, Permission.DELWARP, false));
-		cmds.add(new WarpToCommand(plugin, Permission.WARPTO, true));
-		cmds.add(new WarpAcceptCommand(plugin, Permission.WARPACCEPT, true));
-
-		
-		//Setup prices
-		for (AbstractCommand cur : cmds) {
-			if (cur instanceof TeleportCommand) {
-				((TeleportCommand) cur).setupPrices();
-			}
-		}
-
+		cmds.add(new SetHomeCommand(plugin, Permission.SETHOME, true, "sethome"));
+		cmds.add(new HomeCommand(plugin, Permission.HOME, true, "home"));
+		cmds.add(new HomeListCommand(plugin, Permission.HOMELIST, true,
+				"homelist"));
+		cmds.add(new DelHomeCommand(plugin, Permission.DELHOME, true, "delhome"));
+		cmds.add(new SetSpawnCommand(plugin, Permission.SETSPAWN, false,
+				"setspawn"));
+		cmds.add(new SpawnCommand(plugin, Permission.SPAWN, true, "spawn"));
+		cmds.add(new SetWarpCommand(plugin, Permission.SETWARP, false,
+				"setwarp"));
+		cmds.add(new WarpCommand(plugin, Permission.WARP, true, "warp"));
+		cmds.add(new WarpListCommand(plugin, Permission.WARPLIST, true,
+				"warplist"));
+		cmds.add(new DelWarpCommand(plugin, Permission.DELWARP, false,
+				"delwarp"));
+		cmds.add(new WarpToCommand(plugin, Permission.WARPTO, true, "warpto"));
+		cmds.add(new WarpAcceptCommand(plugin, Permission.WARPACCEPT, true,
+				"warpaccept"));
 	}
 }

@@ -18,8 +18,8 @@ final public class SetHomeCommand extends AbstractCommand {
 	int[] homelimit = new int[5];
 
 	public SetHomeCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted) {
-		super(plugin, commandPermission, isDefaultPermitted);
+			boolean isDefaultPermitted, String name) {
+		super(plugin, commandPermission, isDefaultPermitted, name);
 		for (int i = 0; i < homelimit.length; i++) {
 			homelimit[i] = Tools.getConfig().getInt(
 					"homelimits.group" + (i + 1));
@@ -108,11 +108,6 @@ final public class SetHomeCommand extends AbstractCommand {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public String getName() {
-		return "sethome";
 	}
 
 }

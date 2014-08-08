@@ -14,8 +14,8 @@ import com.homespawnwarp.util.Tools;
 final public class HomeCommand extends TeleportCommand {
 
 	public HomeCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted) {
-		super(plugin, commandPermission, isDefaultPermitted);
+			boolean isDefaultPermitted, String name) {
+		super(plugin, commandPermission, isDefaultPermitted,name);
 	}
 
 	@Override
@@ -48,10 +48,5 @@ final public class HomeCommand extends TeleportCommand {
 		}
 
 		return false;
-	}
-
-	@Override
-	public String getName() {
-		return "home";
 	}
 }

@@ -12,8 +12,8 @@ import com.homespawnwarp.util.Tools;
 final public class HomeListCommand extends AbstractCommand {
 
 	public HomeListCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted) {
-		super(plugin, commandPermission, isDefaultPermitted);
+			boolean isDefaultPermitted, String name) {
+		super(plugin, commandPermission, isDefaultPermitted, name);
 	}
 
 	@Override
@@ -53,8 +53,4 @@ final public class HomeListCommand extends AbstractCommand {
 		return true;
 	}
 
-	@Override
-	public String getName() {
-		return "homelist";
-	}
 }

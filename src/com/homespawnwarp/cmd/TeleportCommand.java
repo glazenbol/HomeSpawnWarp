@@ -17,13 +17,11 @@ public abstract class TeleportCommand extends AbstractCommand {
 	protected double[] price = new double[5];
 
 	public TeleportCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted) {
+			boolean isDefaultPermitted, String name) {
 
-		super(plugin, commandPermission, isDefaultPermitted);
+		super(plugin, commandPermission, isDefaultPermitted, name);
 
-		if (this instanceof MoneyCommand) {
-			setupPrices();
-		}
+		setupPrices();
 	}
 
 	protected void teleportPlayer(Player player, Location l,
@@ -33,8 +31,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 
 	public void setupPrices() {
 		for (int i = 0; i < price.length; i++) {
-			price[i] = Tools.getConfig().getDouble(
-					"prices." + getName() + (i + 1));
+			price[i] = Tools.getConfig().getDouble("prices." + name + (i + 1));
 			// Warpto is just warpto
 		}
 	}
@@ -44,7 +41,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 		HashSet<Double> prices = new HashSet<Double>();
 
 		if (PermissionAgent.checkPerm(player, Permission.PRICES, true, false,
-				1, getName())) {
+				1, name)) {
 			if (price[0] <= 0) {
 				return 0;
 			} else {
@@ -53,7 +50,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 		}
 		for (int i = 1; i < price.length; i++) {
 			if (PermissionAgent.checkPerm(player, Permission.PRICES, false,
-					false, i + 1, getName())) {
+					false, i + 1, name)) {
 
 				if (price[i] > 0) {
 					prices.add(price[i]);
