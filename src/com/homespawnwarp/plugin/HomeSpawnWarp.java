@@ -13,7 +13,6 @@ import com.homespawnwarp.cmd.TeleportCommand;
 import com.homespawnwarp.listener.JoinListener;
 import com.homespawnwarp.listener.PlayerMoveListener;
 import com.homespawnwarp.listener.RespawnListener;
-import com.homespawnwarp.listener.TeleportWarmupCompleteListener;
 import com.homespawnwarp.util.CommandManager;
 import com.homespawnwarp.util.ConfigIO;
 import com.homespawnwarp.util.LocationIO;
@@ -73,8 +72,6 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		cManager = new CommandManager(this);
 		cManager.initCommands();
 
-		setupWarmups();
-
 		if (setupEconomy()) {
 			logger.info(emblem + " Using vault!");
 		} else {
@@ -90,8 +87,6 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		}
 
 		if (TeleportCommand.usingWarmups) {
-			new TeleportWarmupCompleteListener(this);
-
 			if (cancelWarmupsOnMove) {
 				new PlayerMoveListener(this);
 			}
@@ -102,10 +97,6 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		logger.info(emblem + " CancelWarmupsOnMove = " + cancelWarmupsOnMove);
 
 		logger.info(emblem + " Enabled!");
-	}
-
-	private void setupWarmups() {
-		//TODO move to teleportCommands
 	}
 
 	@Override

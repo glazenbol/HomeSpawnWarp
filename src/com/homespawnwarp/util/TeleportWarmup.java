@@ -3,7 +3,6 @@ package com.homespawnwarp.util;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.event.TeleportWarmupCompleteEvent;
 import com.homespawnwarp.plugin.HomeSpawnWarp;
 
 public final class TeleportWarmup implements Runnable {
@@ -16,8 +15,8 @@ public final class TeleportWarmup implements Runnable {
 	private double price;
 	private HomeSpawnWarp plugin;
 
-	public TeleportWarmup(HomeSpawnWarp plugin, Player player, Location l, TeleportationType type,
-			int warmup, double price) {
+	public TeleportWarmup(HomeSpawnWarp plugin, Player player, Location l,
+			TeleportationType type, int warmup, double price) {
 		this.warmup = warmup;
 		this.player = player;
 		this.l = l;
@@ -38,12 +37,15 @@ public final class TeleportWarmup implements Runnable {
 		}
 
 		if (!isCancelled) {
-			plugin.getServer()
-					.getPluginManager()
-					.callEvent(
-							new TeleportWarmupCompleteEvent(player, l, type,
-									price));
+			if (player.isOnline()) {
+
+				Teleportation.teleportPlayer(player, l, type, price, true,
+						true, 0);
+			} else {
+				// TODO send message user left the game
+			}
 		}
+
 		Teleportation.removeWarmup(player);
 	}
 
