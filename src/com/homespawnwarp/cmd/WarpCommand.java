@@ -29,7 +29,7 @@ final public class WarpCommand extends TeleportCommand {
 
 				double price;
 				if (LocationIO.checkPriced("warps." + args[0])) {
-					price = LocationIO.readPrice("warps.");
+					price = LocationIO.readPrice("warps."+ args[0]);
 				} else {
 					price = getPrice(player);
 				}

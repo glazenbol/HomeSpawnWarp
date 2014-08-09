@@ -39,7 +39,7 @@ final public class LocationIO {
 	
 
 	public static boolean checkPriced(final String path) {
-		return Tools.getLocations().contains(path + ".price");
+		return Tools.getLocations().contains(path+ ".price");
 	}
 	
 	public static double readPrice(final String path) {
