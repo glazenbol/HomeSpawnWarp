@@ -2,6 +2,9 @@ package com.homespawnwarp.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -44,14 +47,20 @@ public final class ConfigIO {
 		configs.put(configName, YamlConfiguration.loadConfiguration(configFiles
 				.get(configName)));
 
-		File defaultConfig = new File(plugin.getDataFolder(), configName
-				+ ".yml");
+		Reader defaultConfig;
+		try {
+			defaultConfig = new InputStreamReader(plugin.getResource(configName
+					+ ".yml"), "UTF8");
 
-		if (defaultConfig != null) {
-			YamlConfiguration defConfig = YamlConfiguration
-					.loadConfiguration(defaultConfig);
-			configs.get(configName).setDefaults(defConfig);
+			if (defaultConfig != null) {
+				YamlConfiguration defConfig = YamlConfiguration
+						.loadConfiguration(defaultConfig);
+				configs.get(configName).setDefaults(defConfig);
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
+
 	}
 
 	// SAVING DEFAULT
