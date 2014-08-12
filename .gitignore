@@ -1,2 +1,5 @@
-version/
 bin/
+.hg/
+.settings/
+.classpath
+.project
