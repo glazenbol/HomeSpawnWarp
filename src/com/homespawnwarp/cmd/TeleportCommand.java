@@ -45,8 +45,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 			TeleportCommand.usingWarmups = true;
 		}
 	}
-
-	// TODO move dis :(
+	
 	protected double getPrice(Player player) {
 
 		HashSet<Double> prices = new HashSet<Double>();

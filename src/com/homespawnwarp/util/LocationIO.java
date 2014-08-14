@@ -33,7 +33,7 @@ final public class LocationIO {
 		write(path, location);
 
 		Tools.getLocations().set(path + ".price", customPrice);
-		ConfigIO.save("Locations");// TODO custom prices warps
+		ConfigIO.save("Locations");
 
 	}
 	
