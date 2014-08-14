@@ -19,7 +19,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 	protected int warmup;
 
 	public TeleportCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted, String name) {
+			String name) {
 
 		super(plugin, commandPermission, name);
 
@@ -45,7 +45,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 			TeleportCommand.usingWarmups = true;
 		}
 	}
-	
+
 	protected double getPrice(Player player) {
 
 		HashSet<Double> prices = new HashSet<Double>();

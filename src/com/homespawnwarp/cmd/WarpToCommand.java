@@ -13,26 +13,26 @@ import com.homespawnwarp.util.Tools;
 
 final public class WarpToCommand extends TeleportCommand {
 
-
 	public WarpToCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted, String name) {
-		super(plugin, commandPermission, isDefaultPermitted, name);
+			String name) {
+		super(plugin, commandPermission, name);
 	}
 
 	@Override
 	boolean doCommand(Player player, CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
 		if (args.length != 0) {
-			
+
 			@SuppressWarnings("deprecation")
 			Player targetPlayer = plugin.getServer().getPlayer(args[0]);
-			
+
 			if (targetPlayer != null && targetPlayer.isOnline()) {
 				player.sendMessage(Tools.getMessage("sent-request")
 						+ ChatColor.AQUA + targetPlayer.getName());
 
 				TeleportRequest tr = new TeleportRequest(player, targetPlayer);
-				Teleportation.teleportRequests.put(targetPlayer.getUniqueId(), tr);
+				Teleportation.teleportRequests.put(targetPlayer.getUniqueId(),
+						tr);
 				new Thread(tr).start();
 
 			} else {

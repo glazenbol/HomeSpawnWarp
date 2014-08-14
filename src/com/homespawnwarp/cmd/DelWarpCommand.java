@@ -11,7 +11,7 @@ import com.homespawnwarp.util.Tools;
 final public class DelWarpCommand extends AbstractCommand implements ConsoleSendable{
 
 	public DelWarpCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted, String name) {
+			String name) {
 		super(plugin, commandPermission, name);
 	}
 

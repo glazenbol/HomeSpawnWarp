@@ -13,10 +13,9 @@ import com.homespawnwarp.util.Tools;
 
 final public class WarpAcceptCommand extends TeleportCommand {
 
-
-	public WarpAcceptCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted, String name) {
-		super(plugin, commandPermission, isDefaultPermitted, name);
+	public WarpAcceptCommand(HomeSpawnWarp plugin,
+			Permission commandPermission, String name) {
+		super(plugin, commandPermission, name);
 	}
 
 	@Override
@@ -30,12 +29,15 @@ final public class WarpAcceptCommand extends TeleportCommand {
 			Player player2 = Teleportation.teleportRequests.get(
 					player.getUniqueId()).getSender();
 
-			player.sendMessage(Tools.getMessage("you-accepted-request-of") + ChatColor.AQUA + player.getName());
+			player.sendMessage(Tools.getMessage("you-accepted-request-of")
+					+ ChatColor.AQUA + player.getName());
 			player2.sendMessage(ChatColor.AQUA + player.getName()
 					+ Tools.getMessage("accepted-your-request"));
 
-			teleportPlayer(player2, Teleportation.teleportRequests.get(player.getUniqueId()).getLocation(),
-					TeleportationType.REQUEST, getPrice(player2),warmup);
+			teleportPlayer(player2,
+					Teleportation.teleportRequests.get(player.getUniqueId())
+							.getLocation(), TeleportationType.REQUEST,
+					getPrice(player2), warmup);
 			Teleportation.removeRequest(player);
 
 			return true;
@@ -48,8 +50,7 @@ final public class WarpAcceptCommand extends TeleportCommand {
 	@Override
 	public void setupPrices() {
 		for (int i = 0; i < price.length; i++) {
-			price[i] = Tools.getConfig().getDouble(
-					"prices.warpto" + (i + 1));
+			price[i] = Tools.getConfig().getDouble("prices.warpto" + (i + 1));
 			// Warpto for warpaccept, cuz warpaccept is doing the money taking
 		}
 	}

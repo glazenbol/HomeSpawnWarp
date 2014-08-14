@@ -13,7 +13,7 @@ import com.homespawnwarp.util.Tools;
 final public class SetWarpCommand extends AbstractCommand {
 
 	public SetWarpCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted, String name) {
+			String name) {
 		super(plugin, commandPermission, name);
 	}
 

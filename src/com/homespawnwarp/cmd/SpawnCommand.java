@@ -14,8 +14,8 @@ import com.homespawnwarp.util.Tools;
 final public class SpawnCommand extends TeleportCommand {
 
 	public SpawnCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted, String name) {
-		super(plugin, commandPermission, isDefaultPermitted, name);
+			String name) {
+		super(plugin, commandPermission, name);
 	}
 
 	@Override
@@ -35,7 +35,8 @@ final public class SpawnCommand extends TeleportCommand {
 
 					if (l != null) {
 
-						teleportPlayer(player, l, TeleportationType.SPAWN, getPrice(player),warmup);
+						teleportPlayer(player, l, TeleportationType.SPAWN,
+								getPrice(player), warmup);
 
 					} else {
 						player.sendMessage(Tools.getMessage("no-spawn-set"));
@@ -56,8 +57,8 @@ final public class SpawnCommand extends TeleportCommand {
 
 			if (l != null) {
 
-				teleportPlayer(player, l,
-						TeleportationType.SPAWN, getPrice(player),warmup);
+				teleportPlayer(player, l, TeleportationType.SPAWN,
+						getPrice(player), warmup);
 
 			} else {
 				player.sendMessage(Tools.getMessage("no-spawn-set"));

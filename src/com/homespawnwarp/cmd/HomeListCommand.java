@@ -12,7 +12,7 @@ import com.homespawnwarp.util.Tools;
 final public class HomeListCommand extends AbstractCommand {
 
 	public HomeListCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted, String name) {
+			String name) {
 		super(plugin, commandPermission, name);
 	}
 

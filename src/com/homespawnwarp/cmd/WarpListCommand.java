@@ -13,7 +13,7 @@ final public class WarpListCommand extends AbstractCommand implements
 		ConsoleSendable {
 
 	public WarpListCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted, String name) {
+			String name) {
 		super(plugin, commandPermission, name);
 	}
 

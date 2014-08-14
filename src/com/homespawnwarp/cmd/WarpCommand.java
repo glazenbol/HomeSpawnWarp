@@ -13,9 +13,8 @@ import com.homespawnwarp.util.Tools;
 
 final public class WarpCommand extends TeleportCommand {
 
-	public WarpCommand(HomeSpawnWarp plugin, Permission commandPermission,
-			boolean isDefaultPermitted, String name) {
-		super(plugin, commandPermission, isDefaultPermitted, name);
+	public WarpCommand(HomeSpawnWarp plugin, Permission commandPermission, String name) {
+		super(plugin, commandPermission,  name);
 	}
 
 	@Override
