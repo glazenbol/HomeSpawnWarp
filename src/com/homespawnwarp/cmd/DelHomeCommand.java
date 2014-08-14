@@ -12,7 +12,7 @@ final public class DelHomeCommand extends AbstractCommand {
 
 	public DelHomeCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted, String name) {
-		super(plugin, commandPermission, isDefaultPermitted, name);
+		super(plugin, commandPermission, name);
 	}
 
 	@Override

@@ -64,7 +64,7 @@ final public class Teleportation {
 
 		if (warmup > 0
 				&& !PermissionAgent.checkPerm(player, Permission.NOWARMUP,
-						false, false)
+						false)
 				&& createTeleportWarmup(player, l, type, price, warmup)) {
 
 			return;
@@ -108,7 +108,7 @@ final public class Teleportation {
 			if (useFirework
 					&& fwep != null
 					&& PermissionAgent.checkPerm(player,
-							Permission.TELEPORTEFFECT, true, false)) {
+							Permission.TELEPORTEFFECT, false)) {
 				try {
 					fwep.playFirework(player.getWorld(), player.getLocation(),
 							FireworkEffectGenerator.randomBurstEffect());

@@ -15,16 +15,14 @@ public abstract class AbstractCommand implements CommandExecutor {
 	protected HomeSpawnWarp plugin;
 	
 	protected Permission commandPermission;
-	protected boolean isDefaultPermitted;
 	public String name;
 
 	abstract boolean doCommand(Player player, CommandSender sender,
 			Command cmd, String commandLabel, String[] args);
 
 	public AbstractCommand(final HomeSpawnWarp plugin,
-			final Permission commandPermission, boolean isDefaultPermitted, String name) {
+			final Permission commandPermission, String name) {
 		this.plugin = plugin;
-		this.isDefaultPermitted = isDefaultPermitted;
 		this.commandPermission = commandPermission;
 		this.name = name;
 		plugin.getCommand(name).setExecutor(this);
@@ -41,8 +39,7 @@ public abstract class AbstractCommand implements CommandExecutor {
 
 				player = (Player) sender;
 
-				if (PermissionAgent.checkPerm(sender, commandPermission,
-						isDefaultPermitted, true)) {
+				if (PermissionAgent.checkPerm(sender, commandPermission, true)) {
 					// if (MoneyMachine.checkMoney(player, price)) {
 					if (doCommand(player, sender, cmd, commandLabel, args)) {
 						// @returns wether the command is done or not

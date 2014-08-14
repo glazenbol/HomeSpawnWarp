@@ -19,7 +19,7 @@ final public class SetHomeCommand extends AbstractCommand {
 
 	public SetHomeCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted, String name) {
-		super(plugin, commandPermission, isDefaultPermitted, name);
+		super(plugin, commandPermission, name);
 		for (int i = 0; i < homelimit.length; i++) {
 			homelimit[i] = Tools.getConfig().getInt(
 					"homelimits.group" + (i + 1));
@@ -85,19 +85,19 @@ final public class SetHomeCommand extends AbstractCommand {
 	private boolean checkMaxHomes(Player player, int homeAmount) {
 		boolean[] isInGroup = new boolean[homelimit.length];
 
-		if (PermissionAgent.checkPerm(player, Permission.UNLIMITED_HOMES,
-				false, false)) {
+		if (PermissionAgent
+				.checkPerm(player, Permission.UNLIMITED_HOMES, false)) {
 			return true;
 		}
 
-		if (PermissionAgent.checkPerm(player, Permission.HOMEGROUP,
-				true, false, 1)) {
+		if (PermissionAgent.checkCustomPerm(player, Permission.HOMEGROUP,
+				false, 1, null, true)) {
 			isInGroup[0] = true;
 		}
 
 		for (int i = 1; i < homelimit.length; i++) {
-			if (PermissionAgent.checkPerm(player, Permission.HOMEGROUP, false,
-					false, i + 1)) {
+			if (PermissionAgent.checkCustomPerm(player, Permission.HOMEGROUP,
+					false, i + 1, null, false)) {
 				isInGroup[i] = true;
 			}
 		}

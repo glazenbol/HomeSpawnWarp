@@ -5,41 +5,19 @@ import org.bukkit.command.CommandSender;
 public class PermissionAgent {
 
 	public static boolean checkPerm(final CommandSender sender,
-			final Permission permission, final boolean isDefaultPermitted) {
-		return checkPerm(sender, permission, isDefaultPermitted, true, -1, null);
+			final Permission permission) {
+		return checkPerm(sender, permission, true);
 	}
 
-	public static boolean checkPerm(final CommandSender sender,
-			final Permission permission, final boolean isDefaultPermitted,
-			final boolean sendMessage) {
-		return checkPerm(sender, permission, isDefaultPermitted, sendMessage,
-				-1, null);
-	}
+
 
 	public static boolean checkPerm(final CommandSender sender,
-			final Permission permission, final boolean isDefaultPermitted,
-			final boolean sendMessage, int index) {
-		return checkPerm(sender, permission, isDefaultPermitted, sendMessage,
-				index, null);
-	}
+			final Permission permission, final boolean sendMessage) {
 
-	public static boolean checkPerm(final CommandSender sender,
-			final Permission permissionE, final boolean isDefaultPermitted,
-			final boolean sendMessage, int index, String commandName) {
+		String node = permission.getNode();
 
-		String permission = permissionE.toString();
-
-		if (commandName != null) {
-			permission = permission + "." + commandName;
-		}
-
-		if (index >= 0) {
-			permission = permission + index;
-		}
-
-		if (isDefaultPermitted) {
-			if (sender.hasPermission(permission)
-					|| !sender.isPermissionSet(permission)) {
+		if (permission.isDefaultPermitted()) {
+			if (sender.hasPermission(node) || !sender.isPermissionSet(node)) {
 				return true;
 			} else {
 				if (sendMessage) {
@@ -48,8 +26,44 @@ public class PermissionAgent {
 				return false;
 			}
 		} else {
-			if (sender.hasPermission(permission)
-					|| (!sender.isPermissionSet(permission) && sender.isOp())) {
+			if (sender.hasPermission(node)
+					|| (!sender.isPermissionSet(node) && sender.isOp())) {
+				return true;
+			} else {
+				if (sendMessage) {
+					sender.sendMessage(Tools.getMessage("no-permission"));
+				}
+				return false;
+			} // WORKS!!
+		}
+	}
+	
+	public static boolean checkCustomPerm(final CommandSender sender,
+			final Permission permission, final boolean sendMessage, int index,
+			String commandName, boolean isDefaultPermitted) {
+
+		String node = permission.getNode();
+
+		if (commandName != null) {
+			node = node + "." + commandName;
+		}
+
+		if (index >= 0) {
+			node = node + index;
+		}
+
+		if (isDefaultPermitted) {
+			if (sender.hasPermission(node) || !sender.isPermissionSet(node)) {
+				return true;
+			} else {
+				if (sendMessage) {
+					sender.sendMessage(Tools.getMessage("no-permission"));
+				}
+				return false;
+			}
+		} else {
+			if (sender.hasPermission(node)
+					|| (!sender.isPermissionSet(node) && sender.isOp())) {
 				return true;
 			} else {
 				if (sendMessage) {

@@ -21,7 +21,7 @@ public abstract class TeleportCommand extends AbstractCommand {
 	public TeleportCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted, String name) {
 
-		super(plugin, commandPermission, isDefaultPermitted, name);
+		super(plugin, commandPermission, name);
 
 		setupPrices();
 		setupWarmup();
@@ -45,15 +45,14 @@ public abstract class TeleportCommand extends AbstractCommand {
 			TeleportCommand.usingWarmups = true;
 		}
 	}
-	
-	
-	//TODO move dis :(
+
+	// TODO move dis :(
 	protected double getPrice(Player player) {
 
 		HashSet<Double> prices = new HashSet<Double>();
 
-		if (PermissionAgent.checkPerm(player, Permission.PRICES, true, false,
-				1, name)) {
+		if (PermissionAgent.checkCustomPerm(player, Permission.PRICES, false,
+				1, name, true)) {
 			if (price[0] <= 0) {
 				return 0;
 			} else {
@@ -61,8 +60,8 @@ public abstract class TeleportCommand extends AbstractCommand {
 			}
 		}
 		for (int i = 1; i < price.length; i++) {
-			if (PermissionAgent.checkPerm(player, Permission.PRICES, false,
-					false, i + 1, name)) {
+			if (PermissionAgent.checkCustomPerm(player, Permission.PRICES,
+					false, i + 1, name, false)) {
 
 				if (price[i] > 0) {
 					prices.add(price[i]);

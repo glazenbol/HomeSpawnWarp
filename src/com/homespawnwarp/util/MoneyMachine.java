@@ -41,7 +41,7 @@ public class MoneyMachine {
 	public static boolean canPassWithoutPaying(Player player, double price) {
 
 		return (getEconomy() == null || price <= 0 || PermissionAgent
-				.checkPerm(player, Permission.NOFEE, false, false));
+				.checkPerm(player, Permission.NOFEE, false));
 		
 		
 

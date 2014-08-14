@@ -14,7 +14,7 @@ final public class SetWarpCommand extends AbstractCommand {
 
 	public SetWarpCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted, String name) {
-		super(plugin, commandPermission, isDefaultPermitted, name);
+		super(plugin, commandPermission, name);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ final public class SetWarpCommand extends AbstractCommand {
 
 				} else {
 					if (PermissionAgent.checkPerm(player,
-							Permission.SETPRICEDWARP, isDefaultPermitted)) {
+							Permission.SETPRICEDWARP)) {
 
 						double customPrice;
 						try {

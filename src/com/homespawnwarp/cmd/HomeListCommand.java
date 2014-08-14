@@ -13,7 +13,7 @@ final public class HomeListCommand extends AbstractCommand {
 
 	public HomeListCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted, String name) {
-		super(plugin, commandPermission, isDefaultPermitted, name);
+		super(plugin, commandPermission, name);
 	}
 
 	@Override

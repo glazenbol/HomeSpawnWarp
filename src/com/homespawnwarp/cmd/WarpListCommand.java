@@ -14,7 +14,7 @@ final public class WarpListCommand extends AbstractCommand implements
 
 	public WarpListCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted, String name) {
-		super(plugin, commandPermission, isDefaultPermitted, name);
+		super(plugin, commandPermission, name);
 	}
 
 	@Override

@@ -12,7 +12,7 @@ final public class DelWarpCommand extends AbstractCommand implements ConsoleSend
 
 	public DelWarpCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			boolean isDefaultPermitted, String name) {
-		super(plugin, commandPermission, isDefaultPermitted,name);
+		super(plugin, commandPermission, name);
 	}
 
 	@Override
