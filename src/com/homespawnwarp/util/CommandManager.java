@@ -13,6 +13,7 @@ import com.homespawnwarp.cmd.SetWarpCommand;
 import com.homespawnwarp.cmd.SpawnCommand;
 import com.homespawnwarp.cmd.WarpAcceptCommand;
 import com.homespawnwarp.cmd.WarpCommand;
+import com.homespawnwarp.cmd.WarpHereCommand;
 import com.homespawnwarp.cmd.WarpListCommand;
 import com.homespawnwarp.cmd.WarpToCommand;
 import com.homespawnwarp.plugin.HomeSpawnWarp;
@@ -45,6 +46,7 @@ public class CommandManager {
 		cmds.add(new DelWarpCommand(plugin, Permission.DELWARP,
 				"delwarp"));
 		cmds.add(new WarpToCommand(plugin, Permission.WARPTO, "warpto"));
+		cmds.add(new WarpHereCommand(plugin, Permission.WARPHERE, "warphere"));
 		cmds.add(new WarpAcceptCommand(plugin, Permission.WARPACCEPT,
 				"warpaccept"));
 	}

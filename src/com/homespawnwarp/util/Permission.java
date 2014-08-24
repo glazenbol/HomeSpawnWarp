@@ -15,6 +15,7 @@ public enum Permission {
 	WARPLIST("HomeSpawnWarp.warplist", true),
 	DELWARP("HomeSpawnWarp.delwarp", false),
 	WARPTO("HomeSpawnWarp.warpto", true),
+	WARPHERE("HomeSpawnWarp.warphere", true),
 	WARPACCEPT("HomeSpawnWarp.warpaccept", true),
 	// Misc permissions
 	UNLIMITED_HOMES("HomeSpawnWarp.home.UNLIMITED", false),
