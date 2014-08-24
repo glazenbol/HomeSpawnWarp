@@ -9,7 +9,15 @@ public class MoneyMachine {
 
 	private static Economy economy;
 
+	public static void payMoney(Player player, double amount) {
+		getEconomy().depositPlayer(player, amount);
+	}
+	
 	public static boolean takeMoney(Player player, double price) {
+		return takeMoney(player,price,true);
+	}
+	
+	public static boolean takeMoney(Player player, double price, boolean sendTakenMessage) {
 		
 		if (canPassWithoutPaying(player, price)) {
 			return true;
@@ -18,7 +26,7 @@ public class MoneyMachine {
 		if (canAfford(player, price)) {
 
 			getEconomy().withdrawPlayer(player, price);
-			if (price > 0) {
+			if (sendTakenMessage && price > 0) {
 				if (price < 2 && price > 0) {
 					player.sendMessage(ChatColor.AQUA
 							+ getEconomy().format(price) + " "

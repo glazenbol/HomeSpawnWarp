@@ -1,20 +1,28 @@
 package com.homespawnwarp.util;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public final class TeleportRequest implements Runnable {
+public class TeleportRequest implements Runnable {
+
+	public enum RequestType {
+		WARPTO, WARPHERE;
+	}
 
 	private Player player;
 	private Player targetPlayer;
 	private Location thenLocation;
-	private static final int timeOut = 20;
+	private RequestType type;
+	private static final int maxTime = 60;
+	private double borrowedMoney;
+	private boolean isFinished = false;
 
-	public TeleportRequest(Player player, Player targetPlayer) {
+	public TeleportRequest(Player player, Player targetPlayer, RequestType type) {
 		this.player = player;
 		this.targetPlayer = targetPlayer;
 		this.thenLocation = targetPlayer.getLocation();
+		this.type = type;
+		new Thread(this).run();
 	}
 
 	public boolean arePlayersOnline() {
@@ -24,21 +32,37 @@ public final class TeleportRequest implements Runnable {
 	public Player getSender() {
 		return player;
 	}
-	
+
+	public Location getLocation() {
+		return thenLocation;
+	}
+
+	public RequestType getType() {
+		return type;
+	}
+
+	public void finish() {
+		isFinished = true;
+	}
+
 	@Override
 	public void run() {
-		targetPlayer.sendMessage(ChatColor.AQUA + player.getName()
-				+ Tools.getMessage("teleport-to-you"));
+
+		if (type == RequestType.WARPHERE) {
+			player.sendMessage(Tools.getMessage("warphere-request"));
+		}
+		if (type == RequestType.WARPTO) {
+			player.sendMessage(Tools.getMessage("warpto-request"));
+		}
+
 		try {
-			Thread.sleep(timeOut * 1000);
+			Thread.sleep(maxTime * 1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		Teleportation.removeRequest(targetPlayer);
-	}
-
-	public Location getLocation() {
-		return thenLocation;
+		if (!isFinished) {
+			MoneyMachine.payMoney(player, borrowedMoney);
+		}
 	}
 }

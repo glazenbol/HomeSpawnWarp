@@ -27,6 +27,8 @@ commands:
   warplist:
     description: View a list of available warps.
   warpto:
-    description: Sends the specified player a warp request.
+    description: Sends the specified player a warpto request.
+  warphere:
+    description: Sends the specified player a warphere request.
   warpaccept:
     description: Accepts a warpto request.

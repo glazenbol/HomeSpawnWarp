@@ -42,7 +42,7 @@ public abstract class AbstractCommand implements CommandExecutor {
 				if (PermissionAgent.checkPerm(sender, commandPermission, true)) {
 					// if (MoneyMachine.checkMoney(player, price)) {
 					if (doCommand(player, sender, cmd, commandLabel, args)) {
-						// @returns wether the command is done or not
+						// @returns whether the command is done or not
 					}
 					/*
 					 * } else { //Not using this no more
