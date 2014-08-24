@@ -7,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.util.TeleportRequest.RequestType;
 
 final public class Teleportation {
 
@@ -44,19 +43,16 @@ final public class Teleportation {
 
 	public static void createWarpToRequest(final Player player,
 			final Player targetPlayer, double borrowedMoney) {
-		teleportRequests.put(targetPlayer.getUniqueId(), new TeleportRequest(
-				player, targetPlayer, RequestType.WARPTO));
+
+		teleportRequests.put(targetPlayer.getUniqueId(), new WarpToRequest(
+				player, targetPlayer, plugin));
 	}
 
 	public static void createWarpHereRequest(final Player player,
 			final Player targetPlayer, double borrowedMoney) {
-		createRequest(player, targetPlayer, borrowedMoney, RequestType.WARPHERE);
-	}
 
-	private static void createRequest(final Player player,
-			final Player targetPlayer, double borrowedMoney, RequestType type) {
-		teleportRequests.put(targetPlayer.getUniqueId(), new TeleportRequest(
-				player, targetPlayer, type));
+		teleportRequests.put(targetPlayer.getUniqueId(), new WarpHereRequest(
+				player, targetPlayer, plugin));
 	}
 
 	public static void removeRequest(final Player targetPlayer) {
@@ -137,6 +133,6 @@ final public class Teleportation {
 
 	public static void cancel(Player player) {
 		teleportWarmups.get(player.getUniqueId()).cancel();
-		removeRequest(player);// THIS IS A BIT TRICKY
+		removeRequest(player);// TODO Move, the Teleportation class is too big
 	}
 }
