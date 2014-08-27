@@ -1,11 +1,8 @@
 package com.homespawnwarp.util.message;
 
-import java.util.ArrayList;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.yaml.snakeyaml.error.YAMLException;
 
 import com.homespawnwarp.util.ConfigIO;
 import com.homespawnwarp.util.EconomyManager;
@@ -13,58 +10,41 @@ import com.homespawnwarp.util.EconomyManager;
 public class MessageSender {
 
 	// Maybe preload the messages?
+
 	private static String getMessage(String path) {
 
 		StringBuilder sb = new StringBuilder();
 
 		String rawMessage = ConfigIO.getMessages().getString(path);
 
-		ArrayList<Integer> begins = new ArrayList<Integer>();
-		ArrayList<Integer> ends = new ArrayList<Integer>();
+		int colors = 0;
+		boolean started = false;
 
-		String newMessage = null;
-		
 		for (int i = 0; i < rawMessage.length(); i++) {
 			char c = rawMessage.charAt(i);
 			if (c == '<') {
-				begins.add(i);
+				started = true;
 			}
-			if (c == '>') {
-
-				ends.add(i);
+			if (c == '>' && started) {
+				colors++;
+				started = false;
 			}
 		}
 
-		if (begins.size() != ends.size()) {
-			throw new YAMLException("Colors in message " + rawMessage
-					+ " aren't correctly writen down!");
-		}
-
-		for (int i = 0; i < begins.size(); i++) {//TODO multistring
-
-			if ((begins.get(i) <= 0 && ends.get(i) <= 0 && begins.get(i) < ends
-					.get(i))) {
-				throw new YAMLException("Colors in message " + rawMessage
-						+ " aren't correctly writen down!");
-
-			}
-
-			for (int j = begins.get(i) + 1; j < ends.get(i); j++) {
+		for (int i = 0; i < colors; i++) {
+			sb.setLength(0);
+			for (int j = rawMessage.indexOf('<') + 1; rawMessage.charAt(j) != '>'; j++) {
 				sb.append(rawMessage.charAt(j));
 			}
 
-			String replaceString = "<" + sb.toString() + ">";
 			ChatColor color = ChatColor.valueOf(sb.toString().toUpperCase());
+			String replaceString = "<" + sb.toString() + ">";
 
-			newMessage = rawMessage.replace(replaceString, color + "");
-		}
-		
-		if (newMessage == null) {
-			return rawMessage;
-		} else {
-			return newMessage;
+			rawMessage = rawMessage.replace(replaceString, color + "");
+
 		}
 
+		return rawMessage;
 
 	}
 
@@ -80,13 +60,13 @@ public class MessageSender {
 		messageStr = messageStr.replace("%PRICE%", price + "");
 
 		if (messageStr.indexOf("%CURRENCYPLURAL%") >= 0) {
-			messageStr = messageStr.replace("%CURRENCYPLURAL%", EconomyManager.getEconomy()
-					.currencyNamePlural());
+			messageStr = messageStr.replace("%CURRENCYPLURAL%", EconomyManager
+					.getEconomy().currencyNamePlural());
 		}
 
 		if (messageStr.indexOf("%CURRENCYSINGULAR%") >= 0) {
-			messageStr = messageStr.replace("%CURRENCYSINGULAR%", EconomyManager
-					.getEconomy().currencyNamePlural());
+			messageStr = messageStr.replace("%CURRENCYSINGULAR%",
+					EconomyManager.getEconomy().currencyNamePlural());
 		}
 
 		sender.sendMessage(messageStr);
