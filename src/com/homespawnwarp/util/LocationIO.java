@@ -3,7 +3,7 @@ package com.homespawnwarp.util;
 import org.bukkit.Location;
 import org.bukkit.World;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.HomeSpawnWarp;
 
 final public class LocationIO {
 
@@ -16,13 +16,13 @@ final public class LocationIO {
 
 	public static void write(final String path, final Location location) {
 
-		Tools.getLocations()
+		ConfigIO.getLocations()
 				.set(path + ".world", location.getWorld().getName());
-		Tools.getLocations().set(path + ".x", location.getX());
-		Tools.getLocations().set(path + ".y", location.getY());
-		Tools.getLocations().set(path + ".z", location.getZ());
-		Tools.getLocations().set(path + ".yaw", location.getYaw());
-		Tools.getLocations().set(path + ".pitch", location.getPitch());
+		ConfigIO.getLocations().set(path + ".x", location.getX());
+		ConfigIO.getLocations().set(path + ".y", location.getY());
+		ConfigIO.getLocations().set(path + ".z", location.getZ());
+		ConfigIO.getLocations().set(path + ".yaw", location.getYaw());
+		ConfigIO.getLocations().set(path + ".pitch", location.getPitch());
 		ConfigIO.save("Locations");
 
 	}
@@ -32,32 +32,32 @@ final public class LocationIO {
 
 		write(path, location);
 
-		Tools.getLocations().set(path + ".price", customPrice);
+		ConfigIO.getLocations().set(path + ".price", customPrice);
 		ConfigIO.save("Locations");
 
 	}
 	
 
 	public static boolean checkPriced(final String path) {
-		return Tools.getLocations().contains(path+ ".price");
+		return ConfigIO.getLocations().contains(path+ ".price");
 	}
 	
 	public static double readPrice(final String path) {
-		return Tools.getLocations().getDouble(path + ".price");
+		return ConfigIO.getLocations().getDouble(path + ".price");
 	}
 
 	public static Location read(final String path) {
 
 		if (ConfigIO.get("Locations").contains(path)) {
 			World w = plugin.getServer().getWorld(
-					Tools.getLocations().getString(path + ".world"));
+					ConfigIO.getLocations().getString(path + ".world"));
 
 			if (w != null) {
-				return new Location(w, Tools.getLocations().getDouble(
-						path + ".x"), Tools.getLocations().getDouble(
-						path + ".y"), Tools.getLocations().getDouble(
-						path + ".z"), (float) Tools.getLocations().getDouble(
-						path + ".yaw"), (float) Tools.getLocations().getDouble(
+				return new Location(w, ConfigIO.getLocations().getDouble(
+						path + ".x"), ConfigIO.getLocations().getDouble(
+						path + ".y"), ConfigIO.getLocations().getDouble(
+						path + ".z"), (float) ConfigIO.getLocations().getDouble(
+						path + ".yaw"), (float) ConfigIO.getLocations().getDouble(
 						path + ".pitch"));
 			} else {
 				return null;

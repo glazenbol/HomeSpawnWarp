@@ -4,21 +4,21 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.util.Teleportation;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.tp.Teleportation;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
 
-public class PlayerMoveListener implements Listener {
+public class OnPlayerMoveWarmupCanceller implements Listener {
 
-	public PlayerMoveListener(HomeSpawnWarp plugin) {
+	public OnPlayerMoveWarmupCanceller(HomeSpawnWarp plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent e) {
 		if (Teleportation.warmupsContainsPlayer(e.getPlayer())) {
-			e.getPlayer().sendMessage(
-					Tools.getMessage("teleportation-cancelled-by-move"));
+			MessageSender.message(Message.TP_CANCELLED_BY_MOVEMENT, e.getPlayer());
 			Teleportation.cancel(e.getPlayer());
 			Teleportation.removeWarmup(e.getPlayer());
 		}

@@ -5,12 +5,12 @@ import java.util.HashSet;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.util.Permission;
-import com.homespawnwarp.util.PermissionAgent;
-import com.homespawnwarp.util.Teleportation;
-import com.homespawnwarp.util.TeleportationType;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.tp.Teleportation;
+import com.homespawnwarp.tp.TeleportationType;
+import com.homespawnwarp.util.ConfigIO;
+import com.homespawnwarp.util.perm.Permission;
+import com.homespawnwarp.util.perm.PermissionAgent;
 
 public abstract class TeleportCommand extends AbstractCommand {
 
@@ -34,13 +34,13 @@ public abstract class TeleportCommand extends AbstractCommand {
 
 	protected void setupPrices() {
 		for (int i = 0; i < price.length; i++) {
-			price[i] = Tools.getConfig().getDouble("prices." + name + (i + 1));
+			price[i] = ConfigIO.getConfig().getDouble("prices." + name + (i + 1));
 			// Warpto is just warpto
 		}
 	}
 
 	private void setupWarmup() {
-		warmup = (int) (Tools.getConfig().getDouble("warmups." + name) * 1000);
+		warmup = (int) (ConfigIO.getConfig().getDouble("warmups." + name) * 1000);
 		if (warmup > 0) {
 			TeleportCommand.usingWarmups = true;
 		}

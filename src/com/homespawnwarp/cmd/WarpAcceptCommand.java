@@ -1,15 +1,16 @@
 package com.homespawnwarp.cmd;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.util.Permission;
-import com.homespawnwarp.util.Teleportation;
-import com.homespawnwarp.util.TeleportationType;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.tp.Teleportation;
+import com.homespawnwarp.tp.TeleportationType;
+import com.homespawnwarp.util.ConfigIO;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
 
 final public class WarpAcceptCommand extends TeleportCommand {
 
@@ -29,10 +30,10 @@ final public class WarpAcceptCommand extends TeleportCommand {
 			Player player2 = Teleportation.teleportRequests.get(
 					player.getUniqueId()).getSender();
 
-			player.sendMessage(Tools.getMessage("you-accepted-request-of")//TODO
-					+ ChatColor.AQUA + player.getName());
-			player2.sendMessage(ChatColor.AQUA + player.getName()
-					+ Tools.getMessage("accepted-your-request"));
+			MessageSender.playerMessage(Message.ACCEPTED_REQUEST_FROM, player,
+					player2);
+			MessageSender.playerMessage(Message.ACCEPTED_YOUR_REQUEST, player2,
+					player);
 
 			teleportPlayer(player2,
 					Teleportation.teleportRequests.get(player.getUniqueId())
@@ -42,7 +43,7 @@ final public class WarpAcceptCommand extends TeleportCommand {
 
 			return true;
 		} else {
-			player.sendMessage(Tools.getMessage("no-request"));
+			MessageSender.message(Message.NO_REQUEST, player);
 		}
 		return false;
 	}
@@ -50,8 +51,10 @@ final public class WarpAcceptCommand extends TeleportCommand {
 	@Override
 	public void setupPrices() {
 		for (int i = 0; i < price.length; i++) {
-			price[i] = Tools.getConfig().getDouble("prices.warpto" + (i + 1));
+			price[i] = ConfigIO.getConfig()
+					.getDouble("prices.warpto" + (i + 1));
 			// Warpto for warpaccept, cuz warpaccept is doing the money taking
+			// TODO
 		}
 	}
 

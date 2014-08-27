@@ -4,11 +4,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.util.Permission;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.util.ConfigIO;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
 
-final public class DelWarpCommand extends AbstractCommand implements ConsoleSendable{
+final public class DelWarpCommand extends AbstractCommand implements
+		ConsoleSendable {
 
 	public DelWarpCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			String name) {
@@ -19,19 +22,16 @@ final public class DelWarpCommand extends AbstractCommand implements ConsoleSend
 	boolean doCommand(Player player, CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
 		if (args.length != 0) {
-			if (Tools.getLocations().getString("warps." + args[0]) != null) {
-				Tools.getLocations().set("warps." + args[0], null);
-				sender.sendMessage(Tools.getMessage(
-						"warp-deleted"));
+			if (ConfigIO.getLocations().getString("warps." + args[0]) != null) {
+				ConfigIO.getLocations().set("warps." + args[0], null);
+				MessageSender.message(Message.WARP_DELETED, player);
 				return true;
 			} else {
-				sender.sendMessage(Tools.getMessage(
-						"wrong-warpname"));
+				MessageSender.message(Message.WRONG_WARPNAME, player);
 			}
 
 		} else {
-			sender.sendMessage(Tools.getMessage(
-					"too-few-arguments"));
+			MessageSender.message(Message.TOO_FEW_ARGUMENTS, player);
 		}
 		return false;
 	}

@@ -5,11 +5,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.tp.TeleportationType;
 import com.homespawnwarp.util.LocationIO;
-import com.homespawnwarp.util.Permission;
-import com.homespawnwarp.util.TeleportationType;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
 
 final public class HomeCommand extends TeleportCommand {
 
@@ -31,7 +32,7 @@ final public class HomeCommand extends TeleportCommand {
 				teleportPlayer(player, l, TeleportationType.HOME, getPrice(player), warmup);
 				
 			} else {
-				player.sendMessage(Tools.getMessage("no-home-set"));
+				MessageSender.message(Message.NO_HOME_SET, player);
 			}
 
 		} else {
@@ -43,7 +44,7 @@ final public class HomeCommand extends TeleportCommand {
 
 				teleportPlayer(player, l, TeleportationType.HOME, getPrice(player), warmup);
 			} else {
-				player.sendMessage(Tools.getMessage("wrong-homename"));
+				MessageSender.message(Message.WRONG_HOMENAME, player);
 			}
 		}
 

@@ -1,6 +1,9 @@
-package com.homespawnwarp.util;
+package com.homespawnwarp.util.perm;
 
 import org.bukkit.command.CommandSender;
+
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
 
 public class PermissionAgent {
 
@@ -21,7 +24,7 @@ public class PermissionAgent {
 				return true;
 			} else {
 				if (sendMessage) {
-					sender.sendMessage(Tools.getMessage("no-permission"));
+					MessageSender.message(Message.NO_PERMISSION, sender);
 				}
 				return false;
 			}
@@ -31,7 +34,7 @@ public class PermissionAgent {
 				return true;
 			} else {
 				if (sendMessage) {
-					sender.sendMessage(Tools.getMessage("no-permission"));
+					MessageSender.message(Message.NO_PERMISSION, sender);
 				}
 				return false;
 			} // WORKS!!
@@ -57,7 +60,7 @@ public class PermissionAgent {
 				return true;
 			} else {
 				if (sendMessage) {
-					sender.sendMessage(Tools.getMessage("no-permission"));
+					MessageSender.message(Message.NO_PERMISSION, sender);
 				}
 				return false;
 			}
@@ -67,7 +70,7 @@ public class PermissionAgent {
 				return true;
 			} else {
 				if (sendMessage) {
-					sender.sendMessage(Tools.getMessage("no-permission"));
+					MessageSender.message(Message.NO_PERMISSION, sender);
 				}
 				return false;
 			} // WORKS!!

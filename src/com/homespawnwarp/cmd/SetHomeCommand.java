@@ -7,11 +7,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.util.ConfigIO;
 import com.homespawnwarp.util.LocationIO;
-import com.homespawnwarp.util.Permission;
-import com.homespawnwarp.util.PermissionAgent;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
+import com.homespawnwarp.util.perm.PermissionAgent;
 
 final public class SetHomeCommand extends AbstractCommand {
 
@@ -21,7 +23,7 @@ final public class SetHomeCommand extends AbstractCommand {
 			String name) {
 		super(plugin, commandPermission, name);
 		for (int i = 0; i < homelimit.length; i++) {
-			homelimit[i] = Tools.getConfig().getInt(
+			homelimit[i] = ConfigIO.getConfig().getInt(
 					"homelimits.group" + (i + 1));
 		}
 	}
@@ -32,8 +34,8 @@ final public class SetHomeCommand extends AbstractCommand {
 
 		int homeAmount;
 
-		if (Tools.getLocations().contains("homes." + player.getUniqueId())) {
-			Set<String> homeNames = Tools.getLocations()
+		if (ConfigIO.getLocations().contains("homes." + player.getUniqueId())) {
+			Set<String> homeNames = ConfigIO.getLocations()
 					.getConfigurationSection("homes." + player.getUniqueId())
 					.getKeys(false);
 			homeAmount = homeNames.size();
@@ -48,7 +50,7 @@ final public class SetHomeCommand extends AbstractCommand {
 
 		if (args.length == 0) {
 			// Without args
-			if (Tools.getLocations().contains(
+			if (ConfigIO.getLocations().contains(
 					"homes." + player.getUniqueId() + ".default")) {
 				homeAmount--;
 			}
@@ -57,9 +59,9 @@ final public class SetHomeCommand extends AbstractCommand {
 				LocationIO.write("homes." + player.getUniqueId() + ".default",
 						l);
 
-				player.sendMessage(Tools.getMessage("default-home-set"));
+				MessageSender.message(Message.HOME_SET, player);
 			} else {
-				player.sendMessage(Tools.getMessage("max-homes-reached"));
+				MessageSender.message(Message.MAX_HOMES_REACHED, player);
 				return false;
 			}
 
@@ -71,11 +73,11 @@ final public class SetHomeCommand extends AbstractCommand {
 					LocationIO.write("homes." + player.getUniqueId() + "."
 							+ args[0], l);
 
-					player.sendMessage(Tools.getMessage("home-set"));
+					MessageSender.message(Message.HOME_SET, player);
 				}
 
 			} else {
-				player.sendMessage(Tools.getMessage("max-homes-reached"));
+				MessageSender.message(Message.MAX_HOMES_REACHED, player);
 				return false;
 			}
 		}

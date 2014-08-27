@@ -5,11 +5,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.tp.TeleportationType;
 import com.homespawnwarp.util.LocationIO;
-import com.homespawnwarp.util.Permission;
-import com.homespawnwarp.util.TeleportationType;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.util.ConfigIO;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
 
 final public class SpawnCommand extends TeleportCommand {
 
@@ -25,8 +27,8 @@ final public class SpawnCommand extends TeleportCommand {
 		if (plugin.useGeneralSpawn) {
 
 			// Exact general spawn teleport
-			if (Tools.getLocations().contains("spawn")) {
-				String[] s = Tools.getLocations()
+			if (ConfigIO.getLocations().contains("spawn")) {
+				String[] s = ConfigIO.getLocations()
 						.getConfigurationSection("spawn").getKeys(false)
 						.toArray(new String[0]);
 
@@ -39,14 +41,14 @@ final public class SpawnCommand extends TeleportCommand {
 								getPrice(player), warmup);
 
 					} else {
-						player.sendMessage(Tools.getMessage("no-spawn-set"));
+						MessageSender.message(Message.NO_SPAWN_SET, player);
 					}
 
 				} else {
-					player.sendMessage(Tools.getMessage("no-spawn-set"));
+					MessageSender.message(Message.NO_SPAWN_SET, player);
 				}
 			} else {
-				player.sendMessage(Tools.getMessage("no-spawn-set"));
+				MessageSender.message(Message.NO_SPAWN_SET, player);
 			}
 		} else {
 
@@ -61,7 +63,7 @@ final public class SpawnCommand extends TeleportCommand {
 						getPrice(player), warmup);
 
 			} else {
-				player.sendMessage(Tools.getMessage("no-spawn-set"));
+				MessageSender.message(Message.NO_SPAWN_SET, player);
 			}
 		}
 		return false;

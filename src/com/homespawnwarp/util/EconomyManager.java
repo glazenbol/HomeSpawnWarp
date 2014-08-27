@@ -2,10 +2,14 @@ package com.homespawnwarp.util;
 
 import net.milkbowl.vault.economy.Economy;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class MoneyMachine {
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
+import com.homespawnwarp.util.perm.PermissionAgent;
+
+public class EconomyManager {
 
 	private static Economy economy;
 
@@ -28,20 +32,15 @@ public class MoneyMachine {
 			getEconomy().withdrawPlayer(player, price);
 			if (sendTakenMessage && price > 0) {
 				if (price < 2 && price > 0) {
-					player.sendMessage(ChatColor.AQUA
-							+ getEconomy().format(price) + " "
-							+ getEconomy().currencyNameSingular()
-							+ Tools.getMessage("is-taken-from-account"));
+					MessageSender.moneyMessage(Message.TOOK_FROM_ACCOUNT_SINGULAR, player, price);
 				} else {
-					player.sendMessage(ChatColor.AQUA
-							+ getEconomy().format(price) + " "
-							+ getEconomy().currencyNamePlural()
-							+ Tools.getMessage("are-taken-from-account"));
+					
+					MessageSender.moneyMessage(Message.TOOK_FROM_ACCOUNT_PLURAL, player, price);
 				}
 			}
 			return true;
 		} else {
-			player.sendMessage(Tools.getMessage("not-enough-money"));
+			MessageSender.message(Message.NOT_ENOUGH_MONEY, player);
 			return false;
 		}
 	}
@@ -71,7 +70,7 @@ public class MoneyMachine {
 	}
 
 	public static void setEconomy(Economy economy) {
-		MoneyMachine.economy = economy;
+		EconomyManager.economy = economy;
 	}
 
 }

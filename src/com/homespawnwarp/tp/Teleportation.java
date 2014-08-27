@@ -1,4 +1,4 @@
-package com.homespawnwarp.util;
+package com.homespawnwarp.tp;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -6,7 +6,14 @@ import java.util.UUID;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.util.EconomyManager;
+import com.homespawnwarp.util.FireworkEffectGenerator;
+import com.homespawnwarp.util.FireworkEffectPlayer;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
+import com.homespawnwarp.util.perm.PermissionAgent;
 
 final public class Teleportation {
 
@@ -88,7 +95,7 @@ final public class Teleportation {
 
 	public static void finalizeTeleport(Player player, TeleportationType type,
 			Location l, boolean sendMessage, double price, boolean useFirework) {
-		if (MoneyMachine.takeMoney(player, price)) {
+		if (EconomyManager.takeMoney(player, price)) {
 
 			if (!l.getChunk().isLoaded()) {
 				l.getChunk().load();
@@ -97,16 +104,16 @@ final public class Teleportation {
 			if (sendMessage) {
 				switch (type) {
 				case HOME:
-					player.sendMessage(Tools.getMessage("teleport-to-home"));
+					MessageSender.message(Message.TP_TO_HOME, player);
 					break;
 				case SPAWN:
-					player.sendMessage(Tools.getMessage("teleport-to-spawn"));
+					MessageSender.message(Message.TP_TO_SPAWN, player);
 					break;
 				case WARP:
-					player.sendMessage(Tools.getMessage("teleport-to-warp"));
+					MessageSender.message(Message.TP_TO_WARP, player);
 					break;
 				case REQUEST:
-					player.sendMessage(Tools.getMessage("teleporting"));
+					MessageSender.message(Message.TP_TO_REQUEST, player);
 				default:
 					break;
 				}

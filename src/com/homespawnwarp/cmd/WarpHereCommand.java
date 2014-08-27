@@ -1,12 +1,12 @@
 package com.homespawnwarp.cmd;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.util.Permission;
-import com.homespawnwarp.util.Teleportation;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.tp.Teleportation;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
 
 public class WarpHereCommand extends RequestCommand {
 
@@ -18,8 +18,8 @@ public class WarpHereCommand extends RequestCommand {
 	@Override
 	public void createRequest(Player player, Player targetPlayer,
 			double borrowMoney) {
-		player.sendMessage(Tools.getMessage("sent-warphere-request")
-				+ ChatColor.AQUA + targetPlayer.getName());
+		MessageSender.playerMessage(Message.SENT_WARPTO_REQUEST, player,
+				targetPlayer);
 		Teleportation.createWarpHereRequest(player, targetPlayer, borrowMoney);
 	}
 }

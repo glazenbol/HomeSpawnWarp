@@ -1,7 +1,10 @@
-package com.homespawnwarp.util;
+package com.homespawnwarp.tp;
 
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
 
 public class WarpToRequest extends TeleportRequest {
 
@@ -14,6 +17,6 @@ public class WarpToRequest extends TeleportRequest {
 	@Override
 	public void sendMessage(Player player) {
 
-		player.sendMessage(Tools.getMessage("warpto-request"));
+		MessageSender.message(Message.WARPTO_REQUEST, player);
 	}
 }

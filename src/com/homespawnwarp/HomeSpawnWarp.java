@@ -1,4 +1,4 @@
-package com.homespawnwarp.plugin;
+package com.homespawnwarp;
 
 import java.util.logging.Logger;
 
@@ -10,15 +10,13 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.homespawnwarp.cmd.TeleportCommand;
-import com.homespawnwarp.listener.JoinListener;
-import com.homespawnwarp.listener.PlayerMoveListener;
-import com.homespawnwarp.listener.RespawnListener;
+import com.homespawnwarp.listener.AccuarateSpawner;
+import com.homespawnwarp.listener.OnPlayerMoveWarmupCanceller;
+import com.homespawnwarp.tp.Teleportation;
 import com.homespawnwarp.util.CommandManager;
 import com.homespawnwarp.util.ConfigIO;
+import com.homespawnwarp.util.EconomyManager;
 import com.homespawnwarp.util.LocationIO;
-import com.homespawnwarp.util.MoneyMachine;
-import com.homespawnwarp.util.Teleportation;
-import com.homespawnwarp.util.Tools;
 
 final public class HomeSpawnWarp extends JavaPlugin {
 
@@ -50,17 +48,18 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		ConfigIO.saveDefault("locations");
 		ConfigIO.saveDefault("config");
 
-		Tools.getConfig().options().copyDefaults(true);
-		Tools.getLocations().options().copyDefaults(true);
-		Tools.getMessages().options().copyDefaults(true);
+		ConfigIO.getConfig().options().copyDefaults(true);
+		ConfigIO.getLocations().options().copyDefaults(true);
+		ConfigIO.getMessages().options().copyDefaults(true);
 
 		ConfigIO.save("messages");
 		ConfigIO.save("config");
 
-		useExactSpawn = Tools.getConfig().getBoolean("useexactspawn");
-		useGeneralSpawn = Tools.getConfig().getBoolean("usegeneralspawn");
-		useFireworkEffects = Tools.getConfig().getBoolean("usefireworkeffects");
-		cancelWarmupsOnMove = Tools.getConfig().getBoolean(
+		useExactSpawn = ConfigIO.getConfig().getBoolean("useexactspawn");
+		useGeneralSpawn = ConfigIO.getConfig().getBoolean("usegeneralspawn");
+		useFireworkEffects = ConfigIO.getConfig().getBoolean(
+				"usefireworkeffects");
+		cancelWarmupsOnMove = ConfigIO.getConfig().getBoolean(
 				"cancelwarmupsonmove");
 
 		LocationIO.init(this);
@@ -82,13 +81,12 @@ final public class HomeSpawnWarp extends JavaPlugin {
 		// LISTENERS!!!!!!!!!!!!!
 
 		if (useExactSpawn) {
-			new RespawnListener(this);
-			new JoinListener(this);
+			new AccuarateSpawner(this);
 		}
 
 		if (TeleportCommand.usingWarmups) {
 			if (cancelWarmupsOnMove) {
-				new PlayerMoveListener(this);
+				new OnPlayerMoveWarmupCanceller(this);
 			}
 		}
 		logger.info(emblem + " UseExactSpawn = " + useExactSpawn);
@@ -117,10 +115,10 @@ final public class HomeSpawnWarp extends JavaPlugin {
 						net.milkbowl.vault.economy.Economy.class);
 
 		if (economyProvider != null) {
-			MoneyMachine.setEconomy(economyProvider.getProvider());
+			EconomyManager.setEconomy(economyProvider.getProvider());
 
 		}
 
-		return (MoneyMachine.getEconomy() != null);
+		return (EconomyManager.getEconomy() != null);
 	}
 }

@@ -2,6 +2,7 @@ package com.homespawnwarp.util;
 
 import java.util.HashSet;
 
+import com.homespawnwarp.HomeSpawnWarp;
 import com.homespawnwarp.cmd.AbstractCommand;
 import com.homespawnwarp.cmd.DelHomeCommand;
 import com.homespawnwarp.cmd.DelWarpCommand;
@@ -16,7 +17,7 @@ import com.homespawnwarp.cmd.WarpCommand;
 import com.homespawnwarp.cmd.WarpHereCommand;
 import com.homespawnwarp.cmd.WarpListCommand;
 import com.homespawnwarp.cmd.WarpToCommand;
-import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.util.perm.Permission;
 
 public class CommandManager {
 

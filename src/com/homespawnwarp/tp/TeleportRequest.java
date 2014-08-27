@@ -1,9 +1,11 @@
-package com.homespawnwarp.util;
+package com.homespawnwarp.tp;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import com.homespawnwarp.util.EconomyManager;
 
 public abstract class TeleportRequest extends BukkitRunnable {
 
@@ -43,7 +45,7 @@ public abstract class TeleportRequest extends BukkitRunnable {
 	public void run() {
 
 		if (!isFinished) {
-			MoneyMachine.payMoney(player, borrowedMoney);
+			EconomyManager.payMoney(player, borrowedMoney);
 		}
 	}
 }

@@ -11,7 +11,7 @@ import java.util.Set;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.HomeSpawnWarp;
 
 public final class ConfigIO {
 
@@ -96,5 +96,17 @@ public final class ConfigIO {
 
 	public static Set<String> getCreatedConfigNames() {
 		return configs.keySet();
+	}
+	
+	public static FileConfiguration getLocations() {
+		return ConfigIO.get("Locations");
+	}
+
+	public static FileConfiguration getConfig() {
+		return ConfigIO.get("Config");
+	}
+
+	public static FileConfiguration getMessages() {
+		return ConfigIO.get("Messages");
 	}
 }

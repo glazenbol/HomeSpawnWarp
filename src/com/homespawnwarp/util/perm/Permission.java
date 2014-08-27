@@ -1,4 +1,4 @@
-package com.homespawnwarp.util;
+package com.homespawnwarp.util.perm;
 
 public enum Permission {
 	

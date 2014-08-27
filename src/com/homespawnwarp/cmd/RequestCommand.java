@@ -4,15 +4,17 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.util.MoneyMachine;
-import com.homespawnwarp.util.Permission;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.util.EconomyManager;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
 
 public abstract class RequestCommand extends TeleportCommand {
 
-	public abstract void createRequest(Player player, Player targetPlayer, double borrowMoney);
-	
+	public abstract void createRequest(Player player, Player targetPlayer,
+			double borrowMoney);
+
 	public RequestCommand(HomeSpawnWarp plugin, Permission commandPermission,
 			String name) {
 		super(plugin, commandPermission, name);
@@ -29,15 +31,16 @@ public abstract class RequestCommand extends TeleportCommand {
 			Player targetPlayer = plugin.getServer().getPlayer(args[0]);
 
 			if (targetPlayer != null && targetPlayer.isOnline()) {
-				if (MoneyMachine.takeMoney(player, borrowMoney, false)) {
+				if (EconomyManager.takeMoney(player, borrowMoney, false)) {
 					createRequest(player, targetPlayer, borrowMoney);
 				}
 
 			} else {
-				player.sendMessage(Tools.getMessage("player-not-online"));
+
+				MessageSender.message(Message.PLAYER_NOT_ONLINE, player);
 			}
 		} else {
-			player.sendMessage(Tools.getMessage("too-few-arguments"));
+			MessageSender.message(Message.TOO_FEW_ARGUMENTS, player);
 		}
 		return false;
 	}

@@ -4,11 +4,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.HomeSpawnWarp;
 import com.homespawnwarp.util.LocationIO;
-import com.homespawnwarp.util.Permission;
-import com.homespawnwarp.util.PermissionAgent;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
+import com.homespawnwarp.util.perm.PermissionAgent;
 
 final public class SetWarpCommand extends AbstractCommand {
 
@@ -46,7 +47,8 @@ final public class SetWarpCommand extends AbstractCommand {
 			}
 
 		} else {
-			player.sendMessage(Tools.getMessage("too-few-arguments"));
+
+			MessageSender.message(Message.TOO_FEW_ARGUMENTS, player);
 			return false;
 		}
 		return true;
@@ -56,11 +58,12 @@ final public class SetWarpCommand extends AbstractCommand {
 		if (customPrice <= 0){
 			LocationIO.write("warps." + warpName, player.getLocation());
 
-			player.sendMessage(Tools.getMessage("set-warp"));
+
+			MessageSender.message(Message.SET_WARP, player);
 		} else {
 			LocationIO.write("warps." + warpName, player.getLocation(), customPrice);
 
-			player.sendMessage(Tools.getMessage("set-priced-warp"));
+			MessageSender.message(Message.SET_PRICED_WARP, player);
 		}
 	}
 

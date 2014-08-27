@@ -5,10 +5,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
-import com.homespawnwarp.util.Permission;
-import com.homespawnwarp.util.PermissionAgent;
-import com.homespawnwarp.util.Tools;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
+import com.homespawnwarp.util.perm.Permission;
+import com.homespawnwarp.util.perm.PermissionAgent;
 
 public abstract class AbstractCommand implements CommandExecutor {
 
@@ -52,7 +53,7 @@ public abstract class AbstractCommand implements CommandExecutor {
 
 				}
 			} else {
-				sender.sendMessage(Tools.getMessage("cannot-perform"));
+				MessageSender.message(Message.CANNOT_PERFORM, sender);
 			}
 		}
 		return false;
@@ -61,7 +62,7 @@ public abstract class AbstractCommand implements CommandExecutor {
 	protected boolean containsIllegalChars(final String s,
 			final CommandSender sender) {
 		if (s.indexOf(".") != -1) {
-			sender.sendMessage(Tools.getMessage("cannot-use-dot"));
+			MessageSender.message(Message.CANNOT_USE_DOT, sender);
 			return true;
 		}
 		return false;

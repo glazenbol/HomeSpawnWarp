@@ -4,19 +4,41 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.tp.Teleportation;
+import com.homespawnwarp.tp.TeleportationType;
+import com.homespawnwarp.util.ConfigIO;
 import com.homespawnwarp.util.LocationIO;
-import com.homespawnwarp.util.Tools;
 
-public class RespawnListener implements Listener {
+public class AccuarateSpawner implements Listener {
 
 	HomeSpawnWarp plugin;
 
-	public RespawnListener(HomeSpawnWarp plugin) {
+	public AccuarateSpawner(HomeSpawnWarp plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 		this.plugin = plugin;
+	}
+
+	@EventHandler
+	public void onPlayerJoin(PlayerJoinEvent e) {
+		if (!e.getPlayer().hasPlayedBefore()) {
+
+			String[] s = ConfigIO.getLocations().getConfigurationSection("spawn")
+					.getKeys(false).toArray(new String[0]);
+
+			if (s.length != 0) {
+				Location l = LocationIO.read("spawn." + s[0]);
+
+				if (l != null) {
+
+					Teleportation.teleportPlayer(e.getPlayer(), l,
+							TeleportationType.SPAWN, 0, false, false, 0);
+				}
+			}
+		}
 	}
 
 	@EventHandler
@@ -37,7 +59,7 @@ public class RespawnListener implements Listener {
 			} else {
 				if (plugin.useGeneralSpawn) {
 					// Exact general spawn teleport
-					String[] s = Tools.getLocations()
+					String[] s = ConfigIO.getLocations()
 							.getConfigurationSection("spawn").getKeys(false)
 							.toArray(new String[0]);
 					if (s.length != 0) {
@@ -52,12 +74,11 @@ public class RespawnListener implements Listener {
 						}
 					}
 
-
 				} else {
 					// Exact players current world spawn
 					String s = e.getRespawnLocation().getWorld().getName();
 
-					if (Tools.getLocations().contains("spawn." + s)) {
+					if (ConfigIO.getLocations().contains("spawn." + s)) {
 
 						l = LocationIO.read("spawn." + s);
 

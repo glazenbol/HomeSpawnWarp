@@ -1,9 +1,11 @@
-package com.homespawnwarp.util;
+package com.homespawnwarp.tp;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import com.homespawnwarp.plugin.HomeSpawnWarp;
+import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.util.message.Message;
+import com.homespawnwarp.util.message.MessageSender;
 
 public final class TeleportWarmup implements Runnable {
 
@@ -27,9 +29,9 @@ public final class TeleportWarmup implements Runnable {
 	}
 
 	@Override
-	public void run() {
-		player.sendMessage(Tools.getMessage("teleport-commence-in")
-				+ (int) (warmup / 1000) + Tools.getMessage("seconds"));
+	public void run() {//TODO create noWarphere and to permissions for admins
+		
+		MessageSender.timeMessage(Message.TELEPORT_COMMENCE_IN, player, (int) (warmup / 1000));
 
 		try {
 			Thread.sleep(warmup);
