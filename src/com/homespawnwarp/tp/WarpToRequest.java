@@ -15,8 +15,8 @@ public class WarpToRequest extends TeleportRequest {
 	}
 
 	@Override
-	public void sendMessage(Player player) {
+	public void sendMessage(Player player, Player targetPlayer) {
 
-		MessageSender.message(Message.WARPTO_REQUEST, player);
+		MessageSender.playerMessage(Message.WARPTO_REQUEST, player, targetPlayer);
 	}
 }

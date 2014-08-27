@@ -22,12 +22,15 @@ public class MessageSender {
 		ArrayList<Integer> begins = new ArrayList<Integer>();
 		ArrayList<Integer> ends = new ArrayList<Integer>();
 
-		for (int i = 0; i <= rawMessage.length(); i++) {
+		String newMessage = null;
+		
+		for (int i = 0; i < rawMessage.length(); i++) {
 			char c = rawMessage.charAt(i);
 			if (c == '<') {
 				begins.add(i);
 			}
 			if (c == '>') {
+
 				ends.add(i);
 			}
 		}
@@ -37,9 +40,9 @@ public class MessageSender {
 					+ " aren't correctly writen down!");
 		}
 
-		for (int i = 0; i < begins.size(); i++) {
+		for (int i = 0; i < begins.size(); i++) {//TODO multistring
 
-			if (!(begins.get(i) <= 0 && ends.get(i) <= 0 && begins.get(i) < ends
+			if ((begins.get(i) <= 0 && ends.get(i) <= 0 && begins.get(i) < ends
 					.get(i))) {
 				throw new YAMLException("Colors in message " + rawMessage
 						+ " aren't correctly writen down!");
@@ -53,15 +56,20 @@ public class MessageSender {
 			String replaceString = "<" + sb.toString() + ">";
 			ChatColor color = ChatColor.valueOf(sb.toString().toUpperCase());
 
-			rawMessage.replace(replaceString, color + "");
+			newMessage = rawMessage.replace(replaceString, color + "");
+		}
+		
+		if (newMessage == null) {
+			return rawMessage;
+		} else {
+			return newMessage;
 		}
 
-		return rawMessage;
 
 	}
 
 	public static void message(Message message, CommandSender sender) {
-		sender.sendMessage(ConfigIO.getMessages().getString(message.toString()));
+		sender.sendMessage(getMessage(message.toString()));
 	}
 
 	public static void moneyMessage(Message message, CommandSender sender,
@@ -69,15 +77,15 @@ public class MessageSender {
 
 		String messageStr = getMessage(message.toString());
 
-		messageStr.replace("%PRICE%", price + "");
+		messageStr = messageStr.replace("%PRICE%", price + "");
 
 		if (messageStr.indexOf("%CURRENCYPLURAL%") >= 0) {
-			messageStr.replace("%CURRENCYPLURAL%", EconomyManager.getEconomy()
+			messageStr = messageStr.replace("%CURRENCYPLURAL%", EconomyManager.getEconomy()
 					.currencyNamePlural());
 		}
 
 		if (messageStr.indexOf("%CURRENCYSINGULAR%") >= 0) {
-			messageStr.replace("%CURRENCYSINGULAR%", EconomyManager
+			messageStr = messageStr.replace("%CURRENCYSINGULAR%", EconomyManager
 					.getEconomy().currencyNamePlural());
 		}
 
@@ -89,7 +97,7 @@ public class MessageSender {
 
 		String messageStr = getMessage(message.toString());
 
-		messageStr.replace("%PLAYER%", includingName.getName());
+		messageStr = messageStr.replace("%PLAYER%", includingName.getName());
 
 		sender.sendMessage(messageStr);
 	}
@@ -99,7 +107,7 @@ public class MessageSender {
 
 		String messageStr = getMessage(message.toString());
 
-		messageStr.replace("%SECONDS%", seconds + "");
+		messageStr = messageStr.replace("%SECONDS%", seconds + "");
 
 		sender.sendMessage(messageStr);
 	}

@@ -18,7 +18,7 @@ public class WarpHereCommand extends RequestCommand {
 	@Override
 	public void createRequest(Player player, Player targetPlayer,
 			double borrowMoney) {
-		MessageSender.playerMessage(Message.SENT_WARPTO_REQUEST, player,
+		MessageSender.playerMessage(Message.SENT_WARPHERE_REQUEST, player,
 				targetPlayer);
 		Teleportation.createWarpHereRequest(player, targetPlayer, borrowMoney);
 	}

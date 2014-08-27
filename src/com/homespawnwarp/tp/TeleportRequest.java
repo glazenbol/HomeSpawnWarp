@@ -16,12 +16,12 @@ public abstract class TeleportRequest extends BukkitRunnable {
 	private double borrowedMoney;
 	private boolean isFinished = false;
 	
-	public abstract void sendMessage(Player player);
+	public abstract void sendMessage(Player targetPlayer, Player player);
 
 	public TeleportRequest(Player player, Player targetPlayer, JavaPlugin plugin) {
 		this.player = player;
 		this.targetPlayer = targetPlayer;
-		sendMessage(targetPlayer);
+		sendMessage(targetPlayer, player);
 		runTaskLater(plugin, maxTime);
 	}
 
