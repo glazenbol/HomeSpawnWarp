@@ -1,57 +1,65 @@
 package com.homespawnwarp.tp;
 
-import org.bukkit.Location;
+import java.util.HashMap;
+import java.util.UUID;
+
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import com.homespawnwarp.HomeSpawnWarp;
 import com.homespawnwarp.util.message.Message;
 import com.homespawnwarp.util.message.MessageSender;
 
-public final class TeleportWarmup implements Runnable {
+public final class TeleportWarmup extends BukkitRunnable {
 
-	private int warmup;
-	private TeleportationType type;
-	private Player player;
-	private Location l;
 	private boolean isCancelled = false;
-	private double price;
-	@SuppressWarnings("unused")
-	private HomeSpawnWarp plugin;
 
-	public TeleportWarmup(HomeSpawnWarp plugin, Player player, Location l,
-			TeleportationType type, int warmup, double price) {
-		this.warmup = warmup;
-		this.player = player;
-		this.l = l;
-		this.type = type;
-		this.price = price;
-		this.plugin = plugin;
+	private final TeleportTicket ticket;
+
+	static volatile public HashMap<UUID, TeleportWarmup> warmups = new HashMap<UUID, TeleportWarmup>();
+
+	public TeleportWarmup(TeleportTicket ticket, HomeSpawnWarp plugin) {
+
+		this.ticket = ticket;
+		UUID id = ticket.getPlayer().getUniqueId();
+
+		if (warmups.containsKey(id)) {
+			warmups.get(id).cancel();
+		}
+		warmups.put(id, this);
+
+		MessageSender.timeMessage(Message.TELEPORT_COMMENCE_IN,
+				ticket.getPlayer(), (int) (ticket.getWarmup() / 20));
+
+		this.runTaskLater(plugin, ticket.getWarmup());
 	}
 
 	@Override
-	public void run() {//TODO create noWarphere and to permissions for admins
-		
-		MessageSender.timeMessage(Message.TELEPORT_COMMENCE_IN, player, (int) (warmup / 1000));
+	public void run() {// TODO create noWarphere and to permissions for admins
 
-		try {
-			Thread.sleep(warmup);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		Player player = ticket.getPlayer();
+
+		if (!isCancelled && player.isOnline()) {
+			ticket.clearWarmup();
+			Teleportation.teleportPlayer(ticket);
 		}
 
-		if (!isCancelled && player.isOnline()) { 
-
-			Teleportation.teleportPlayer(player, l, type, price, true, true, 0);
+		if (warmups.containsKey(player.getUniqueId())) {
+			warmups.remove(player.getUniqueId());
 		}
 
-		Teleportation.removeWarmup(player);
-	}
-
-	public TeleportationType getType() {
-		return type;
 	}
 
 	public void cancel() {
 		isCancelled = true;
+	}
+
+	public static void cancel(Player player) {
+
+		warmups.get(player.getUniqueId()).cancel();
+	}
+
+	public static boolean contains(Player player) {
+		return warmups.containsKey(player.getUniqueId());
 	}
 }

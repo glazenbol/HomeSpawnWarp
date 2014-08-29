@@ -3,7 +3,7 @@ package com.homespawnwarp.cmd;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.HomeSpawnWarp;
-import com.homespawnwarp.tp.Teleportation;
+import com.homespawnwarp.tp.WarpHereRequest;
 import com.homespawnwarp.util.message.Message;
 import com.homespawnwarp.util.message.MessageSender;
 import com.homespawnwarp.util.perm.Permission;
@@ -17,9 +17,9 @@ public class WarpHereCommand extends RequestCommand {
 
 	@Override
 	public void createRequest(Player player, Player targetPlayer,
-			double borrowMoney) {
+			double borrowMoney, int warmup) {
 		MessageSender.playerMessage(Message.SENT_WARPHERE_REQUEST, player,
 				targetPlayer);
-		Teleportation.createWarpHereRequest(player, targetPlayer, borrowMoney);
+		new WarpHereRequest(player, targetPlayer, borrowMoney, plugin, warmup);
 	}
 }

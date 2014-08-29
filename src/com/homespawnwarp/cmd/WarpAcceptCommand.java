@@ -5,9 +5,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.HomeSpawnWarp;
-import com.homespawnwarp.tp.Teleportation;
-import com.homespawnwarp.tp.TeleportationType;
-import com.homespawnwarp.util.ConfigIO;
+import com.homespawnwarp.tp.TeleportRequest;
+import com.homespawnwarp.tp.TeleportTicket;
 import com.homespawnwarp.util.message.Message;
 import com.homespawnwarp.util.message.MessageSender;
 import com.homespawnwarp.util.perm.Permission;
@@ -23,39 +22,29 @@ final public class WarpAcceptCommand extends TeleportCommand {
 	boolean doCommand(Player player, CommandSender sender, Command cmd,
 			String commandLabel, String[] args) {
 
-		if (Teleportation.teleportRequests.containsKey(player.getUniqueId())
-				&& Teleportation.teleportRequests.get(player.getUniqueId())
+		if (TeleportRequest.requests.containsKey(player.getUniqueId())
+				&& TeleportRequest.get(player)
 						.arePlayersOnline()) {
+			
+			
+			TeleportRequest req = TeleportRequest.get(player);
 
-			Player player2 = Teleportation.teleportRequests.get(
-					player.getUniqueId()).getSender();
+			Player sender1 = req.getSender();
 
 			MessageSender.playerMessage(Message.ACCEPTED_REQUEST_FROM, player,
-					player2);
-			MessageSender.playerMessage(Message.ACCEPTED_YOUR_REQUEST, player2,
+					sender1);
+			MessageSender.playerMessage(Message.ACCEPTED_YOUR_REQUEST, sender1,
 					player);
 
-			teleportPlayer(player2,
-					Teleportation.teleportRequests.get(player.getUniqueId())
-							.getLocation(), TeleportationType.REQUEST,
-					getPrice(player2), warmup);
-			Teleportation.removeRequest(player);
+			teleportPlayer(new TeleportTicket(sender1, Message.TP_TO_REQUEST,req
+					.getLocation(),true,getPrice(player),req.getWarmup()));
+			TeleportRequest.removeRequest(player);
 
 			return true;
 		} else {
 			MessageSender.message(Message.NO_REQUEST, player);
 		}
 		return false;
-	}
-
-	@Override
-	public void setupPrices() {
-		for (int i = 0; i < price.length; i++) {
-			price[i] = ConfigIO.getConfig()
-					.getDouble("prices.warpto" + (i + 1));
-			// Warpto for warpaccept, cuz warpaccept is doing the money taking
-			// TODO
-		}
 	}
 
 }

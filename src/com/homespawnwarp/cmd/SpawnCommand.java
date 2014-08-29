@@ -6,9 +6,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.HomeSpawnWarp;
-import com.homespawnwarp.tp.TeleportationType;
-import com.homespawnwarp.util.LocationIO;
+import com.homespawnwarp.tp.TeleportTicket;
 import com.homespawnwarp.util.ConfigIO;
+import com.homespawnwarp.util.LocationIO;
 import com.homespawnwarp.util.message.Message;
 import com.homespawnwarp.util.message.MessageSender;
 import com.homespawnwarp.util.perm.Permission;
@@ -37,8 +37,9 @@ final public class SpawnCommand extends TeleportCommand {
 
 					if (l != null) {
 
-						teleportPlayer(player, l, TeleportationType.SPAWN,
-								getPrice(player), warmup);
+						teleportPlayer(new TeleportTicket(player,
+								Message.TP_TO_SPAWN, l, true, getPrice(player),
+								warmup));
 
 					} else {
 						MessageSender.message(Message.NO_SPAWN_SET, player);
@@ -59,8 +60,9 @@ final public class SpawnCommand extends TeleportCommand {
 
 			if (l != null) {
 
-				teleportPlayer(player, l, TeleportationType.SPAWN,
-						getPrice(player), warmup);
+				teleportPlayer(new TeleportTicket(player,
+						Message.TP_TO_SPAWN, l, true, getPrice(player),
+						warmup));
 
 			} else {
 				MessageSender.message(Message.NO_SPAWN_SET, player);

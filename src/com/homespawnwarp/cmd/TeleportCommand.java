@@ -2,12 +2,11 @@ package com.homespawnwarp.cmd;
 
 import java.util.HashSet;
 
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.tp.TeleportTicket;
 import com.homespawnwarp.tp.Teleportation;
-import com.homespawnwarp.tp.TeleportationType;
 import com.homespawnwarp.util.ConfigIO;
 import com.homespawnwarp.util.perm.Permission;
 import com.homespawnwarp.util.perm.PermissionAgent;
@@ -27,9 +26,8 @@ public abstract class TeleportCommand extends AbstractCommand {
 		setupWarmup();
 	}
 
-	protected void teleportPlayer(Player player, Location l,
-			TeleportationType type, double price, int warmup) {
-		Teleportation.teleportPlayer(player, l, type, price, warmup);
+	protected void teleportPlayer(TeleportTicket ticket) {
+		Teleportation.teleportPlayer(ticket);
 	}
 
 	protected void setupPrices() {

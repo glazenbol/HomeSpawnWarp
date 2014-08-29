@@ -8,8 +8,9 @@ import com.homespawnwarp.util.message.MessageSender;
 
 public class WarpHereRequest extends TeleportRequest {
 
-	public WarpHereRequest(Player player, Player targetPlayer, JavaPlugin plugin) {
-		super(player, targetPlayer, plugin);
+	public WarpHereRequest(Player player, Player targetPlayer,
+			double borrowedMoney, JavaPlugin plugin, int warmup) {
+		super(player, targetPlayer, borrowedMoney, plugin, warmup);
 
 		this.thenLocation = player.getLocation();
 
@@ -18,7 +19,8 @@ public class WarpHereRequest extends TeleportRequest {
 	@Override
 	public void sendMessage(Player player, Player targetPlayer) {
 
-		MessageSender.playerMessage(Message.WARPHERE_REQUEST, player, targetPlayer);
+		MessageSender.playerMessage(Message.WARPHERE_REQUEST, player,
+				targetPlayer);
 	}
 
 }

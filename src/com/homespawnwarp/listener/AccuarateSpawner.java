@@ -8,10 +8,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.tp.TeleportTicket;
 import com.homespawnwarp.tp.Teleportation;
-import com.homespawnwarp.tp.TeleportationType;
 import com.homespawnwarp.util.ConfigIO;
 import com.homespawnwarp.util.LocationIO;
+import com.homespawnwarp.util.message.Message;
 
 public class AccuarateSpawner implements Listener {
 
@@ -26,16 +27,18 @@ public class AccuarateSpawner implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		if (!e.getPlayer().hasPlayedBefore()) {
 
-			String[] s = ConfigIO.getLocations().getConfigurationSection("spawn")
-					.getKeys(false).toArray(new String[0]);
+			String[] s = ConfigIO.getLocations()
+					.getConfigurationSection("spawn").getKeys(false)
+					.toArray(new String[0]);
 
 			if (s.length != 0) {
 				Location l = LocationIO.read("spawn." + s[0]);
+				
+				//TODO more efficient method above ^
 
 				if (l != null) {
-
-					Teleportation.teleportPlayer(e.getPlayer(), l,
-							TeleportationType.SPAWN, 0, false, false, 0);
+					Teleportation.teleportPlayer(new TeleportTicket(e
+							.getPlayer(), Message.TP_TO_SPAWN, l, false, 0, 0));
 				}
 			}
 		}
@@ -49,8 +52,10 @@ public class AccuarateSpawner implements Listener {
 			Location l = LocationIO.read("homes." + player.getUniqueId()
 					+ ".default");
 
+			
 			if (l != null) {
 
+				//TPs to default home
 				if (!l.getChunk().isLoaded()) {
 					l.getChunk().load();
 				}
