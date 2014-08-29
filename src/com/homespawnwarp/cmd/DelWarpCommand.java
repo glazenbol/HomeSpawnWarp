@@ -24,14 +24,14 @@ final public class DelWarpCommand extends AbstractCommand implements
 		if (args.length != 0) {
 			if (ConfigIO.getLocations().getString("warps." + args[0]) != null) {
 				ConfigIO.getLocations().set("warps." + args[0], null);
-				MessageSender.message(Message.WARP_DELETED, player);
+				MessageSender.message(Message.WARP_DELETED, sender);
 				return true;
 			} else {
-				MessageSender.message(Message.WRONG_WARPNAME, player);
+				MessageSender.message(Message.WRONG_WARPNAME, sender);
 			}
 
 		} else {
-			MessageSender.message(Message.TOO_FEW_ARGUMENTS, player);
+			MessageSender.message(Message.TOO_FEW_ARGUMENTS, sender);
 		}
 		return false;
 	}
