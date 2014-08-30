@@ -13,25 +13,13 @@ public class MessageSender {
 
 	private static String getMessage(String path) {
 
+		// TODO PERFORMANCE IMPROVEMENTS
+
 		StringBuilder sb = new StringBuilder();
 
 		String rawMessage = ConfigIO.getMessages().getString(path);
 
-		int colors = 0;
-		boolean started = false;
-
-		for (int i = 0; i < rawMessage.length(); i++) {
-			char c = rawMessage.charAt(i);
-			if (c == '<') {
-				started = true;
-			}
-			if (c == '>' && started) {
-				colors++;
-				started = false;
-			}
-		}
-
-		for (int i = 0; i < colors; i++) {
+		while (rawMessage.indexOf('<') > 0) {
 			sb.setLength(0);
 			for (int j = rawMessage.indexOf('<') + 1; rawMessage.charAt(j) != '>'; j++) {
 				sb.append(rawMessage.charAt(j));
