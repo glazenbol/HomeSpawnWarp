@@ -7,6 +7,7 @@ import com.homespawnwarp.tp.WarpToRequest;
 import com.homespawnwarp.util.message.Message;
 import com.homespawnwarp.util.message.MessageSender;
 import com.homespawnwarp.util.perm.Permission;
+import com.homespawnwarp.util.perm.PermissionAgent;
 
 final public class WarpToCommand extends RequestCommand {
 
@@ -16,11 +17,23 @@ final public class WarpToCommand extends RequestCommand {
 	}
 
 	@Override
-	public void createRequest(Player player, Player targetPlayer,
+	public boolean createRequest(Player player, Player targetPlayer,
 			double borrowMoney, int warmup) {
-		MessageSender.playerMessage(Message.SENT_WARPTO_REQUEST, player, targetPlayer);
-		new WarpToRequest(player, targetPlayer, borrowMoney, plugin, warmup);
-	}
 
+		if (PermissionAgent.checkPerm(targetPlayer, Permission.NOWARPTO)
+				&& !PermissionAgent.checkPerm(player,
+						Permission.OVERRIDE_NOWARPTO)) {
+
+			MessageSender.playerMessage(Message.DOESNT_ALLOW_WARPTO, player,
+					targetPlayer);
+			return false;
+		} else {
+			
+			MessageSender.playerMessage(Message.SENT_WARPTO_REQUEST, player,
+					targetPlayer);
+			new WarpToRequest(player, targetPlayer, borrowMoney, plugin, warmup);
+			return true;
+		}
+	}
 
 }

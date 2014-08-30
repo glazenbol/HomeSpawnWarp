@@ -36,7 +36,9 @@ public enum Message {
 	ACCEPTED_YOUR_REQUEST("accepted-your-request"),
 	NO_REQUEST("no-request"),
 	SENT_WARPTO_REQUEST("sent-warpto-request"),
-	SENT_WARPHERE_REQUEST("sent-warphere-request");
+	SENT_WARPHERE_REQUEST("sent-warphere-request"),
+	DOESNT_ALLOW_WARPHERE("player-doesnt-allow-warphere"),
+	DOESNT_ALLOW_WARPTO("player-doesnt-allow-warpto");
 	
 	
 	

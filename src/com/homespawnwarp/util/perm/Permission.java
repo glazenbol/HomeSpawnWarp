@@ -25,7 +25,12 @@ public enum Permission {
 	TELEPORTEFFECT("HomeSpawnWarp.teleporteffect", true),
 	
 	NOFEE("HomeSpawnWarp.nofee", false),
-	NOWARMUP("HomeSpawnWarp.nowarmup", false);
+	NOWARMUP("HomeSpawnWarp.nowarmup", false), 
+	
+	NOWARPHERE("HomeSpawnWarp.warphere.disallow", false),
+	NOWARPTO("HomeSpawnWarp.warpto.disallow", false),
+	OVERRIDE_NOWARPHERE("HomeSpawnWarp.warphere.disallow.override", false),
+	OVERRIDE_NOWARPTO("HomeSpawnWarp.warpto.disallow.override", false);
 	
 	private final String node;
 	private final boolean isDefaultPermitted;

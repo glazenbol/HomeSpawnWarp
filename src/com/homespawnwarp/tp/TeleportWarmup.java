@@ -35,7 +35,7 @@ public final class TeleportWarmup extends BukkitRunnable {
 	}
 
 	@Override
-	public void run() {// TODO create noWarphere and to permissions for admins
+	public void run() {
 
 		Player player = ticket.getPlayer();
 

@@ -12,7 +12,7 @@ import com.homespawnwarp.util.perm.Permission;
 
 public abstract class RequestCommand extends TeleportCommand {
 
-	public abstract void createRequest(Player player, Player targetPlayer,
+	public abstract boolean createRequest(Player player, Player targetPlayer,
 			double borrowMoney, int warmup);
 
 	public RequestCommand(HomeSpawnWarp plugin, Permission commandPermission,
@@ -32,7 +32,9 @@ public abstract class RequestCommand extends TeleportCommand {
 
 			if (targetPlayer != null && targetPlayer.isOnline()) {
 				if (EconomyManager.takeMoney(player, borrowMoney, false)) {
-					createRequest(player, targetPlayer, borrowMoney, warmup);
+					if (!createRequest(player, targetPlayer, borrowMoney, warmup)) {
+						EconomyManager.payMoney(player, borrowMoney);
+					}
 				}
 
 			} else {
