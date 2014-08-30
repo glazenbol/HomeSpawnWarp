@@ -17,7 +17,7 @@ public class MessageSender {
 
 		String rawMessage = ConfigIO.getMessages().getString(path);
 
-		while (rawMessage.indexOf('<') > 0) {
+		while (rawMessage.indexOf('<') >= 0) {
 			sb.setLength(0);
 			for (int j = rawMessage.indexOf('<') + 1; rawMessage.charAt(j) != '>'; j++) {
 				sb.append(rawMessage.charAt(j));
