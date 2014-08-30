@@ -36,5 +36,5 @@ not-enough-money: "<dark_red>You don't have enough money to perform this command
 is-taken-from-account: "<dark_aqua>%PRICE% %CURRENCYNAMESINGULAR% has been taken from your account!"
 are-taken-from-account: "<dark_aqua>%PRICE% %CURRENCYNAMEPLURAL% have been taken from your account!"
 you-accepted-request-of: "<dark_aqua>You accepted the request of %PLAYER%"
-player-doesnt-allow-warphere: "<aqua>%PLAYER% <dark_aqua> doesn't allow you to sent him/her warphere requests!"
-player-doesnt-allow-warpto: "<aqua>%PLAYER% <dark_aqua> doesn't allow you to sent him/her warpto requests!"
+player-doesnt-allow-warphere: "<aqua>%PLAYER% <dark_aqua>doesn't allow you to sent him/her warphere requests!"
+player-doesnt-allow-warpto: "<aqua>%PLAYER% <dark_aqua>doesn't allow you to sent him/her warpto requests!"
