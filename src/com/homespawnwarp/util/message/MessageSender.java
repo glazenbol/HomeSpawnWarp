@@ -13,8 +13,6 @@ public class MessageSender {
 
 	private static String getMessage(String path) {
 
-		// TODO PERFORMANCE IMPROVEMENTS
-
 		StringBuilder sb = new StringBuilder();
 
 		String rawMessage = ConfigIO.getMessages().getString(path);
