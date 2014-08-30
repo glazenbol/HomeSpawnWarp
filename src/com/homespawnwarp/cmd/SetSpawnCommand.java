@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.homespawnwarp.HomeSpawnWarp;
+import com.homespawnwarp.util.ConfigIO;
 import com.homespawnwarp.util.LocationIO;
 import com.homespawnwarp.util.message.Message;
 import com.homespawnwarp.util.message.MessageSender;
@@ -29,6 +30,10 @@ final public class SetSpawnCommand extends AbstractCommand {
 		l.getWorld().setSpawnLocation((int) l.getX(), (int) l.getY(),
 				(int) l.getZ());
 
+		if (plugin.useGeneralSpawn) {
+			ConfigIO.getConfig().set("spawn", null);
+		}
+		
 		LocationIO.write("spawn." + wN, l);
 
 		MessageSender.message(Message.SET_SPAWN, player);

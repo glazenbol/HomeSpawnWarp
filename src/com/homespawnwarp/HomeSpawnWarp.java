@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.homespawnwarp.cmd.TeleportCommand;
 import com.homespawnwarp.listener.AccuarateSpawner;
+import com.homespawnwarp.listener.GeneralSpawner;
 import com.homespawnwarp.listener.OnPlayerMoveWarmupCanceller;
 import com.homespawnwarp.tp.Teleportation;
 import com.homespawnwarp.util.CommandManager;
@@ -82,6 +83,8 @@ final public class HomeSpawnWarp extends JavaPlugin {
 
 		if (useExactSpawn) {
 			new AccuarateSpawner(this);
+		} else if (useGeneralSpawn) {
+			new GeneralSpawner(this);
 		}
 
 		if (TeleportCommand.usingWarmups) {

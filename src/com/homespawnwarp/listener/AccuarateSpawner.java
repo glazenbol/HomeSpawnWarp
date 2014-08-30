@@ -1,5 +1,7 @@
 package com.homespawnwarp.listener;
 
+import java.util.Set;
+
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,7 +14,6 @@ import com.homespawnwarp.tp.TeleportTicket;
 import com.homespawnwarp.tp.Teleportation;
 import com.homespawnwarp.util.ConfigIO;
 import com.homespawnwarp.util.LocationIO;
-import com.homespawnwarp.util.message.Message;
 
 public class AccuarateSpawner implements Listener {
 
@@ -27,20 +28,14 @@ public class AccuarateSpawner implements Listener {
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		if (!e.getPlayer().hasPlayedBefore()) {
 
-			String[] s = ConfigIO.getLocations()
-					.getConfigurationSection("spawn").getKeys(false)
-					.toArray(new String[0]);
+			Location l = LocationIO.read("spawn."
+					+ e.getPlayer().getWorld().getName());
 
-			if (s.length != 0) {
-				Location l = LocationIO.read("spawn." + s[0]);
-				
-				//TODO more efficient method above ^
-
-				if (l != null) {
-					Teleportation.teleportPlayer(new TeleportTicket(e
-							.getPlayer(), Message.TP_TO_SPAWN, l, false, 0, 0));
-				}
+			if (l != null) {
+				Teleportation.teleportPlayer(new TeleportTicket(e.getPlayer(),
+						null, l, false, 0, 0));
 			}
+
 		}
 	}
 
@@ -52,10 +47,9 @@ public class AccuarateSpawner implements Listener {
 			Location l = LocationIO.read("homes." + player.getUniqueId()
 					+ ".default");
 
-			
 			if (l != null) {
 
-				//TPs to default home
+				// TPs to default home
 				if (!l.getChunk().isLoaded()) {
 					l.getChunk().load();
 				}
@@ -64,11 +58,11 @@ public class AccuarateSpawner implements Listener {
 			} else {
 				if (plugin.useGeneralSpawn) {
 					// Exact general spawn teleport
-					String[] s = ConfigIO.getLocations()
-							.getConfigurationSection("spawn").getKeys(false)
-							.toArray(new String[0]);
-					if (s.length != 0) {
-						l = LocationIO.read("spawn." + s[0]);
+					Set<String> s = ConfigIO.getLocations()
+							.getConfigurationSection("spawn").getKeys(false);
+					if (s.size() != 0) {
+
+						l = LocationIO.read("spawn." + s.iterator().next());
 
 						if (l != null) {
 
@@ -81,12 +75,11 @@ public class AccuarateSpawner implements Listener {
 
 				} else {
 					// Exact players current world spawn
-					String s = e.getRespawnLocation().getWorld().getName();
+					String s = "spawn."
+							+ e.getRespawnLocation().getWorld().getName();
 
-					if (ConfigIO.getLocations().contains("spawn." + s)) {
-
-						l = LocationIO.read("spawn." + s);
-
+					l = LocationIO.read(s);
+					if (l != null) {
 						if (!l.getChunk().isLoaded()) {
 							l.getChunk().load();
 						}
