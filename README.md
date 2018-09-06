@@ -1,3 +1,3 @@
 HomeSpawnWarp
 =============
-Reponsority for the bukkit HomeSpawnWarp project http://dev.bukkit.org/bukkit-plugins/homespawnwarp/pages/main/
+Reposority for the bukkit project HomeSpawnWarp (http://dev.bukkit.org/bukkit-plugins/homespawnwarp/pages/main/)
